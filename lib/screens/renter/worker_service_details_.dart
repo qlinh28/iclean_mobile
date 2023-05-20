@@ -5,12 +5,12 @@ import 'package:iclean_flutter/screens/renter/components/worker_details/review_c
 import '../../models/services.dart';
 import '../../models/workers.dart';
 
-
-
 class WorkerDetailsScreen extends StatefulWidget {
   final Worker worker;
   final Service service;
-  const WorkerDetailsScreen({required this.worker, required this.service});
+  const WorkerDetailsScreen(
+      {Key? key, required this.worker, required this.service})
+      : super(key: key);
 
   @override
   State<WorkerDetailsScreen> createState() => _WorkerDetailsScreenState();
@@ -90,7 +90,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                       const SizedBox(width: 15),
                       Text(
                         widget.worker.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Lato',
                         ),
                       ),
@@ -105,137 +105,132 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                         height: 170,
                         fit: BoxFit.contain,
                       ),
-                      Container(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                widget.worker.name,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: 'Lato',
-                                  color: Colors.deepPurple.shade300,
-                                  fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.worker.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontFamily: 'Lato',
+                                color: Colors.deepPurple.shade300,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.star_half_outlined,
+                                  size: 15,
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.star_half_outlined,
-                                    size: 15,
+                                const SizedBox(width: 4),
+                                Text(
+                                  "${averageReview.toStringAsFixed(1)}",
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'Lato',
                                   ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    "${averageReview.toStringAsFixed(1)}",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontFamily: 'Lato',
-                                    ),
+                                ),
+                                const SizedBox(width: 4),
+                                Text(
+                                  "(${sumReview} reviews)",
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'Lato',
                                   ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    "(${sumReview} reviews)",
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      fontFamily: 'Lato',
-                                    ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.cleaning_services_sharp,
+                                  color: Colors.deepPurple.shade300,
+                                  size: 15,
+                                ),
+                                const SizedBox(width: 5),
+                                Text(
+                                  widget.worker.jobName,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.cleaning_services_sharp,
-                                    color: Colors.deepPurple.shade300,
-                                    size: 15,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Text(
-                                    widget.worker.jobName,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.location_on_sharp,
+                                  color: Colors.deepPurple.shade300,
+                                  size: 15,
+                                ),
+                                const SizedBox(width: 5),
+                                SizedBox(
+                                  width: MediaQuery.of(context).size.width / 3,
+                                  child: Text(
+                                    widget.worker.address,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: 'Lato',
+                                      color: Colors.grey.shade600,
                                     ),
+                                    maxLines:
+                                        2, // Allow the Text widget to wrap to as many lines as needed.
+                                    overflow: TextOverflow
+                                        .ellipsis, // Specify what to display if the Text widget overflows.
+                                    softWrap:
+                                        true, // Allow the text to wrap to new lines.
                                   ),
-                                ],
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "\$${widget.worker.price}",
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Lato',
+                                color: Colors.deepPurple.shade300,
                               ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on_sharp,
-                                    color: Colors.deepPurple.shade300,
-                                    size: 15,
-                                  ),
-                                  SizedBox(width: 5),
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 3,
-                                    child: Text(
-                                      widget.worker.address,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: 'Lato',
-                                        color: Colors.grey.shade600,
-                                      ),
-                                      maxLines:
-                                          2, // Allow the Text widget to wrap to as many lines as needed.
-                                      overflow: TextOverflow
-                                          .ellipsis, // Specify what to display if the Text widget overflows.
-                                      softWrap:
-                                          true, // Allow the text to wrap to new lines.
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                "\$${widget.worker.price}",
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Lato',
+                            ),
+                            const SizedBox(height: 10),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            BookingDetailsScreen(
+                                                worker: widget.worker)));
+                              },
+                              child: Container(
+                                width: MediaQuery.of(context).size.width / 3.5,
+                                height: MediaQuery.of(context).size.height / 18,
+                                decoration: BoxDecoration(
                                   color: Colors.deepPurple.shade300,
+                                  borderRadius: BorderRadius.circular(50),
                                 ),
-                              ),
-                              const SizedBox(height: 10),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              BookingDetailsScreen(
-                                                  worker: widget.worker)));
-                                },
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 3.5,
-                                  height:
-                                      MediaQuery.of(context).size.height / 18,
-                                  decoration: BoxDecoration(
-                                    color: Colors.deepPurple.shade300,
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      "Book now",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontFamily: 'Lato',
-                                          letterSpacing: 1),
-                                    ),
+                                child: const Center(
+                                  child: Text(
+                                    "Book now",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontFamily: 'Lato',
+                                        letterSpacing: 1),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       )
                     ],
@@ -246,30 +241,28 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                     color: Colors.grey[400],
                   ),
                   const SizedBox(height: 10),
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "About me",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.bold,
-                          ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "About me",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(height: 5),
-                        Text(
-                          widget.worker.introduce,
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontFamily: 'Lato',
-                          ),
-                          textAlign: TextAlign.justify,
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        widget.worker.introduce,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontFamily: 'Lato',
                         ),
-                      ],
-                    ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 15),
                   Container(
@@ -279,23 +272,23 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                       children: [
                         Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.star_half_outlined,
                               size: 20,
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
                               "${averageReview.toStringAsFixed(1)}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(width: 4),
+                            const SizedBox(width: 4),
                             Text(
                               "(${sumReview} reviews)",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
@@ -321,22 +314,23 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 const EdgeInsets.symmetric(horizontal: 2.0),
                             tabs: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Tab(
                                     child: Container(
-                                  padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       border: Border.all(
                                           color: Colors.deepPurple.shade300,
                                           width: 2)),
                                   child: Row(
-                                    children: [
+                                    children: const [
                                       Icon(
                                         Icons.star,
                                         size: 16.3,
                                       ),
-                                      const SizedBox(width: 6),
+                                      SizedBox(width: 6),
                                       Text(
                                         "All",
                                         style: TextStyle(
@@ -349,10 +343,11 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 )),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Tab(
                                     child: Container(
-                                  padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       border: Border.all(
@@ -380,7 +375,8 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Tab(
                                     child: Container(
-                                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       border: Border.all(
@@ -408,7 +404,8 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Tab(
                                     child: Container(
-                                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       border: Border.all(
@@ -436,7 +433,8 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Tab(
                                     child: Container(
-                                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       border: Border.all(
@@ -464,7 +462,8 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                 child: Tab(
                                     child: Container(
-                                  padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 5, 10, 5),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
                                       border: Border.all(

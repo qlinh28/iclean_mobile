@@ -5,7 +5,9 @@ import '../../models/workers.dart';
 
 class WorkerServiceScreen extends StatefulWidget {
   final Service service;
-  const WorkerServiceScreen({super.key, required this.service});
+
+  const WorkerServiceScreen({Key? key, required this.service})
+      : super(key: key);
 
   @override
   State<WorkerServiceScreen> createState() => _WorkerServiceScreenState();

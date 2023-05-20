@@ -6,7 +6,9 @@ import '../../../../models/bookings.dart';
 class PendingCard extends StatefulWidget {
   final String status;
   final int userId;
-  const PendingCard({super.key, required this.status, required this.userId});
+
+  const PendingCard({Key? key, required this.status, required this.userId})
+      : super(key: key);
 
   @override
   State<PendingCard> createState() => _PendingCardState();
@@ -165,10 +167,10 @@ class _PendingCardState extends State<PendingCard> {
                               ),
                               Flexible(
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 50),
+                                  padding: const EdgeInsets.only(left: 50),
                                   child: Text(
                                     bookings[i].location,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'Lato',
                                     ),

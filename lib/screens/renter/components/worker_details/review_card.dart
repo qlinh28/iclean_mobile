@@ -6,17 +6,17 @@ import '../../../../models/Feedbackk.dart';
 import '../../../../models/services.dart';
 import '../../../../models/workers.dart';
 
-
-
 class ReviewCard extends StatefulWidget {
   final Worker worker;
   final Service service;
   final int rate;
-  ReviewCard(
-      {super.key,
+
+  const ReviewCard(
+      {Key? key,
       required this.worker,
       required this.service,
-      required this.rate});
+      required this.rate})
+      : super(key: key);
   @override
   _ReviewCardState createState() => _ReviewCardState();
 }
@@ -39,7 +39,7 @@ class _ReviewCardState extends State<ReviewCard> {
   @override
   void didUpdateWidget(covariant ReviewCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-   // fetchReview(workerId, serviceId, widget.rate);
+    // fetchReview(workerId, serviceId, widget.rate);
   }
 
   @override

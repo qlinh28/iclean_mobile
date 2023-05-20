@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class InboxScreen extends StatefulWidget {
-  const InboxScreen({super.key});
+  const InboxScreen({Key? key}) : super(key: key);
 
   @override
   State<InboxScreen> createState() => _InboxScreenState();
@@ -41,7 +41,7 @@ class _InboxScreenState extends State<InboxScreen> {
               padding: const EdgeInsets.all(16),
               child: Row(
                 children: [
-                  CircleAvatar(
+                  const CircleAvatar(
                     backgroundImage:
                         // NetworkImage(feedback[i].profilePicture),
                         AssetImage('assets/images/lisa_avatar.jpg'),
@@ -58,7 +58,6 @@ class _InboxScreenState extends State<InboxScreen> {
                             fontFamily: 'Lato',
                           )),
                       Row(
-                        
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -67,8 +66,7 @@ class _InboxScreenState extends State<InboxScreen> {
                                 fontSize: 14,
                                 color: Colors.grey[800],
                                 fontFamily: 'Lato',
-                                height: 1.7
-                                ),
+                                height: 1.7),
                             textAlign: TextAlign.justify,
                           ),
                           const Text(

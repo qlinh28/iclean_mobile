@@ -6,7 +6,9 @@ import '../../../../models/bookings.dart';
 class UpcomingCard extends StatefulWidget {
   final String status;
   final int userId;
-  const UpcomingCard({super.key, required this.status, required this.userId});
+
+  const UpcomingCard({Key? key, required this.status, required this.userId})
+      : super(key: key);
 
   @override
   State<UpcomingCard> createState() => _UpcomingCardState();
@@ -152,10 +154,10 @@ class _UpcomingCardState extends State<UpcomingCard> {
                               ),
                               Flexible(
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 50),
+                                  padding: const EdgeInsets.only(left: 50),
                                   child: Text(
                                     bookings[i].location,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 15,
                                     ),
                                     textAlign: TextAlign.right,

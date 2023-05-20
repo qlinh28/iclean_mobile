@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/common/login_screen.dart';
 import 'package:iclean_flutter/screens/renter/components/user_screens.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title:'Hello',
+      title: 'Hello',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  MyHomePage({Key? key}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
-    return UserScreens();
+  Widget build(BuildContext context) {
+    return const UserScreens();
   }
 }
-

@@ -8,7 +8,9 @@ import '../../../../models/bookings.dart';
 class CompletedCard extends StatefulWidget {
   final String status;
   final int userId;
-  const CompletedCard({super.key, required this.status, required this.userId});
+
+  const CompletedCard({Key? key, required this.status, required this.userId})
+      : super(key: key);
 
   @override
   State<CompletedCard> createState() => _CompletedCardState();
@@ -35,13 +37,13 @@ class _CompletedCardState extends State<CompletedCard> {
     double _rating = 0;
     String _feedback = '';
     return AlertDialog(
-      title: Text('Feedback'),
+      title: const Text('Feedback'),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('How would you rate your experience?'),
-          SizedBox(height: 10.0),
+          const Text('How would you rate your experience?'),
+          const SizedBox(height: 10.0),
           RatingBar.builder(
             initialRating: _rating,
             minRating: 1,
@@ -50,8 +52,8 @@ class _CompletedCardState extends State<CompletedCard> {
             direction: Axis.horizontal,
             allowHalfRating: true,
             itemCount: 5,
-            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => Icon(
+            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => const Icon(
               Icons.star,
               color: Colors.amber,
             ),
@@ -61,9 +63,9 @@ class _CompletedCardState extends State<CompletedCard> {
               });
             },
           ),
-          SizedBox(height: 20.0),
-          Text('Please tell us what you think:'),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 20.0),
+          const Text('Please tell us what you think:'),
+          const SizedBox(height: 10.0),
           TextFormField(
             maxLines: null,
             onChanged: (value) {
@@ -76,13 +78,13 @@ class _CompletedCardState extends State<CompletedCard> {
       ),
       actions: [
         TextButton(
-          child: Text('CANCEL'),
+          child: const Text('CANCEL'),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
-          child: Text('SUBMIT'),
+          child: const Text('SUBMIT'),
           onPressed: () {
             // _rating > 0 && _feedback.isNotEmpty
             //     ? _submitFeedback(_rating, _feedback, orderId)
@@ -229,10 +231,10 @@ class _CompletedCardState extends State<CompletedCard> {
                               ),
                               Flexible(
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 50),
+                                  padding: const EdgeInsets.only(left: 50),
                                   child: Text(
                                     bookings[i].location,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'Lato',
                                     ),
@@ -271,7 +273,7 @@ class _CompletedCardState extends State<CompletedCard> {
                                         color: Colors.grey.withOpacity(0.4),
                                         spreadRadius: 5,
                                         blurRadius: 20,
-                                        offset: Offset(
+                                        offset: const Offset(
                                             0, 3), // changes position of shadow
                                       ),
                                     ],

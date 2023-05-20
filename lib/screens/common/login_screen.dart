@@ -9,7 +9,7 @@ import 'component/square_tile.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -233,7 +233,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             //   );
                             // }
                           },
-                          child: Text('Login'),
+                          child: const Text('Login'),
                         ),
                       ],
                     )),
@@ -283,8 +283,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   //onPressed: _loginWithGoogle,
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -318,7 +317,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignUpScreen()),
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpScreen()),
                         );
                       },
                       child: const Text(

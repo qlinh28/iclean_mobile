@@ -4,7 +4,8 @@ import 'component/my_textfield.dart';
 import 'package:intl/intl.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  const SignUpScreen({Key? key}) : super(key: key);
+
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
@@ -164,7 +165,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               surface: Colors.deepPurple.shade300,
               onSurface: Colors.black,
             ),
-            textTheme: TextTheme(
+            textTheme: const TextTheme(
               bodyText1: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
@@ -272,7 +273,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     decoration: InputDecoration(
                       labelText: 'Role',
                       hintText: 'Select your role',
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -299,7 +300,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(value),
                       );
                     }).toList(),
-                    validator: (value) => validateDropdown(value),
+                    //validator: (value) => validateDropdown(value),
                   ),
 
                   const SizedBox(height: 10),
@@ -328,7 +329,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     .format(_selectedDate!)),
                         obscureText: false,
                         decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white),
                           ),
                           focusedBorder: OutlineInputBorder(
@@ -353,7 +354,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 initDateTime = true;
                               });
                             },
-                            child: Padding(
+                            child: const Padding(
                               padding: EdgeInsets.only(right: 10),
                               child: Icon(Icons.edit_calendar),
                             ),
@@ -361,7 +362,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         ),
                       ),
                       if (_selectedDate == null && initDateTime)
-                        Text(
+                        const Text(
                           'Please select a date',
                           style: TextStyle(
                             color: Colors.red,
@@ -376,7 +377,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   // gender dropdown
                   DropdownButtonFormField(
                     decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
+                      enabledBorder: const OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.white),
                       ),
                       focusedBorder: OutlineInputBorder(
@@ -405,7 +406,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: Text(value),
                       );
                     }).toList(),
-                    validator: (value) => validateDropdown(value),
+                    //validator: (value) => validateDropdown(value),
                   ),
 
                   const SizedBox(height: 10),

@@ -35,7 +35,7 @@ class UpdateTextField extends StatelessWidget {
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Colors.white),
+            borderSide: const BorderSide(color: Colors.white),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Colors.grey.shade400),
@@ -43,7 +43,7 @@ class UpdateTextField extends StatelessWidget {
           fillColor: Colors.grey.shade200,
           filled: true,
           hintText: hintText,
-          contentPadding: EdgeInsets.only(left: 20),
+          contentPadding: const EdgeInsets.only(left: 20),
           labelText: labelText,
           labelStyle: TextStyle(
             color: Colors.grey[500],

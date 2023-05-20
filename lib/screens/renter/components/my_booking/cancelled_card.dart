@@ -6,7 +6,9 @@ import '../../../../models/bookings.dart';
 class CancelledCard extends StatefulWidget {
   final String status;
   final int userId;
-  const CancelledCard({super.key, required this.status, required this.userId});
+
+  const CancelledCard({Key? key, required this.status, required this.userId})
+      : super(key: key);
 
   @override
   State<CancelledCard> createState() => _CancelledCardState();
@@ -158,10 +160,10 @@ class _CancelledCardState extends State<CancelledCard> {
                               ),
                               Flexible(
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 50),
+                                  padding: const EdgeInsets.only(left: 50),
                                   child: Text(
                                     bookings[i].location,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 15,
                                       fontFamily: 'Lato',
                                     ),

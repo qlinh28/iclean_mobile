@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/renter/components/my_booking/cancelled_card.dart';
 import 'package:iclean_flutter/screens/renter/components/my_booking/completed_card.dart';
@@ -6,7 +5,7 @@ import 'package:iclean_flutter/screens/renter/components/my_booking/pending_card
 import 'package:iclean_flutter/screens/renter/components/my_booking/upcoming_card.dart';
 
 class MyBookingsScreen extends StatefulWidget {
-  const MyBookingsScreen({super.key});
+  const MyBookingsScreen({Key? key}) : super(key: key);
 
   @override
   State<MyBookingsScreen> createState() => _MyBookingsScreenState();
@@ -50,14 +49,13 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text(
-                    "My Booking",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.bold,
-                    ),
+                "My Booking",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontFamily: 'Lato',
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              
               TabBar(
                   controller: _tabController,
                   isScrollable: true,
@@ -81,7 +79,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       return PendingCard(
                           status: 'unconfirm', userId: snapshot.data!);
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
@@ -92,7 +90,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       return UpcomingCard(
                           status: 'undone', userId: snapshot.data!);
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
@@ -103,7 +101,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       return CompletedCard(
                           status: 'done', userId: snapshot.data!);
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
@@ -114,7 +112,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       return CancelledCard(
                           status: 'cancel', userId: snapshot.data!);
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../common/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -43,25 +43,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               const SizedBox(height: 10),
-              Container(
-                child: Column(
-                  children: const [
-                    CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/lisa_avatar.jpg'),
-                      radius: 50,
+              Column(
+                children: const [
+                  CircleAvatar(
+                    backgroundImage:
+                        AssetImage('assets/images/lisa_avatar.jpg'),
+                    radius: 50,
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Lisa",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Lato',
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "Lisa",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Lato',
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               const SizedBox(height: 10),
               InkWell(
@@ -76,152 +74,134 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Row(
-                                children: const [
-                                  Icon(Icons.person_outline),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "Edit Profile",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Lato',
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.person_outline),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Edit Profile",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              )),
-                              const Icon(Icons.keyboard_arrow_right),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Row(
-                                children: const [
-                                  Icon(Icons.notifications_outlined),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "Notification",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Lato',
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.notifications_outlined),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Notification",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              )),
-                              const Icon(Icons.keyboard_arrow_right),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Row(
-                                children: const[
-                                  Icon(Icons.payment_outlined),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "Payment",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Lato',
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.payment_outlined),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Payment",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              )),
-                              const Icon(Icons.keyboard_arrow_right),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Row(
-                                children: const [
-                                  Icon(Icons.language_outlined),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "Language",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Lato',
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.language_outlined),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Language",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              )),
-                              const Icon(Icons.keyboard_arrow_right),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Row(
-                                children: const [
-                                  Icon(Icons.remove_red_eye_outlined),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "Dark Mode",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Lato',
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.remove_red_eye_outlined),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Dark Mode",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              )),
-                              const Icon(Icons.keyboard_arrow_right),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 8),
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                  child: Row(
-                                children: const [
-                                  Icon(Icons.policy_outlined),
-                                  SizedBox(width: 15),
-                                  Text(
-                                    "Privacy Policy",
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      fontFamily: 'Lato',
-                                    ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: const [
+                                Icon(Icons.policy_outlined),
+                                SizedBox(width: 15),
+                                Text(
+                                  "Privacy Policy",
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
                                   ),
-                                ],
-                              )),
-                              const Icon(Icons.keyboard_arrow_right),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                            const Icon(Icons.keyboard_arrow_right),
+                          ],
                         ),
                       ),
                       Padding(
@@ -247,8 +227,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               builder: (BuildContext context) {
                                 return AlertDialog(
                                   title: const Text("Confirm Log Out"),
-                                  content:
-                                      const Text("Are you sure you want to log out?"),
+                                  content: const Text(
+                                      "Are you sure you want to log out?"),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>

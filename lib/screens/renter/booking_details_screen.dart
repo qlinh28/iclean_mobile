@@ -6,7 +6,8 @@ import '../../models/workers.dart';
 class BookingDetailsScreen extends StatefulWidget {
   final Worker worker;
 
-  const BookingDetailsScreen({super.key, required this.worker});
+  const BookingDetailsScreen({Key? key, required this.worker})
+      : super(key: key);
 
   @override
   State<BookingDetailsScreen> createState() => _BookingDetailsScreenState();
@@ -158,12 +159,12 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     firstDay: DateTime.utc(2023),
                     focusedDay: today,
                     lastDay: DateTime.utc(2024),
-                    headerStyle: HeaderStyle(
+                    headerStyle: const HeaderStyle(
                       formatButtonVisible: false,
                       titleTextStyle:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    daysOfWeekStyle: DaysOfWeekStyle(
+                    daysOfWeekStyle: const DaysOfWeekStyle(
                         weekdayStyle: TextStyle(fontWeight: FontWeight.bold),
                         weekendStyle: TextStyle(fontWeight: FontWeight.bold)),
                     availableGestures: AvailableGestures.all,
@@ -171,7 +172,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     selectedDayPredicate: (day) => isSameDay(day, today),
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: false,
-                      weekendTextStyle: TextStyle(color: Colors.black),
+                      weekendTextStyle: const TextStyle(color: Colors.black),
                       todayDecoration: BoxDecoration(
                         color: Colors.deepPurple.shade200,
                         shape: BoxShape.circle,
@@ -199,57 +200,55 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                             fontFamily: 'Lato',
                             fontWeight: FontWeight.bold,
                           )),
-                      Container(
-                        child: Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: CircleAvatar(
-                                radius: 15.0,
-                                backgroundColor: Colors.deepPurple.shade100,
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.remove,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                  onPressed: _decrementCounter,
+                      Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 15.0,
+                              backgroundColor: Colors.deepPurple.shade100,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.remove,
+                                  color: Colors.white,
+                                  size: 15,
                                 ),
+                                onPressed: _decrementCounter,
                               ),
                             ),
-                            const SizedBox(width: 10),
-                            Text(
-                              '$_counter',
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontFamily: 'Lato',
-                                fontWeight: FontWeight.bold,
-                              ),
+                          ),
+                          const SizedBox(width: 10),
+                          Text(
+                            '$_counter',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(width: 10),
-                            Container(
-                              padding: const EdgeInsets.all(8),
-                              decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                              ),
-                              child: CircleAvatar(
-                                radius: 15.0,
-                                backgroundColor: Colors.deepPurple.shade100,
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.add,
-                                    color: Colors.white,
-                                    size: 15,
-                                  ),
-                                  onPressed: _incrementCounter,
+                          ),
+                          const SizedBox(width: 10),
+                          Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: CircleAvatar(
+                              radius: 15.0,
+                              backgroundColor: Colors.deepPurple.shade100,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.add,
+                                  color: Colors.white,
+                                  size: 15,
                                 ),
+                                onPressed: _incrementCounter,
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -284,11 +283,11 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                                     });
                                   },
                                   child: Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 8),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8),
                                     child: Container(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          10, 5, 10, 5),
                                       decoration: BoxDecoration(
                                           color: _selectedTime == time
                                               ? Colors.deepPurple.shade300
@@ -334,8 +333,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             ),
             const SizedBox(height: 5),
             InkWell(
-              onTap: () {
-              },
+              onTap: () {},
               //onTap: _createBookingOrder,
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,

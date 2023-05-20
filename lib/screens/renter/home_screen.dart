@@ -5,7 +5,7 @@ import '../../models/services.dart';
 import 'workers_service_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -17,13 +17,11 @@ class _HomeScreenState extends State<HomeScreen> {
     Service(id: 2, name: "lau nha", icon: "assets/images/lisa_avatar.jpg"),
     Service(id: 3, name: "rua chen", icon: "assets/images/lisa_avatar.jpg"),
     Service(id: 4, name: "nau com", icon: "assets/images/lisa_avatar.jpg"),
-
   ];
 
   @override
   void initState() {
     super.initState();
-
   }
 
   @override
@@ -37,8 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Row(
               children: [
                 const CircleAvatar(
-                  backgroundImage:
-                      AssetImage('assets/images/lisa_avatar.jpg'),
+                  backgroundImage: AssetImage('assets/images/lisa_avatar.jpg'),
                   radius: 25,
                 ),
                 Container(
@@ -74,22 +71,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.grey.shade600,
                         ),
                         const SizedBox(width: 4),
-                        Container(
-                          //width: MediaQuery.of(context).size.width / 3,
-                          child: Text(
-                            "S102 Vinhomes Grand Park",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Lato',
-                              color: Colors.grey.shade600,
-                            ),
-                            maxLines:
-                                2, // Allow the Text widget to wrap to as many lines as needed.
-                            overflow: TextOverflow
-                                .ellipsis, // Specify what to display if the Text widget overflows.
-                            softWrap:
-                                true, // Allow the text to wrap to new lines.
+                        Text(
+                          "S102 Vinhomes Grand Park",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Lato',
+                            color: Colors.grey.shade600,
                           ),
+                          maxLines:
+                              2, // Allow the Text widget to wrap to as many lines as needed.
+                          overflow: TextOverflow
+                              .ellipsis, // Specify what to display if the Text widget overflows.
+                          softWrap:
+                              true, // Allow the text to wrap to new lines.
                         ),
                       ]),
                       const SizedBox(width: 10),
@@ -108,13 +102,13 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             const SizedBox(height: 5),
-            Center(child: BannerSlider()),
+            const Center(child: BannerSlider()),
             const SizedBox(height: 10),
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:  [
+                children: [
                   const Text(
                     "Service",
                     style: TextStyle(
@@ -141,38 +135,36 @@ class _HomeScreenState extends State<HomeScreen> {
               childAspectRatio: (80 / 70),
               children: [
                 for (int i = 0; i < services.length; i++)
-                  Container(
-                    child: Column(children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WorkerServiceScreen(
-                                      service: services[i])));
-                        },
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          child: Image.asset(
-                            services[i].icon,
-                            width: 100,
-                            height: 60,
-                            fit: BoxFit.contain,
-                          ),
+                  Column(children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    WorkerServiceScreen(service: services[i])));
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(10),
+                        child: Image.asset(
+                          services[i].icon,
+                          width: 100,
+                          height: 60,
+                          fit: BoxFit.contain,
                         ),
                       ),
-                      Center(
-                        child: Text(
-                          services[i].name,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.bold,
-                          ),
+                    ),
+                    Center(
+                      child: Text(
+                        services[i].name,
+                        style: const TextStyle(
+                          fontSize: 10,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.bold,
                         ),
-                      )
-                    ]),
-                  ),
+                      ),
+                    )
+                  ]),
               ],
             ),
           ],
