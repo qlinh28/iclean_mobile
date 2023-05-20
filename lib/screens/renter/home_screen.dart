@@ -29,14 +29,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       body: SafeArea(
           child: Container(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
         child: ListView(
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/lisa_avatar.jpg'),
-                  radius: 25,
+                Container(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: const CircleAvatar(
+                    backgroundImage:
+                        AssetImage('assets/images/lisa_avatar.jpg'),
+                    radius: 25,
+                  ),
                 ),
                 Container(
                   padding: const EdgeInsets.only(left: 15),

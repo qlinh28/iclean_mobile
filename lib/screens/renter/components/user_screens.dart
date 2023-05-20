@@ -112,7 +112,7 @@ class _UserScreensState extends State<UserScreens> {
             ),
           ),
           GButton(
-            icon: Icons.person_outline,
+            icon: Icons.chat,
             text: 'Inbox',
             textStyle: TextStyle(
               fontFamily: 'Lato',
