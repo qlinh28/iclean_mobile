@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/common/signup_screen.dart';
+import 'package:iclean_flutter/screens/renter/components/user_screens.dart';
 
 import 'component/my_textfield.dart';
 import 'component/square_tile.dart';
@@ -232,6 +233,31 @@ class _LoginScreenState extends State<LoginScreen> {
                             //     _passwordController.text,
                             //   );
                             // }
+                            if (_usernameController.text.compareTo('test') ==
+                                    0 &&
+                                _passwordController.text.compareTo('test') ==
+                                    0) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const UserScreens()),
+                              );
+                            } else {
+                              // Display an error message if the login is unsuccessful
+                              showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text('Error'),
+                                  content: const Text('Invalid username or password'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
                           },
                           child: const Text('Login'),
                         ),

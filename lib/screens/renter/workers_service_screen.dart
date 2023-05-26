@@ -14,7 +14,12 @@ class WorkerServiceScreen extends StatefulWidget {
 }
 
 class _WorkerServiceScreenState extends State<WorkerServiceScreen> {
-  List<Worker> worker = [];
+  List<Worker> worker = [
+    Worker(id: 1, jobEmpId: 1, jobId: 1, name: "Lisa", image: "assets/images/lisa_worker.jpg", introduce: "Lalisa Manobal, thường được biết đến với nghệ danh Lisa, là một nữ rapper, ca sĩ, nhạc sĩ và vũ công người Thái Lan. Cô là thành viên nhỏ tuổi nhất của nhóm nhạc nữ Hàn Quốc Blackpink trực thuộc YG Entertainment.", countRate: 10, averageRate: 5.0, address: "Buriram, Thái Lan", jobName: "Singer", price: 10000000000),
+    Worker(id: 2, jobEmpId: 2, jobId: 1, name: "Jennie", image: "assets/images/jennie_worker.jpg", introduce: "Kim Jennie, thường được biết đến với nghệ danh JENNIE hay Jennie Kim, là một nữ ca sĩ, rapper, diễn viên người Hàn Quốc, thành viên của nhóm nhạc nữ Blackpink trực thuộc công ty YG Entertainment.", countRate: 10, averageRate: 5.0, address: "Cheongdam-dong, Hàn Quốc", jobName: "Singer", price: 10000000000),
+    Worker(id: 3, jobEmpId: 3, jobId: 1, name: "Rosé", image: "assets/images/rose_worker.jpg", introduce: "Park Chae-young, thường được biết đến với nghệ danh Rosé là nữ ca sĩ, người mẫu, nhạc sĩ người New Zealand gốc Hàn Quốc, thành viên của nhóm nhạc nữ Blackpink do YG Entertainment thành lập và quản lý", countRate: 10, averageRate: 5.0, address: "Auckland, New Zealand", jobName: "Singer", price: 10000000000),
+    Worker(id: 4, jobEmpId: 4, jobId: 1, name: "Jisoo", image: "assets/images/jisoo_worker.jpg", introduce: "Kim Ji-soo, thường được biết đến với nghệ danh Jisoo, là một nữ ca sĩ, diễn viên, người mẫu, người dẫn chương trình người Hàn Quốc, thành viên chị cả của nhóm nhạc nữ Blackpink do YG Entertainment thành lập và quản lý.", countRate: 10, averageRate: 5.0, address: "Gunpo, Gyeonggi, Hàn Quốc", jobName: "Singer", price: 10000000000)
+  ];
 
   @override
   void initState() {
@@ -79,7 +84,7 @@ class _WorkerServiceScreenState extends State<WorkerServiceScreen> {
                           color: Colors.grey.shade400,
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: Image.network(
+                        child: Image.asset(
                           worker[i].image,
                           width: 70,
                           height: 70,

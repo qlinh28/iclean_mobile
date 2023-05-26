@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/renter/components/user_screens.dart';
+import 'package:iclean_flutter/screens/common/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +25,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const UserScreens();
+    return const LoginScreen();
   }
 }

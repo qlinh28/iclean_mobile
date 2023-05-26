@@ -4,11 +4,13 @@ import 'package:intl/intl.dart';
 import '../../../../models/bookings.dart';
 
 class CancelledCard extends StatefulWidget {
-  final String status;
-  final int userId;
+  //final String status;
+  //final int userId;
 
-  const CancelledCard({Key? key, required this.status, required this.userId})
-      : super(key: key);
+  const CancelledCard({
+    Key? key,
+    /*required this.status, required this.userId*/
+  }) : super(key: key);
 
   @override
   State<CancelledCard> createState() => _CancelledCardState();
@@ -16,7 +18,53 @@ class CancelledCard extends StatefulWidget {
 
 class _CancelledCardState extends State<CancelledCard> {
   late List<bool> _isExpanded = List.filled(bookings.length, false);
-  List<Booking> bookings = [];
+  List<Booking> bookings = [
+    Booking(
+        id: 1,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa1",
+        status: "cancel",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+    Booking(
+        id: 2,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa2",
+        status: "cancel",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+    Booking(
+        id: 3,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa3",
+        status: "cancel",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+  ];
 
   @override
   void initState() {
@@ -58,7 +106,7 @@ class _CancelledCardState extends State<CancelledCard> {
                             color: Colors.grey.shade400,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Image.network(
+                          child: Image.asset(
                             bookings[i].jobImage,
                             width: 70,
                             height: 70,

@@ -4,18 +4,66 @@ import 'package:intl/intl.dart';
 import '../../../../models/bookings.dart';
 
 class PendingCard extends StatefulWidget {
-  final String status;
-  final int userId;
+  // final String status;
+  // final int userId;
 
-  const PendingCard({Key? key, required this.status, required this.userId})
-      : super(key: key);
+  const PendingCard({
+    Key? key,
+    /*required this.status, required this.userId*/
+  }) : super(key: key);
 
   @override
   State<PendingCard> createState() => _PendingCardState();
 }
 
 class _PendingCardState extends State<PendingCard> {
-  List<Booking> bookings = [];
+  List<Booking> bookings = [
+    Booking(
+        id: 1,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa1",
+        status: "pending",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+    Booking(
+        id: 2,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa2",
+        status: "pending",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+    Booking(
+        id: 3,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa3",
+        status: "pending",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+  ];
   late List<bool> _isExpanded = List.filled(bookings.length, false);
 
   void _reloadPage() {
@@ -65,7 +113,7 @@ class _PendingCardState extends State<PendingCard> {
                             color: Colors.grey.shade400,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Image.network(
+                          child: Image.asset(
                             bookings[i].jobImage,
                             width: 70,
                             height: 70,

@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 import '../../../../models/bookings.dart';
 
 class UpcomingCard extends StatefulWidget {
-  final String status;
-  final int userId;
+  // final String status;
+  // final int userId;
 
-  const UpcomingCard({Key? key, required this.status, required this.userId})
+  const UpcomingCard({Key? key, /*required this.status, required this.userId*/})
       : super(key: key);
 
   @override
@@ -15,7 +15,53 @@ class UpcomingCard extends StatefulWidget {
 }
 
 class _UpcomingCardState extends State<UpcomingCard> {
-  List<Booking> bookings = [];
+  List<Booking> bookings = [
+    Booking(
+        id: 1,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa1",
+        status: "upcoming",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+    Booking(
+        id: 2,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa2",
+        status: "upcoming",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+    Booking(
+        id: 3,
+        userId: 1,
+        usename: "Linh",
+        empId: 1,
+        empName: "Lisa3",
+        status: "upcoming",
+        workTime: DateTime.august,
+        timestamp: DateTime.now(),
+        price: 1000000000,
+        location: "Thái Lan",
+        jobId: 1,
+        jobName: "Singer",
+        description: "1233321123321",
+        jobImage: "assets/images/lisa_avatar.jpg"),
+  ];
   late List<bool> _isExpanded = List.filled(bookings.length, false);
 
   @override
@@ -58,7 +104,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                             color: Colors.grey.shade400,
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          child: Image.network(
+                          child: Image.asset(
                             bookings[i].jobImage,
                             width: 70,
                             height: 70,
@@ -76,6 +122,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
+                                  fontFamily: 'Lato',
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -83,6 +130,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                 bookings[i].jobName,
                                 style: const TextStyle(
                                   fontSize: 15,
+                                  fontFamily: 'Lato',
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -98,6 +146,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
+                                    fontFamily: 'Lato',
                                   ),
                                 ),
                               )
@@ -130,6 +179,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.grey.shade700,
+                                  fontFamily: 'Lato',
                                 ),
                               ),
                               Text(
@@ -137,6 +187,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                     .format(bookings[i].timestamp),
                                 style: const TextStyle(
                                   fontSize: 15,
+                                  fontFamily: 'Lato',
                                 ),
                               ),
                             ],
@@ -150,6 +201,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.grey.shade700,
+                                  fontFamily: 'Lato',
                                 ),
                               ),
                               Flexible(
@@ -159,6 +211,7 @@ class _UpcomingCardState extends State<UpcomingCard> {
                                     bookings[i].location,
                                     style: const TextStyle(
                                       fontSize: 15,
+                                      fontFamily: 'Lato',
                                     ),
                                     textAlign: TextAlign.right,
                                     maxLines: 3,

@@ -22,7 +22,32 @@ class ReviewCard extends StatefulWidget {
 }
 
 class _ReviewCardState extends State<ReviewCard> {
-  List<Feedbackk> feedback = [];
+  List<Feedbackk> feedback = [
+    Feedbackk(
+        id: 1,
+        rate: 5,
+        employeeId: 1,
+        detail: "She's so beautiful",
+        profilePicture: "assets/images/lisa_avatar.jpg",
+        username: "Quang Linh1",
+        timestamp: DateTime.now()),
+    Feedbackk(
+        id: 2,
+        rate: 4,
+        employeeId: 1,
+        detail: "She dances very well",
+        profilePicture: "assets/images/lisa_avatar.jpg",
+        username: "Quang Linh2",
+        timestamp: DateTime.now()),
+    Feedbackk(
+        id: 3,
+        rate: 3,
+        employeeId: 1,
+        detail: "I love her performance",
+        profilePicture: "assets/images/lisa_avatar.jpg",
+        username: "Quang Linh3",
+        timestamp: DateTime.now()),
+  ];
   late int workerId;
   late int serviceId;
   late int rate;
@@ -63,7 +88,7 @@ class _ReviewCardState extends State<ReviewCard> {
                           children: [
                             CircleAvatar(
                               backgroundImage:
-                                  NetworkImage(feedback[i].profilePicture),
+                                  AssetImage(feedback[i].profilePicture),
                               radius: 20,
                             ),
                             const SizedBox(width: 15),

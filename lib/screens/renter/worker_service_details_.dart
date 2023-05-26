@@ -99,7 +99,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      Image.network(
+                      Image.asset(
                         widget.worker.image,
                         width: 170,
                         height: 170,
@@ -242,7 +242,6 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                   ),
                   const SizedBox(height: 10),
                   Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
