@@ -23,47 +23,6 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
   late int sumReview = 0;
   late double averageReview = 5.0;
 
-  late File _image;
-
-  Future _pickImage(ImageSource source) async {
-    try {
-      final image = await ImagePicker().pickImage(source: source);
-      if (image == null) return;
-      File? img = File(image.path);
-      setState(() {
-        _image = img;
-      });
-    } on PlatformException catch (e) {
-      print(e);
-      Navigator.of(context).pop();
-    }
-  }
-
-  void _showSelectPhotoOptions(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(25.0),
-        ),
-      ),
-      builder: (context) => DraggableScrollableSheet(
-          initialChildSize: 0.28,
-          maxChildSize: 0.4,
-          minChildSize: 0.28,
-          expand: false,
-          builder: (context, scrollController) {
-            return SingleChildScrollView(
-              controller: scrollController,
-              child: SelectPhotoOptionsScreen(
-                onTap: _pickImage,
-              ),
-            );
-          }),
-    );
-  }
-
   late final nameController;
   late final priceController;
   late final introduceController;
@@ -75,7 +34,6 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
     priceController =
         TextEditingController(text: widget.profile.price.toString());
     introduceController = TextEditingController(text: widget.profile.introduce);
-    _image = File(widget.profile.image);
   }
 
   @override
@@ -107,37 +65,18 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    // GestureDetector(
-                    //   onTap: () {
-                    //     _showSelectPhotoOptions(context);
-                    //   },
-                    //   child: Image(
-                    //     image: FileImage(_image),
-                    //     width: 170,
-                    //     height: 170,
-                    //     fit: BoxFit.contain,
-                    //   ),
-                    // ),
-                    CircleAvatar(
-                      backgroundImage: FileImage(_image),
-                      radius: 100.0,
+                    Image.asset(
+                      widget.profile.image,
+                      width: 170,
+                      height: 170,
+                      fit: BoxFit.contain,
                     ),
-
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // Text(
-                          //   widget.profile.name,
-                          //   style: TextStyle(
-                          //     fontSize: 20,
-                          //     fontFamily: 'Lato',
-                          //     color: Colors.deepPurple.shade300,
-                          //     fontWeight: FontWeight.bold,
-                          //   ),
-                          // ),
                           UpdateProfileTextField(
                               controller: nameController,
                               hintText: 'Your name',
@@ -234,7 +173,6 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                                   text: widget.profile.price.toString()),
                             ],
                           ),
-
                           const SizedBox(height: 10),
                         ],
                       ),
