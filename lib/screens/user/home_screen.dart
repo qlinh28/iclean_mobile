@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
+import 'package:iclean_flutter/screens/user/location_screen.dart';
 import '../../models/services.dart';
 import 'employee_service_screen.dart';
 
@@ -74,19 +75,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.grey.shade600,
                         ),
                         const SizedBox(width: 4),
-                        Text(
-                          "S102 Vinhomes Grand Park",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'Lato',
-                            color: Colors.grey.shade600,
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LocationScreen()));
+                          },
+                          child: Text(
+                            "S102 Vinhomes Grand Park",
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: 'Lato',
+                              color: Colors.grey.shade600,
+                            ),
+                            maxLines:
+                                2, // Allow the Text widget to wrap to as many lines as needed.
+                            overflow: TextOverflow
+                                .ellipsis, // Specify what to display if the Text widget overflows.
+                            softWrap:
+                                true, // Allow the text to wrap to new lines.
                           ),
-                          maxLines:
-                              2, // Allow the Text widget to wrap to as many lines as needed.
-                          overflow: TextOverflow
-                              .ellipsis, // Specify what to display if the Text widget overflows.
-                          softWrap:
-                              true, // Allow the text to wrap to new lines.
                         ),
                       ]),
                       const SizedBox(width: 10),

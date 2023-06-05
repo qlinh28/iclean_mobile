@@ -1,11 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
 import '../../models/profile.dart';
 import 'components/update_profile/introduce_textfield.dart';
-import 'components/update_profile/select_photo_options_screen.dart';
 import 'components/update_profile/update_profile_textfield.dart';
 
 class UpdateProfileServiceScreen extends StatefulWidget {
