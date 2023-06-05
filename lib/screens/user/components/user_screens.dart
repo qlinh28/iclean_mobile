@@ -1,11 +1,11 @@
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:iclean_flutter/screens/renter/home_screen.dart';
-import 'package:iclean_flutter/screens/renter/inbox_screen.dart';
-import 'package:iclean_flutter/screens/renter/my_bookings_screen.dart';
-import 'package:iclean_flutter/screens/renter/notification_screen.dart';
-import 'package:iclean_flutter/screens/renter/profile_screen.dart';
+import 'package:iclean_flutter/screens/user/home_screen.dart';
+import 'package:iclean_flutter/screens/user/inbox_screen.dart';
+import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
+import 'package:iclean_flutter/screens/user/notification_screen.dart';
+import 'package:iclean_flutter/screens/user/profile_screen.dart';
 
 class UserScreens extends StatefulWidget {
   const UserScreens({Key? key}) : super(key: key);

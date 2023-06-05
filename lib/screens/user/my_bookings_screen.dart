@@ -125,10 +125,10 @@
 //   }
 // }
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/renter/components/my_booking/cancelled_card.dart';
-import 'package:iclean_flutter/screens/renter/components/my_booking/completed_card.dart';
-import 'package:iclean_flutter/screens/renter/components/my_booking/pending_card.dart';
-import 'package:iclean_flutter/screens/renter/components/my_booking/upcoming_card.dart';
+import 'package:iclean_flutter/screens/user/components/my_booking/cancelled_card.dart';
+import 'package:iclean_flutter/screens/user/components/my_booking/completed_card.dart';
+import 'package:iclean_flutter/screens/user/components/my_booking/pending_card.dart';
+import 'package:iclean_flutter/screens/user/components/my_booking/upcoming_card.dart';
 
 class MyBookingsScreen extends StatefulWidget {
   const MyBookingsScreen({Key? key}) : super(key: key);

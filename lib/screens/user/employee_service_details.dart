@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/renter/booking_details_screen.dart';
-import 'package:iclean_flutter/screens/renter/components/worker_details/review_card.dart';
+import 'package:iclean_flutter/screens/user/booking_details_screen.dart';
+import 'package:iclean_flutter/screens/user/components/employee_service_details/review_card.dart';
 
+import '../../models/profile.dart';
 import '../../models/services.dart';
-import '../../models/workers.dart';
 
-class WorkerDetailsScreen extends StatefulWidget {
-  final Worker worker;
+class EmployeeDetailsScreen extends StatefulWidget {
+  final Profile profile;
   final Service service;
-  const WorkerDetailsScreen(
-      {Key? key, required this.worker, required this.service})
+  const EmployeeDetailsScreen(
+      {Key? key, required this.profile, required this.service})
       : super(key: key);
 
   @override
-  State<WorkerDetailsScreen> createState() => _WorkerDetailsScreenState();
+  State<EmployeeDetailsScreen> createState() => _EmployeeDetailsScreenState();
 }
 
-class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
+class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
   late int sumReview = 0;
@@ -89,7 +89,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                       ),
                       const SizedBox(width: 15),
                       Text(
-                        widget.worker.name,
+                        widget.profile.name,
                         style: const TextStyle(
                           fontFamily: 'Lato',
                         ),
@@ -100,7 +100,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                   Row(
                     children: [
                       Image.asset(
-                        widget.worker.image,
+                        widget.profile.image,
                         width: 170,
                         height: 170,
                         fit: BoxFit.contain,
@@ -112,7 +112,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              widget.worker.name,
+                              widget.profile.name,
                               style: TextStyle(
                                 fontSize: 20,
                                 fontFamily: 'Lato',
@@ -155,7 +155,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 ),
                                 const SizedBox(width: 5),
                                 Text(
-                                  widget.worker.jobName,
+                                  widget.profile.jobName,
                                   style: const TextStyle(
                                     fontSize: 12,
                                     fontFamily: 'Lato',
@@ -175,7 +175,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width / 3,
                                   child: Text(
-                                    widget.worker.address,
+                                    widget.profile.address,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: 'Lato',
@@ -193,7 +193,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              "\$${widget.worker.price}",
+                              "\$${widget.profile.price}",
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -209,7 +209,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             BookingDetailsScreen(
-                                                worker: widget.worker)));
+                                                profile: widget.profile)));
                               },
                               child: Container(
                                 width: MediaQuery.of(context).size.width / 3.5,
@@ -254,7 +254,7 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        widget.worker.introduce,
+                        widget.profile.introduce,
                         style: const TextStyle(
                           fontSize: 13,
                           fontFamily: 'Lato',
@@ -493,27 +493,27 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                           child: Center(
                             child: [
                               ReviewCard(
-                                  worker: widget.worker,
+                                  profile: widget.profile,
                                   service: widget.service,
                                   rate: 10),
                               ReviewCard(
-                                  worker: widget.worker,
+                                  profile: widget.profile,
                                   service: widget.service,
                                   rate: _tabController.index),
                               ReviewCard(
-                                  worker: widget.worker,
+                                  profile: widget.profile,
                                   service: widget.service,
                                   rate: _tabController.index),
                               ReviewCard(
-                                  worker: widget.worker,
+                                  profile: widget.profile,
                                   service: widget.service,
                                   rate: _tabController.index),
                               ReviewCard(
-                                  worker: widget.worker,
+                                  profile: widget.profile,
                                   service: widget.service,
                                   rate: _tabController.index),
                               ReviewCard(
-                                  worker: widget.worker,
+                                  profile: widget.profile,
                                   service: widget.service,
                                   rate: _tabController.index),
                             ][_tabController.index],

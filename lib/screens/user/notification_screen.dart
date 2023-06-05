@@ -12,11 +12,34 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   List<Noti> notis = [
-    Noti(id: 1, details: "chưa được duyệt", status: 'unconfirm', timestamp: DateTime.now(), deleted: false, read: false),
-    Noti(id: 2, details: "đợi đến ngày làm", status: 'undone', timestamp: DateTime.now(), deleted: false, read: false),
-    Noti(id: 3, details: "đã hoàn thành", status: 'done', timestamp: DateTime.now(), deleted: false, read: false),
-    Noti(id: 4, details: "đã hủy", status: 'cancel', timestamp: DateTime.now(), deleted: false, read: false),
-
+    Noti(
+        id: 1,
+        details: "chưa được duyệt",
+        status: 'unconfirm',
+        timestamp: DateTime.now(),
+        deleted: false,
+        read: false),
+    Noti(
+        id: 2,
+        details: "đợi đến ngày làm",
+        status: 'undone',
+        timestamp: DateTime.now(),
+        deleted: false,
+        read: false),
+    Noti(
+        id: 3,
+        details: "đã hoàn thành",
+        status: 'done',
+        timestamp: DateTime.now(),
+        deleted: false,
+        read: false),
+    Noti(
+        id: 4,
+        details: "đã hủy",
+        status: 'cancel',
+        timestamp: DateTime.now(),
+        deleted: false,
+        read: false),
   ];
 
   @override

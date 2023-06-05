@@ -3,17 +3,17 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../models/Feedbackk.dart';
+import '../../../../models/profile.dart';
 import '../../../../models/services.dart';
-import '../../../../models/workers.dart';
 
 class ReviewCard extends StatefulWidget {
-  final Worker worker;
+  final Profile profile;
   final Service service;
   final int rate;
 
   const ReviewCard(
       {Key? key,
-      required this.worker,
+      required this.profile,
       required this.service,
       required this.rate})
       : super(key: key);
@@ -55,7 +55,7 @@ class _ReviewCardState extends State<ReviewCard> {
   @override
   void initState() {
     super.initState;
-    workerId = widget.worker.id;
+    workerId = widget.profile.id;
     serviceId = widget.service.id;
     rate = widget.rate;
     //fetchReview(workerId, serviceId, rate);

@@ -1,9 +1,9 @@
-class Worker {
+class Profile {
   String name, image, address, introduce, jobName;
   int price, id, jobId, countRate, jobEmpId;
   double averageRate;
 
-  Worker({
+  Profile({
     required this.id,
     required this.jobEmpId,
     required this.jobId,

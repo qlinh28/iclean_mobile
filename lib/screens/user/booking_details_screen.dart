@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../models/workers.dart';
+import '../../models/profile.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
-  final Worker worker;
+  final Profile profile;
 
-  const BookingDetailsScreen({Key? key, required this.worker})
+  const BookingDetailsScreen({Key? key, required this.profile})
       : super(key: key);
 
   @override
@@ -323,8 +323,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 105,
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        height: 80,
+        padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
         child: Column(
           children: [
             Divider(

@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MyTextField extends StatelessWidget {
+class UpdateProfileTextField extends StatelessWidget {
   final controller;
   final String hintText;
-  final String labelText;
   final bool obscureText;
   final String text;
   final String? Function(dynamic value)? validator;
 
-  const MyTextField({
+  const UpdateProfileTextField({
     Key? key,
     required this.controller,
     required this.hintText,
-    required this.labelText,
     required this.obscureText,
     required this.text,
     this.validator,
@@ -20,29 +18,36 @@ class MyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 0),
+    return SizedBox(
+      width: 150,
       child: TextFormField(
+        style: TextStyle(
+            fontFamily: 'Lato',
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.deepPurple.shade300),
+        textAlign: TextAlign.left,
+        maxLines: 1,
         controller: controller,
         validator: validator ??
             (value) {
               if (value == null || value.isEmpty) {
-                return 'Please enter your $text';
+                return '$text';
               }
               return null;
             },
         obscureText: obscureText,
         decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.white),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.grey),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey.shade400),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
           ),
-          fillColor: Colors.grey.shade200,
           filled: true,
           hintText: hintText,
-          labelText: labelText,
+          contentPadding: const EdgeInsets.fromLTRB(8, 0, 5, 0),
           labelStyle: TextStyle(
             color: Colors.grey[500],
             fontFamily: 'Lato',

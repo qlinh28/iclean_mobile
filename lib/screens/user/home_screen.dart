@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/renter/components/home/banner_slider.dart';
-
+import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
 import '../../models/services.dart';
-import 'workers_service_screen.dart';
+import 'employee_service_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -145,8 +144,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    WorkerServiceScreen(service: services[i])));
+                                builder: (context) => EmployeeServiceScreen(
+                                    service: services[i])));
                       },
                       child: Container(
                         margin: const EdgeInsets.all(10),
