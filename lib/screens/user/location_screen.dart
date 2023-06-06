@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/models/address.dart';
 import 'package:iclean_flutter/screens/user/update_location_screen.dart';
 
-class LocationScreen extends StatefulWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+class LocationScreen extends StatelessWidget {
+  LocationScreen({Key? key}) : super(key: key);
 
-  @override
-  State<LocationScreen> createState() => _LocationScreenState();
-}
+  Address defaultAddress = Address(
+      id: 3,
+      userId: 1,
+      addressName: 'S102 Vinhomes Grand Park',
+      description:
+          '492 Nguyen Xien, P. Long Thanh My, TP. Thu Duc, Thanh Pho Ho Chi Minh, Viet Nam',
+      isDefault: true);
 
-class _LocationScreenState extends State<LocationScreen> {
+  List<Address> listAddressSaved = [
+    Address(
+        id: 1,
+        userId: 1,
+        addressName: 'home',
+        description:
+            '492 Nguyen Xien, P. Long Thanh My, TP. Thu Duc, Thanh Pho Ho Chi Minh, Viet Nam',
+        isDefault: false),
+    Address(
+        id: 2,
+        userId: 1,
+        addressName: 'home2',
+        description:
+            '1210 Huynh Van Luy, P. Phu My, TP. Thu Dau Mot, Tinh Binh Duong, Viet Nam',
+        isDefault: false),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,9 +95,9 @@ class _LocationScreenState extends State<LocationScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text(
-                                      "Name of address (home)",
-                                      style: TextStyle(
+                                    Text(
+                                      defaultAddress.addressName,
+                                      style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         fontFamily: 'Lato',
@@ -88,7 +109,9 @@ class _LocationScreenState extends State<LocationScreen> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    UpdateLocationScreen()));
+                                                    UpdateLocationScreen(
+                                                        address:
+                                                            defaultAddress)));
                                       },
                                       child: const Text(
                                         "Edit",
@@ -103,8 +126,7 @@ class _LocationScreenState extends State<LocationScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 3),
-                                Text(
-                                    "492 Nguyen Xien, P. Long Thanh My, TP. Thu Duc, Thanh Pho Ho Chi Minh, Viet Nam",
+                                Text(defaultAddress.description,
                                     style: TextStyle(
                                       color: Colors.grey[600],
                                       fontSize: 12,
@@ -133,74 +155,83 @@ class _LocationScreenState extends State<LocationScreen> {
                         ),
                       ),
                     ),
-                    Container(
-                      padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.turned_in_not_outlined,
-                            color: Colors.deepPurple.shade300,
-                            size: 25,
-                          ),
-                          const SizedBox(width: 10),
-                          Flexible(
-                            fit: FlexFit.loose,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    for (int i = 0; i < listAddressSaved.length; i++)
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                        child: Column(
+                          children: [
+                            Row(
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      "Name of address (home)",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    UpdateLocationScreen()));
-                                      },
-                                      child: const Text(
-                                        "Edit",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: 'Lato',
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                Icon(
+                                  Icons.turned_in_not_outlined,
+                                  color: Colors.deepPurple.shade300,
+                                  size: 25,
                                 ),
-                                const SizedBox(height: 3),
-                                Text(
-                                    "492 Nguyen Xien, P. Long Thanh My, TP. Thu Duc, Thanh Pho Ho Chi Minh, Viet Nam",
-                                    style: TextStyle(
-                                      color: Colors.grey[600],
-                                      fontSize: 12,
-                                      fontFamily: 'Lato',
-                                    ),
-                                    textAlign: TextAlign.justify,
-                                    maxLines: null),
+                                const SizedBox(width: 10),
+                                Flexible(
+                                  fit: FlexFit.loose,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            listAddressSaved[i].addressName,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Lato',
+                                            ),
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          UpdateLocationScreen(
+                                                              address:
+                                                                  listAddressSaved[
+                                                                      i])));
+                                            },
+                                            child: const Text(
+                                              "Edit",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.blue,
+                                                fontWeight: FontWeight.bold,
+                                                fontFamily: 'Lato',
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 3),
+                                      Text(listAddressSaved[i].description,
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 12,
+                                            fontFamily: 'Lato',
+                                          ),
+                                          textAlign: TextAlign.justify,
+                                          maxLines: null),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
-                        ],
+                            const SizedBox(height: 10),
+                            if (i != listAddressSaved.length - 1)
+                              Divider(
+                                thickness: 0.5,
+                                color: Colors.grey[400],
+                              ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    Divider(
-                      thickness: 0.5,
-                      color: Colors.grey[400],
-                    ),
                   ],
                 ),
               ),
