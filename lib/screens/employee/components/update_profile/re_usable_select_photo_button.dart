@@ -43,6 +43,7 @@ class SelectPhoto extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 18,
                 color: Colors.black,
+                fontFamily: 'Lato',
               ),
             )
           ],

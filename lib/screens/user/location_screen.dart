@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/models/address.dart';
+import 'package:iclean_flutter/screens/user/add_location_screen.dart';
 import 'package:iclean_flutter/screens/user/update_location_screen.dart';
 
 class LocationScreen extends StatelessWidget {
@@ -251,11 +252,10 @@ class LocationScreen extends StatelessWidget {
             const SizedBox(height: 5),
             InkWell(
               onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             UpdateProfileServiceScreen(profile: profile)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => AddLocationScreen()));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,

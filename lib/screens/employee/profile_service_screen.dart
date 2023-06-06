@@ -250,263 +250,255 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                   ],
                 ),
                 const SizedBox(height: 15),
-                Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.star_half_outlined,
-                            size: 20,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            "${averageReview.toStringAsFixed(1)}",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Lato',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            "(${sumReview} reviews)",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontFamily: 'Lato',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      TabBar(
-                          controller: _tabController,
-                          isScrollable: true,
-                          unselectedLabelColor: Colors.deepPurple.shade300,
-                          onTap: (value) {
-                            setState(() {});
-                          },
-                          indicator: BoxDecoration(
-                            color: Colors.deepPurple.shade300,
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          indicatorPadding:
-                              const EdgeInsets.symmetric(vertical: 7.0),
-                          labelPadding:
-                              const EdgeInsets.symmetric(horizontal: 2.0),
-                          tabs: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Tab(
-                                  child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2)),
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.3,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "All",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Tab(
-                                  child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2)),
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.3,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "1",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Tab(
-                                  child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2)),
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.3,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "2",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Tab(
-                                  child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2)),
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.3,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "3",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Tab(
-                                  child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2)),
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.3,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "4",
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Tab(
-                                  child: Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2)),
-                                child: Row(
-                                  children: const [
-                                    Icon(
-                                      Icons.star,
-                                      size: 16.3,
-                                    ),
-                                    SizedBox(width: 6),
-                                    Text(
-                                      "5",
-                                      style: TextStyle(
-                                        fontSize: 13,
-                                        fontFamily: 'Lato',
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )),
-                            )
-                          ]),
-                      const SizedBox(height: 5),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Center(
-                          child: [
-                            ReviewCard(
-                                profile: profile,
-                                service: widget.service,
-                                rate: 10),
-                            ReviewCard(
-                                profile: profile,
-                                service: widget.service,
-                                rate: _tabController.index),
-                            ReviewCard(
-                                profile: profile,
-                                service: widget.service,
-                                rate: _tabController.index),
-                            ReviewCard(
-                                profile: profile,
-                                service: widget.service,
-                                rate: _tabController.index),
-                            ReviewCard(
-                                profile: profile,
-                                service: widget.service,
-                                rate: _tabController.index),
-                            ReviewCard(
-                                profile: profile,
-                                service: widget.service,
-                                rate: _tabController.index),
-                          ][_tabController.index],
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        const Icon(
+                          Icons.star_half_outlined,
+                          size: 20,
                         ),
-                      )
-                    ],
-                  ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "${averageReview.toStringAsFixed(1)}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          "(${sumReview} reviews)",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    TabBar(
+                        controller: _tabController,
+                        isScrollable: true,
+                        unselectedLabelColor: Colors.deepPurple.shade300,
+                        onTap: (value) {
+                          setState(() {});
+                        },
+                        indicator: BoxDecoration(
+                          color: Colors.deepPurple.shade300,
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        indicatorPadding:
+                            const EdgeInsets.symmetric(vertical: 7.0),
+                        labelPadding:
+                            const EdgeInsets.symmetric(horizontal: 2.0),
+                        tabs: [
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Tab(
+                                child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.deepPurple.shade300,
+                                      width: 2)),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16.3,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "All",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Tab(
+                                child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.deepPurple.shade300,
+                                      width: 2)),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16.3,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "1",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Tab(
+                                child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.deepPurple.shade300,
+                                      width: 2)),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16.3,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "2",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Tab(
+                                child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.deepPurple.shade300,
+                                      width: 2)),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16.3,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "3",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Tab(
+                                child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.deepPurple.shade300,
+                                      width: 2)),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16.3,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "4",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            child: Tab(
+                                child: Container(
+                              padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  border: Border.all(
+                                      color: Colors.deepPurple.shade300,
+                                      width: 2)),
+                              child: Row(
+                                children: const [
+                                  Icon(
+                                    Icons.star,
+                                    size: 16.3,
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "5",
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                          )
+                        ]),
+                    const SizedBox(height: 5),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      child: Center(
+                        child: [
+                          ReviewCard(
+                              profile: profile,
+                              service: widget.service,
+                              rate: 10),
+                          ReviewCard(
+                              profile: profile,
+                              service: widget.service,
+                              rate: _tabController.index),
+                          ReviewCard(
+                              profile: profile,
+                              service: widget.service,
+                              rate: _tabController.index),
+                          ReviewCard(
+                              profile: profile,
+                              service: widget.service,
+                              rate: _tabController.index),
+                          ReviewCard(
+                              profile: profile,
+                              service: widget.service,
+                              rate: _tabController.index),
+                          ReviewCard(
+                              profile: profile,
+                              service: widget.service,
+                              rate: _tabController.index),
+                        ][_tabController.index],
+                      ),
+                    )
+                  ],
                 )
               ],
             ),

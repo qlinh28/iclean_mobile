@@ -272,7 +272,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               );
                             }
                           },
-                          child: const Text('Login'),
+                          child: const Text(
+                            'Login',
+                            style: TextStyle(
+                              fontFamily: 'Lato',
+                            ),
+                          ),
                         ),
                       ],
                     )),

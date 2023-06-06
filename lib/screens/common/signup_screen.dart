@@ -208,6 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         style: TextStyle(
                           color: Colors.grey[700],
                           fontSize: 26,
+                          fontFamily: 'Lato',
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -366,6 +367,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           'Please select a date',
                           style: TextStyle(
                             color: Colors.red,
+                            fontFamily: 'Lato',
                             fontSize: 12,
                           ),
                         ),

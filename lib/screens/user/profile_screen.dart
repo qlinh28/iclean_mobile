@@ -115,8 +115,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  LocationScreen()));
+                              builder: (context) => LocationScreen()));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -272,15 +271,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           context: context,
                           builder: (BuildContext context) {
                             return AlertDialog(
-                              title: const Text("Confirm Log Out"),
+                              title: const Text(
+                                "Confirm Log Out",
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                ),
+                              ),
                               content: const Text(
-                                  "Are you sure you want to log out?"),
+                                "Are you sure you want to log out?",
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                ),
+                              ),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.of(context).pop(),
                                   child: Text(
                                     "Cancel",
                                     style: TextStyle(
+                                        fontFamily: 'Lato',
                                         color: Colors.deepPurple.shade300),
                                   ),
                                 ),
@@ -291,7 +300,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             Colors.deepPurple.shade300),
                                   ),
                                   onPressed: _logout,
-                                  child: const Text("Log Out"),
+                                  child: const Text(
+                                    "Log Out",
+                                    style: TextStyle(
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
                                 ),
                               ],
                             );

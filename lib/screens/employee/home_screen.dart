@@ -194,6 +194,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     "See all",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'Lato',
                       color: Colors.deepPurple.shade300,
                       fontSize: 15,
                     ),
