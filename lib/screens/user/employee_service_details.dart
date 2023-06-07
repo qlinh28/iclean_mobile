@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD:lib/screens/user/employee_service_details.dart
 import 'package:iclean_flutter/screens/user/booking_details_screen.dart';
 import 'package:iclean_flutter/screens/user/components/employee_service_details/review_card.dart';
+=======
+import 'package:iclean_flutter/screens/renter/booking_details_screen.dart';
+import 'package:iclean_flutter/screens/renter/components/worker_details/review_card.dart';
+import 'package:intl/intl.dart';
+>>>>>>> linh-sii:lib/screens/renter/worker_service_details_.dart
 
 import '../../models/profile.dart';
 import '../../models/services.dart';
@@ -183,6 +189,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                               fontFamily: 'Lato',
                               color: Colors.deepPurple.shade300,
                             ),
+<<<<<<< HEAD:lib/screens/user/employee_service_details.dart
                           ),
                           const SizedBox(height: 5),
                           InkWell(
@@ -198,6 +205,15 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                               width: MediaQuery.of(context).size.width / 3.5,
                               height: MediaQuery.of(context).size.height / 18,
                               decoration: BoxDecoration(
+=======
+                            const SizedBox(height: 8),
+                            Text(
+                              "${NumberFormat('#,###').format(widget.worker.price)} VNĐ",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'Lato',
+>>>>>>> linh-sii:lib/screens/renter/worker_service_details_.dart
                                 color: Colors.deepPurple.shade300,
                                 borderRadius: BorderRadius.circular(50),
                               ),

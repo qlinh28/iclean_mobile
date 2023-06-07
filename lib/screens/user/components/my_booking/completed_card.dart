@@ -18,60 +18,68 @@ class CompletedCard extends StatefulWidget {
   State<CompletedCard> createState() => _CompletedCardState();
 }
 
-class _CompletedCardState extends State<CompletedCard> {
+class _CompletedCardState extends State<CompletedCard>
+    with TickerProviderStateMixin {
   List<Booking> bookings = [
     Booking(
         id: 1,
         userId: 1,
         usename: "Linh",
         empId: 1,
-        empName: "Lisa1",
+        empName: "Nguyễn Văn Đạt",
         status: "completed",
         workTime: DateTime.august,
         timestamp: DateTime.now(),
         price: 1000000000,
-        location: "Thái Lan",
+        location: "Thủ Đức, Thành phố Hồ Chí Minh",
         jobId: 1,
-        jobName: "Singer",
+        jobName: "Giặt ủi",
         description: "1233321123321",
-        jobImage: "assets/images/lisa_avatar.jpg"),
+        jobImage: "assets/images/1.jpg"),
     Booking(
         id: 2,
         userId: 1,
         usename: "Linh",
         empId: 1,
-        empName: "Lisa2",
+        empName: "Nguyễn Đăng Khoa",
         status: "completed",
         workTime: DateTime.august,
         timestamp: DateTime.now(),
         price: 1000000000,
-        location: "Thái Lan",
+        location: "Thủ Đức, Thành phố Hồ Chí Minh",
         jobId: 1,
-        jobName: "Singer",
+        jobName: "Decor",
         description: "1233321123321",
-        jobImage: "assets/images/lisa_avatar.jpg"),
+        jobImage: "assets/images/2.png"),
     Booking(
         id: 3,
         userId: 1,
         usename: "Linh",
         empId: 1,
-        empName: "Lisa3",
+        empName: "Lê Thúy Ngân",
         status: "completed",
         workTime: DateTime.august,
         timestamp: DateTime.now(),
         price: 1000000000,
-        location: "Thái Lan",
+        location: "Thủ Đức, Thành phố Hồ Chí Minh",
         jobId: 1,
-        jobName: "Singer",
+        jobName: "Nấu ăn",
         description: "1233321123321",
-        jobImage: "assets/images/lisa_avatar.jpg"),
+        jobImage: "assets/images/3.png"),
   ];
+  late AnimationController _controller;
+  late Animation<double> _animation;
   late List<bool> _isExpanded = List.filled(bookings.length, false);
 
   @override
   void initState() {
     super.initState;
     //fetchBooking(widget.userId, widget.status);
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   // void fetchBooking(int userId, String status) async {
@@ -156,19 +164,20 @@ class _CompletedCardState extends State<CompletedCard> {
                 _isExpanded[i] = !_isExpanded[i];
               });
             },
-            child: Container(
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
               margin: const EdgeInsets.symmetric(vertical: 8),
-              height: _isExpanded[i] ? 280 : 165,
-              width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(15),
               ),
-              child: ListView(
+              child: Column(
                 children: [
                   Container(
-                    margin: const EdgeInsets.only(left: 15, top: 15),
+                    padding: const EdgeInsets.all(15),
                     child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
                           height: 100,
@@ -184,18 +193,17 @@ class _CompletedCardState extends State<CompletedCard> {
                             fit: BoxFit.contain,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 15),
+                        const SizedBox(width: 15),
+                        Expanded(
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 bookings[i].empName,
                                 style: const TextStyle(
                                   fontSize: 18,
-                                  fontWeight: FontWeight.bold,
                                   fontFamily: 'Lato',
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const SizedBox(height: 10),
@@ -208,78 +216,76 @@ class _CompletedCardState extends State<CompletedCard> {
                               ),
                               const SizedBox(height: 10),
                               Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 5,
+                                  horizontal: 10,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: Colors.greenAccent.shade200,
+                                  color: Colors.deepPurple.shade300,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Text(
-                                  "Completed",
+                                  "Pending",
                                   style: TextStyle(
-                                    fontFamily: 'Lato',
                                     color: Colors.white,
                                     fontSize: 13,
+                                    fontFamily: 'Lato',
                                   ),
                                 ),
                               )
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 5),
-                  Container(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
-                    child: Divider(
-                      thickness: 1,
-                      color: Colors.grey[400],
-                    ),
+                  const Divider(
+                    thickness: 1,
+                    color: Colors.grey,
                   ),
-                  Visibility(
-                    visible: _isExpanded[i],
-                    child: Container(
-                      padding:
-                          const EdgeInsets.only(left: 15, right: 15, top: 3),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Date & Time",
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: 'Lato',
-                                  color: Colors.grey.shade700,
+                  AnimatedSize(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: Visibility(
+                      visible: _isExpanded[i],
+                      child: Container(
+                        padding: const EdgeInsets.all(15),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Date & Time",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'Lato',
+                                    color: Colors.grey.shade700,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                DateFormat('MMM d, yyyy | hh:mm aaa')
-                                    .format(bookings[i].timestamp),
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  fontFamily: 'Lato',
+                                Text(
+                                  DateFormat('MMM d, yyyy | hh:mm aaa')
+                                      .format(bookings[i].timestamp),
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                    fontFamily: 'Lato',
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Location",
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontFamily: 'Lato',
-                                  color: Colors.grey.shade700,
+                              ],
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Location",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontFamily: 'Lato',
+                                    color: Colors.grey.shade700,
+                                  ),
                                 ),
-                              ),
-                              Flexible(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 50),
+                                Flexible(
                                   child: Text(
                                     bookings[i].location,
                                     style: const TextStyle(
@@ -290,65 +296,73 @@ class _CompletedCardState extends State<CompletedCard> {
                                     maxLines: 3,
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  await showDialog(
-                                    context: context,
-                                    builder: (context) => _buildFeedbackDialog(
-                                        context, bookings[i].id),
-                                  );
-                                },
-                                child: Container(
-                                  width:
-                                      MediaQuery.of(context).size.width / 2.6,
-                                  height:
-                                      MediaQuery.of(context).size.height / 20,
-                                  decoration: BoxDecoration(
-                                    color: Colors.deepPurple.shade300,
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        color: Colors.deepPurple.shade300,
-                                        width: 2),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.4),
-                                        spreadRadius: 5,
-                                        blurRadius: 20,
-                                        offset: const Offset(
-                                            0, 3), // changes position of shadow
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          _buildFeedbackDialog(
+                                              context, bookings[i].id),
+                                    );
+                                  },
+                                  child: Container(
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 8),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2.6,
+                                    height:
+                                        MediaQuery.of(context).size.height / 20,
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepPurple.shade300,
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                          color: Colors.deepPurple.shade300,
+                                          width: 2),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.4),
+                                          spreadRadius: 5,
+                                          blurRadius: 20,
+                                          offset: const Offset(0,
+                                              3), // changes position of shadow
+                                        ),
+                                      ],
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Give Feedback",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontFamily: 'Lato',
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1),
                                       ),
-                                    ],
-                                  ),
-                                  child: const Center(
-                                    child: Text(
-                                      "Give Feedback",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontFamily: 'Lato',
-                                          fontWeight: FontWeight.bold,
-                                          letterSpacing: 1),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 4),
-                        ],
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  Icon(_isExpanded[i]
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down)
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    alignment: Alignment.center,
+                    child: Icon(
+                      _isExpanded[i]
+                          ? Icons.keyboard_arrow_up
+                          : Icons.keyboard_arrow_down,
+                      size: 30,
+                    ),
+                  ),
                 ],
               ),
             ),

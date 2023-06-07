@@ -1,8 +1,8 @@
-class Feedbackk{
-   int id , rate /*, user_id*/ ,employeeId ;
-   String detail , profilePicture , username ;
-   DateTime timestamp ;
-   Feedbackk({
+class FeedbackOrder {
+  int id, rate /*, user_id*/, employeeId;
+  String detail, profilePicture, username;
+  DateTime timestamp;
+  FeedbackOrder({
     required this.id,
     required this.rate,
     // required this.user_id,
@@ -11,5 +11,5 @@ class Feedbackk{
     required this.profilePicture,
     required this.username,
     required this.timestamp,
-   });
+  });
 }

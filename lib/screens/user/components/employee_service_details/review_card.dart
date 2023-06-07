@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
+<<<<<<< HEAD:lib/screens/user/components/employee_service_details/review_card.dart
 import '../../../../models/Feedbackk.dart';
 import '../../../../models/profile.dart';
+=======
+import '../../../../models/feedback.dart';
+>>>>>>> linh-sii:lib/screens/renter/components/worker_details/review_card.dart
 import '../../../../models/services.dart';
 
 class ReviewCard extends StatefulWidget {
@@ -22,30 +26,30 @@ class ReviewCard extends StatefulWidget {
 }
 
 class _ReviewCardState extends State<ReviewCard> {
-  List<Feedbackk> feedback = [
-    Feedbackk(
+  List<FeedbackOrder> feedback = [
+    FeedbackOrder(
         id: 1,
         rate: 5,
         employeeId: 1,
         detail: "She's so beautiful",
-        profilePicture: "assets/images/lisa_avatar.jpg",
-        username: "Quang Linh1",
+        profilePicture: "assets/images/1.jpg",
+        username: "Lê Trần Quang Linh",
         timestamp: DateTime.now()),
-    Feedbackk(
+    FeedbackOrder(
         id: 2,
         rate: 4,
         employeeId: 1,
         detail: "She dances very well",
-        profilePicture: "assets/images/lisa_avatar.jpg",
-        username: "Quang Linh2",
+        profilePicture: "assets/images/2.png",
+        username: "Mai Thanh Tỷ",
         timestamp: DateTime.now()),
-    Feedbackk(
+    FeedbackOrder(
         id: 3,
         rate: 3,
         employeeId: 1,
         detail: "I love her performance",
-        profilePicture: "assets/images/lisa_avatar.jpg",
-        username: "Quang Linh3",
+        profilePicture: "assets/images/3.png",
+        username: "Nguyễn Phương Nhật Linh",
         timestamp: DateTime.now()),
   ];
   late int workerId;
@@ -92,23 +96,29 @@ class _ReviewCardState extends State<ReviewCard> {
                               radius: 20,
                             ),
                             const SizedBox(width: 15),
-                            Text(
-                              feedback[i].username,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                fontFamily: 'Lato',
-                              ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  feedback[i].username,
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    fontFamily: 'Lato',
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                RatingBarIndicator(
+                                  rating: feedback[i].rate.toDouble(),
+                                  itemBuilder: (_, __) => Icon(Icons.star,
+                                      color: Colors.deepPurple.shade300),
+                                  itemCount: 5,
+                                  itemSize: 20,
+                                  unratedColor: Colors.grey[300],
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                        RatingBarIndicator(
-                          rating: feedback[i].rate.toDouble(),
-                          itemBuilder: (_, __) => Icon(Icons.star,
-                              color: Colors.deepPurple.shade300),
-                          itemCount: 5,
-                          itemSize: 20,
-                          unratedColor: Colors.grey[300],
                         ),
                       ],
                     ),
