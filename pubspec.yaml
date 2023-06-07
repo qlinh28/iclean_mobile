@@ -41,7 +41,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   table_calendar: ^3.0.9
   timeago: ^3.4.0
-  image_picker: ^0.8.7+5
+  barcode_widget: ^2.0.1
+  flutter_svg: ^0.22.0
 
 
 dev_dependencies:

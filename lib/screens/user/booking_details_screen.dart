@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/screens/user/summary_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../models/profile.dart';
@@ -117,7 +118,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
+            padding: const EdgeInsets.only(top: 15, left: 25, right: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -333,8 +334,10 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             ),
             const SizedBox(height: 5),
             InkWell(
-              onTap: () {},
-              //onTap: _createBookingOrder,
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SummaryScreen()));
+              },
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
                 height: MediaQuery.of(context).size.height / 14,

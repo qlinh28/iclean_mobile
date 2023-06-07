@@ -81,7 +81,7 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
         body: SingleChildScrollView(
             child: SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
+        padding: const EdgeInsets.only(top: 15, left: 25, right: 25),
         child: Column(children: [
           Row(
             children: [
