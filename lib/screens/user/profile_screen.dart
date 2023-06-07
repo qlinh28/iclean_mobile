@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/models/account.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
+import 'package:iclean_flutter/screens/user/payment_screen.dart';
 import 'package:iclean_flutter/screens/user/update_profile_screen.dart';
 
 import '../common/login_screen.dart';
@@ -162,26 +163,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8, bottom: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: const [
-                            Icon(Icons.payment_outlined),
-                            SizedBox(width: 15),
-                            Text(
-                              "Payment",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: 'Lato',
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PaymentScreen()));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: const [
+                              Icon(Icons.payment_outlined),
+                              SizedBox(width: 15),
+                              Text(
+                                "Payment",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: 'Lato',
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        const Icon(Icons.keyboard_arrow_right),
-                      ],
+                            ],
+                          ),
+                          const Icon(Icons.keyboard_arrow_right),
+                        ],
+                      ),
                     ),
                   ),
                   Padding(
