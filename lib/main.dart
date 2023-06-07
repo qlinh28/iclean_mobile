@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/common/login_screen.dart';
+import 'package:iclean_flutter/screens/common/user_preferences.dart';
+import 'package:iclean_flutter/screens/renter/components/user_screens.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'screens/common/welcome_screen.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await UserPreferences.init();
+
+  final isLoggedIn = UserPreferences.isLoggedIn();
+  runApp(MyApp(isLoggedIn: isLoggedIn));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isLoggedIn;
+
+  const MyApp({Key? key, required this.isLoggedIn}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: isLoggedIn ? const UserScreens() : const MyHomePage(),
     );
   }
 }
@@ -25,6 +34,6 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LoginScreen();
+    return WelcomeScreen();
   }
 }

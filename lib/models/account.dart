@@ -25,16 +25,16 @@ class Account {
 
   factory Account.fromJson(Map<String, dynamic> json) {
     return Account(
-      id: json['id'],
-      role: json['role'],
+      id: json['userId'],
+      role: json['roleName'],
       username: json['username'],
       fullname: json['fullname'],
       gender: json['gender'],
       dateOfBirth: DateTime.parse(json['dateOfBirth']),
       phone: json['phone'],
       email: json['email'],
-      profilePicture: json['profilePicture'],
-      location: json['location'],
+      profilePicture: json['profilePicture'] ?? "",
+      location: json['location'] ?? "",
     );
   }
 

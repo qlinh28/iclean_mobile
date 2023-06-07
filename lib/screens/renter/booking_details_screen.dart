@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../models/workers.dart';
+import 'location_select.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
   final Worker worker;
@@ -117,7 +118,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20, left: 25, right: 25),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -127,29 +128,29 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: const Icon(Icons.arrow_back),
+                      child: Icon(Icons.arrow_back),
                     ),
-                    const SizedBox(width: 15),
-                    const Text(
+                    SizedBox(width: 15),
+                    Text(
                       "Booking Details",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Lato',
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 15),
-                const Text(
+                SizedBox(height: 15),
+                Text(
                   "Select Date",
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Lato',
                   ),
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.deepPurple.shade100,
@@ -159,12 +160,12 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     firstDay: DateTime.utc(2023),
                     focusedDay: today,
                     lastDay: DateTime.utc(2024),
-                    headerStyle: const HeaderStyle(
+                    headerStyle: HeaderStyle(
                       formatButtonVisible: false,
                       titleTextStyle:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    daysOfWeekStyle: const DaysOfWeekStyle(
+                    daysOfWeekStyle: DaysOfWeekStyle(
                         weekdayStyle: TextStyle(fontWeight: FontWeight.bold),
                         weekendStyle: TextStyle(fontWeight: FontWeight.bold)),
                     availableGestures: AvailableGestures.all,
@@ -172,7 +173,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     selectedDayPredicate: (day) => isSameDay(day, today),
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: false,
-                      weekendTextStyle: const TextStyle(color: Colors.black),
+                      weekendTextStyle: TextStyle(color: Colors.black),
                       todayDecoration: BoxDecoration(
                         color: Colors.deepPurple.shade200,
                         shape: BoxShape.circle,
@@ -184,7 +185,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 Container(
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
@@ -194,24 +195,26 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text("Working Hours",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: 'Lato',
-                            fontWeight: FontWeight.bold,
-                          )),
+                      Text(
+                        "Working Hours",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: 'Lato',
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Row(
                         children: [
                           Container(
                             padding: const EdgeInsets.all(8),
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: CircleAvatar(
                               radius: 15.0,
                               backgroundColor: Colors.deepPurple.shade100,
                               child: IconButton(
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.remove,
                                   color: Colors.white,
                                   size: 15,
@@ -220,26 +223,26 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Text(
                             '$_counter',
-                            style: const TextStyle(
-                              fontSize: 18,
+                            style: TextStyle(
+                              fontSize: 24,
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          SizedBox(width: 10),
                           Container(
                             padding: const EdgeInsets.all(8),
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: CircleAvatar(
                               radius: 15.0,
                               backgroundColor: Colors.deepPurple.shade100,
                               child: IconButton(
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.add,
                                   color: Colors.white,
                                   size: 15,
@@ -253,70 +256,91 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 15),
+                SizedBox(height: 15),
                 const Text(
                   "Choose Start Time",
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: 18,
                     fontFamily: 'Lato',
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 8),
                 Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 5),
-                    child: SizedBox(
-                      height: 30,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: 9, // number of hours
-                              itemBuilder: (context, index) {
-                                final hour = index + 9; // start at 9:00 AM
-                                final time = TimeOfDay(hour: hour, minute: 0);
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _selectedTime = time;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8),
-                                    child: Container(
-                                      padding: const EdgeInsets.fromLTRB(
-                                          10, 5, 10, 5),
-                                      decoration: BoxDecoration(
-                                          color: _selectedTime == time
-                                              ? Colors.deepPurple.shade300
-                                              : Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          border: Border.all(
-                                              color: Colors.deepPurple.shade300,
-                                              width: 2)),
-                                      child: Text(
-                                        time.format(context),
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'Lato',
-                                          color: _selectedTime == time
-                                              ? Colors.white
-                                              : Colors.deepPurple.shade300,
-                                        ),
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: SizedBox(
+                    height: 30,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: 9, // number of hours
+                            itemBuilder: (context, index) {
+                              final hour = index + 9; // start at 9:00 AM
+                              final time = TimeOfDay(hour: hour, minute: 0);
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _selectedTime = time;
+                                  });
+                                },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Container(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 5, 10, 5),
+                                    decoration: BoxDecoration(
+                                      color: _selectedTime == time
+                                          ? Colors.deepPurple.shade300
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                          color: Colors.deepPurple.shade300,
+                                          width: 2),
+                                    ),
+                                    child: Text(
+                                      time.format(context),
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: 'Lato',
+                                        color: _selectedTime == time
+                                            ? Colors.white
+                                            : Colors.deepPurple.shade300,
                                       ),
                                     ),
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
-                          const SizedBox(width: 16),
-                        ],
-                      ),
-                    )),
+                        ),
+                        const SizedBox(width: 16),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
+                const Text(
+                  "Enter Voucher Code",
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Lato',
+                  ),
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    hintText: "Enter your voucher code",
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 20),
+                  ),
+                ),
               ],
             ),
           ),
@@ -331,9 +355,14 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               thickness: 0.5,
               color: Colors.grey[400],
             ),
-            const SizedBox(height: 5),
+            SizedBox(height: 5),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => LocationSelectionPage()));
+              },
               //onTap: _createBookingOrder,
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
@@ -346,11 +375,12 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                   child: Text(
                     "Book now",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Lato',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1),
+                      color: Colors.white,
+                      fontFamily: 'Lato',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
               ),

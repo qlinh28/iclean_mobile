@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/renter/booking_details_screen.dart';
 import 'package:iclean_flutter/screens/renter/components/worker_details/review_card.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/services.dart';
 import '../../models/workers.dart';
@@ -193,9 +194,9 @@ class _WorkerDetailsScreenState extends State<WorkerDetailsScreen>
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              "\$${widget.worker.price}",
+                              "${NumberFormat('#,###').format(widget.worker.price)} VNĐ",
                               style: TextStyle(
-                                fontSize: 20,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'Lato',
                                 color: Colors.deepPurple.shade300,

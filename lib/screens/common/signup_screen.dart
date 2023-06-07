@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/screens/common/login_screen.dart';
 import 'component/my_button.dart';
 import 'component/my_textfield.dart';
 import 'package:intl/intl.dart';
@@ -543,7 +544,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             textStyle:
                                 const TextStyle(fontWeight: FontWeight.bold)),
                         onPressed: () {
-                          Navigator.pop(context);
+                          Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const LoginScreen()),
+    );
                         },
                         child: const Text(
                           'Login',

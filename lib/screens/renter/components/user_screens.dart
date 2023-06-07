@@ -1,6 +1,7 @@
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:iclean_flutter/models/account.dart';
 import 'package:iclean_flutter/screens/renter/home_screen.dart';
 import 'package:iclean_flutter/screens/renter/inbox_screen.dart';
 import 'package:iclean_flutter/screens/renter/my_bookings_screen.dart';
@@ -8,7 +9,7 @@ import 'package:iclean_flutter/screens/renter/notification_screen.dart';
 import 'package:iclean_flutter/screens/renter/profile_screen.dart';
 
 class UserScreens extends StatefulWidget {
-  const UserScreens({Key? key}) : super(key: key);
+  const UserScreens({Key? key, Account? account}) : super(key: key);
 
   //final Account account;
 
@@ -25,7 +26,6 @@ class _UserScreensState extends State<UserScreens> {
   @override
   void initState() {
     super.initState();
-    //requestPermission();
     _screenOptions = <Widget>[
       const HomeScreen(),
       const MyBookingsScreen(),
