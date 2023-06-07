@@ -1,17 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-import 'package:iclean_flutter/screens/user/components/update_location/introduce_textfield.dart';
-import 'package:iclean_flutter/screens/user/components/update_location/update_location_textfield.dart';
+class AddLocationScreen extends StatefulWidget {
+  const AddLocationScreen({Key? key}) : super(key: key);
 
-class AddLocationScreen extends StatelessWidget {
-  const AddLocationScreen(
-      {Key? key, this.nameController, this.descriptionController})
-      : super(key: key);
-  final nameController;
-  final descriptionController;
+  @override
+  State<AddLocationScreen> createState() => _AddLocationScreenState();
+}
+
+class _AddLocationScreenState extends State<AddLocationScreen> {
+  final Set<Marker> _markers = {};
+  late final dynamic nameController;
+  late final dynamic buildingController;
+  late final dynamic descriptionController;
+  late final double latitude;
+  late final double longitude;
+
+  @override
+  void initState() {
+    super.initState();
+    latitude = 37.7749;
+    longitude = -122.4194;
+    nameController = TextEditingController();
+    buildingController = TextEditingController();
+    descriptionController = TextEditingController();
+    _markers.add(
+      Marker(
+        markerId: const MarkerId('selected_location'),
+        position: LatLng(latitude,
+            longitude), // Replace with desired initial latitude and longitude
+        infoWindow: const InfoWindow(
+          title: 'Your Location',
+          snippet: 'This is the initial location',
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    buildingController.dispose();
+    descriptionController.dispose();
+    _markers.clear();
+    super.dispose();
+  }
+
+  void _onMapTapped(LatLng latLng) {
+    setState(() {
+      _markers.clear();
+      _markers.add(
+        Marker(
+          markerId: const MarkerId('selected_location'),
+          position: latLng,
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    double baseWidth = 430;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -21,71 +71,134 @@ class AddLocationScreen extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
-                child: Row(children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Icon(Icons.arrow_back),
-                  ),
-                  const SizedBox(width: 8),
-                  const Text(
-                    "Update Your Location",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Lato',
+                child: Row(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(Icons.arrow_back),
                     ),
-                  ),
-                ]),
+                    const SizedBox(width: 8),
+                    const Text(
+                      "Add New Location",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Lato',
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Divider(
                 thickness: 0.5,
                 color: Colors.grey[400],
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 5),
-                child: Text(
-                  "Name Address",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Lato',
+              Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(34 * fem, 0, 0, 0),
+                      child: SizedBox(
+                        width: 350 * fem,
+                        height: 70 * fem,
+                        child: TextFormField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            labelText: 'Name Location',
+                            labelStyle: TextStyle(
+                              fontSize: 15 * fem,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromRGBO(158, 158, 158, 1),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10 * fem),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(158, 158, 158, 1),
+                              ),
+                            ),
+                          ),
+                          validator: (value) {},
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
-                child: UpdateLocationTextField(
-                    controller: nameController,
-                    hintText: 'enter name of your address',
-                    obscureText: false,
-                    text: 'name of your location'),
-              ),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: Text(
-                  "Description",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Lato',
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(34 * fem, 0 * fem, 0, 0),
+                      child: SizedBox(
+                        width: 350 * fem,
+                        height: 70 * fem,
+                        child: TextFormField(
+                          controller: buildingController,
+                          decoration: InputDecoration(
+                            labelText: 'Street/Building Name',
+                            labelStyle: TextStyle(
+                              fontSize: 15 * fem,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromRGBO(158, 158, 158, 1),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10 * fem),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(158, 158, 158, 1),
+                              ),
+                            ),
+                          ),
+                          validator: (value) {},
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 5),
-                child: UpdateDescriptionTextField(
-                    controller: descriptionController,
-                    hintText: 'enter your address',
-                    obscureText: false,
-                    text: 'your address'),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(34 * fem, 0 * fem, 0, 0),
+                      child: SizedBox(
+                        width: 350 * fem,
+                        height: 70 * fem,
+                        child: TextFormField(
+                          controller: descriptionController,
+                          decoration: InputDecoration(
+                            labelText: 'Additional Address Information',
+                            labelStyle: TextStyle(
+                              fontSize: 15 * fem,
+                              fontWeight: FontWeight.w700,
+                              color: const Color.fromRGBO(158, 158, 158, 1),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10 * fem),
+                              borderSide: const BorderSide(
+                                color: Color.fromRGBO(158, 158, 158, 1),
+                              ),
+                            ),
+                          ),
+                          validator: (value) {},
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 5, bottom: 10),
                 child: Divider(
                   thickness: 0.5,
                   color: Colors.grey[400],
+                ),
+              ),
+              Expanded(
+                child: GoogleMap(
+                  initialCameraPosition: CameraPosition(
+                    target: LatLng(latitude,
+                        longitude), //Default Location: Tan Son Nhat AirPort
+                    zoom: 14,
+                  ),
+                  markers: _markers,
+                  onTap: _onMapTapped,
                 ),
               ),
             ],
@@ -121,11 +234,12 @@ class AddLocationScreen extends StatelessWidget {
                   child: Text(
                     "Save",
                     style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'Lato',
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1),
+                      color: Colors.white,
+                      fontFamily: 'Lato',
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
               ),

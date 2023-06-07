@@ -4,24 +4,25 @@ import 'package:intl/intl.dart';
 
 import 'components/update_profile/update_textfield.dart';
 
-
 class UpdateProfileScreen extends StatefulWidget {
   final Account account;
-  const UpdateProfileScreen({Key? key, required this.account}) : super(key: key);
+  const UpdateProfileScreen({Key? key, required this.account})
+      : super(key: key);
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
 }
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-  late final fullnameController;
-  late final emailController;
-  late final phoneController;
-  late final addressController;
+  late final dynamic fullnameController;
+  late final dynamic emailController;
+  late final dynamic phoneController;
+  late final dynamic addressController;
   DateTime? _selectedDate;
   bool initDateTime = false;
   String? _selectedGender;
 
+  @override
   void initState() {
     super.initState();
     fullnameController = TextEditingController(text: widget.account.fullname);
@@ -167,8 +168,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               Column(
                 children: [
                   CircleAvatar(
-                    backgroundImage:
-                        AssetImage(widget.account.profilePicture),
+                    backgroundImage: AssetImage(widget.account.profilePicture),
                     radius: 50,
                   ),
                   const SizedBox(height: 10),
