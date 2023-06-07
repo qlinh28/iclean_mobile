@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/common/user_preferences.dart';
-import 'package:iclean_flutter/screens/renter/components/user_screens.dart';
 
 import 'screens/common/welcome_screen.dart';
+import 'screens/user/components/user_screens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -97,24 +97,36 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               const SizedBox(height: 4),
                               Row(
-                                children: const [
-                                  Icon(
+                                children: [
+                                  const Icon(
                                     Icons.location_on,
                                     size: 14,
                                     color: Colors.white,
                                   ),
-                                  SizedBox(width: 4),
-                                  Text(
-                                    "S102 Vinhomes Grand Park",
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: 'Lato',
-                                      color: Colors.white,
+                                  const SizedBox(width: 4),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LocationScreen()));
+                                    },
+                                    child: Text(
+                                      "S102 Vinhomes Grand Park",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: 'Lato',
+                                        color: Colors.grey.shade600,
+                                      ),
+                                      maxLines:
+                                          2, // Allow the Text widget to wrap to as many lines as needed.
+                                      overflow: TextOverflow
+                                          .ellipsis, // Specify what to display if the Text widget overflows.
+                                      softWrap:
+                                          true, // Allow the text to wrap to new lines.
                                     ),
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    softWrap: true,
-                                  ),
+                                  )
                                 ],
                               ),
                               const SizedBox(width: 10),
@@ -167,56 +179,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ],
                       ),
-<<<<<<< HEAD:lib/screens/user/home_screen.dart
-                      const SizedBox(height: 4),
-                      Row(children: [
-                        Icon(
-                          Icons.location_on,
-                          size: 14,
-                          color: Colors.grey.shade600,
-                        ),
-                        const SizedBox(width: 4),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => LocationScreen()));
-                          },
-                          child: Text(
-                            "S102 Vinhomes Grand Park",
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: 'Lato',
-                              color: Colors.grey.shade600,
-                            ),
-                            maxLines:
-                                2, // Allow the Text widget to wrap to as many lines as needed.
-                            overflow: TextOverflow
-                                .ellipsis, // Specify what to display if the Text widget overflows.
-                            softWrap:
-                                true, // Allow the text to wrap to new lines.
-                          ),
-                        ),
-                      ]),
-                      const SizedBox(width: 10),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              "What's news?",
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Lato',
-                fontSize: 15,
-=======
                     ),
                   ],
                 ),
->>>>>>> linh-sii:lib/screens/renter/home_screen.dart
               ),
               const SizedBox(height: 20),
               const Text(
@@ -254,33 +219,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-<<<<<<< HEAD:lib/screens/user/home_screen.dart
-            ),
-            GridView.count(
-              crossAxisCount: 3,
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              childAspectRatio: (80 / 70),
-              children: [
-                for (int i = 0; i < services.length; i++)
-                  Column(children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EmployeeServiceScreen(
-                                    service: services[i])));
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.all(10),
-                        child: Image.asset(
-                          services[i].icon,
-                          width: 100,
-                          height: 60,
-                          fit: BoxFit.contain,
-                        ),
-=======
               GridView.count(
                 crossAxisCount: MediaQuery.of(context).size.width > 600 ? 6 : 3,
                 physics: const NeverScrollableScrollPhysics(),
@@ -301,7 +239,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             spreadRadius: .05,
                           ),
                         ],
->>>>>>> linh-sii:lib/screens/renter/home_screen.dart
                       ),
                       child: Column(
                         children: [
@@ -310,7 +247,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => WorkerServiceScreen(
+                                  builder: (context) => EmployeeServiceScreen(
                                     service: services[i],
                                   ),
                                 ),

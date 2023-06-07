@@ -5,11 +5,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/constant/gobal_variable.dart';
 import 'package:iclean_flutter/screens/common/user_preferences.dart';
-import 'package:iclean_flutter/screens/renter/components/user_screens.dart';
 
 import '../../constant/url_constants.dart';
 import '../../models/account.dart';
 import 'package:http/http.dart' as http;
+
+import '../user/components/user_screens.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);

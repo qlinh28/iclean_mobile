@@ -2,12 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
-<<<<<<< HEAD:lib/screens/user/components/employee_service_details/review_card.dart
-import '../../../../models/Feedbackk.dart';
 import '../../../../models/profile.dart';
-=======
 import '../../../../models/feedback.dart';
->>>>>>> linh-sii:lib/screens/renter/components/worker_details/review_card.dart
 import '../../../../models/services.dart';
 
 class ReviewCard extends StatefulWidget {

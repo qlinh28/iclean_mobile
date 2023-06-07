@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/user/summary_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-<<<<<<< HEAD:lib/screens/user/booking_details_screen.dart
 import '../../models/profile.dart';
-=======
-import '../../models/workers.dart';
-import 'location_select.dart';
->>>>>>> linh-sii:lib/screens/renter/booking_details_screen.dart
 
 class BookingDetailsScreen extends StatefulWidget {
   final Profile profile;
@@ -123,11 +118,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Padding(
-<<<<<<< HEAD:lib/screens/user/booking_details_screen.dart
             padding: const EdgeInsets.only(top: 15, left: 25, right: 25),
-=======
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
->>>>>>> linh-sii:lib/screens/renter/booking_details_screen.dart
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -137,10 +128,10 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Icon(Icons.arrow_back),
+                      child: const Icon(Icons.arrow_back),
                     ),
-                    SizedBox(width: 15),
-                    Text(
+                    const SizedBox(width: 15),
+                    const Text(
                       "Booking Details",
                       style: TextStyle(
                         fontSize: 24,
@@ -150,8 +141,8 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ),
                   ],
                 ),
-                SizedBox(height: 15),
-                Text(
+                const SizedBox(height: 15),
+                const Text(
                   "Select Date",
                   style: TextStyle(
                     fontSize: 18,
@@ -159,7 +150,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     fontFamily: 'Lato',
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.deepPurple.shade100,
@@ -169,12 +160,12 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     firstDay: DateTime.utc(2023),
                     focusedDay: today,
                     lastDay: DateTime.utc(2024),
-                    headerStyle: HeaderStyle(
+                    headerStyle: const HeaderStyle(
                       formatButtonVisible: false,
                       titleTextStyle:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
-                    daysOfWeekStyle: DaysOfWeekStyle(
+                    daysOfWeekStyle: const DaysOfWeekStyle(
                         weekdayStyle: TextStyle(fontWeight: FontWeight.bold),
                         weekendStyle: TextStyle(fontWeight: FontWeight.bold)),
                     availableGestures: AvailableGestures.all,
@@ -182,7 +173,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     selectedDayPredicate: (day) => isSameDay(day, today),
                     calendarStyle: CalendarStyle(
                       outsideDaysVisible: false,
-                      weekendTextStyle: TextStyle(color: Colors.black),
+                      weekendTextStyle: const TextStyle(color: Colors.black),
                       todayDecoration: BoxDecoration(
                         color: Colors.deepPurple.shade200,
                         shape: BoxShape.circle,
@@ -194,7 +185,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 Container(
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
@@ -204,7 +195,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         "Working Hours",
                         style: TextStyle(
                           fontSize: 18,
@@ -216,14 +207,14 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                         children: [
                           Container(
                             padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: CircleAvatar(
                               radius: 15.0,
                               backgroundColor: Colors.deepPurple.shade100,
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.remove,
                                   color: Colors.white,
                                   size: 15,
@@ -232,26 +223,26 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                               ),
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
                             '$_counter',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 24,
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Container(
                             padding: const EdgeInsets.all(8),
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                             ),
                             child: CircleAvatar(
                               radius: 15.0,
                               backgroundColor: Colors.deepPurple.shade100,
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.add,
                                   color: Colors.white,
                                   size: 15,
@@ -265,7 +256,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 const Text(
                   "Choose Start Time",
                   style: TextStyle(
@@ -339,7 +330,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
                     fontFamily: 'Lato',
                   ),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 TextFormField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -364,21 +355,14 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
               thickness: 0.5,
               color: Colors.grey[400],
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             InkWell(
               onTap: () {
-<<<<<<< HEAD:lib/screens/user/booking_details_screen.dart
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => SummaryScreen()));
-              },
-=======
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => LocationSelectionPage()));
+                        builder: (context) => const SummaryScreen()));
               },
-              //onTap: _createBookingOrder,
->>>>>>> linh-sii:lib/screens/renter/booking_details_screen.dart
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
                 height: MediaQuery.of(context).size.height / 14,

@@ -14,46 +14,30 @@ class _NotificationScreenState extends State<NotificationScreen> {
   List<Noti> notis = [
     Noti(
         id: 1,
-<<<<<<< HEAD:lib/screens/user/notification_screen.dart
-        details: "chưa được duyệt",
-=======
         details: "Đơn #00834 của bạn đang được duyệt từ nhân viên",
->>>>>>> linh-sii:lib/screens/renter/notification_screen.dart
         status: 'unconfirm',
         timestamp: DateTime.now(),
         deleted: false,
         read: false),
     Noti(
         id: 2,
-<<<<<<< HEAD:lib/screens/user/notification_screen.dart
-        details: "đợi đến ngày làm",
-=======
         details:
             "Đơn #98956 của bạn đã được xác nhận, vui lòng chờ nhân viên của chúng tôi!",
->>>>>>> linh-sii:lib/screens/renter/notification_screen.dart
         status: 'undone',
         timestamp: DateTime.now(),
         deleted: false,
         read: false),
     Noti(
         id: 3,
-<<<<<<< HEAD:lib/screens/user/notification_screen.dart
-        details: "đã hoàn thành",
-=======
         details:
             "Công việc thuộc đơn #98442 đã được hoàn thành, bạn có thể đánh giá dịch vụ của chúng tôi!",
->>>>>>> linh-sii:lib/screens/renter/notification_screen.dart
         status: 'done',
         timestamp: DateTime.now(),
         deleted: false,
         read: false),
     Noti(
         id: 4,
-<<<<<<< HEAD:lib/screens/user/notification_screen.dart
-        details: "đã hủy",
-=======
         details: "Đơn #95242 đã bị hủy từ nhân viên",
->>>>>>> linh-sii:lib/screens/renter/notification_screen.dart
         status: 'cancel',
         timestamp: DateTime.now(),
         deleted: false,

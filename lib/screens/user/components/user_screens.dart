@@ -1,20 +1,13 @@
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-<<<<<<< HEAD:lib/screens/user/components/user_screens.dart
 import 'package:iclean_flutter/screens/user/home_screen.dart';
 import 'package:iclean_flutter/screens/user/inbox_screen.dart';
 import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
 import 'package:iclean_flutter/screens/user/notification_screen.dart';
 import 'package:iclean_flutter/screens/user/profile_screen.dart';
-=======
-import 'package:iclean_flutter/models/account.dart';
-import 'package:iclean_flutter/screens/renter/home_screen.dart';
-import 'package:iclean_flutter/screens/renter/inbox_screen.dart';
-import 'package:iclean_flutter/screens/renter/my_bookings_screen.dart';
-import 'package:iclean_flutter/screens/renter/notification_screen.dart';
-import 'package:iclean_flutter/screens/renter/profile_screen.dart';
->>>>>>> linh-sii:lib/screens/renter/components/user_screens.dart
+
+import '../../../models/account.dart';
 
 class UserScreens extends StatefulWidget {
   const UserScreens({Key? key, Account? account}) : super(key: key);
@@ -42,44 +35,6 @@ class _UserScreensState extends State<UserScreens> {
       const ProfileScreen(),
     ];
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   getToken();
-  // }
-
-  // void requestPermission() async {
-  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  //   NotificationSettings settings = await messaging.requestPermission(
-  //     alert: true,
-  //     announcement: false,
-  //     badge: true,
-  //     carPlay: false,
-  //     criticalAlert: false,
-  //     provisional: false,
-  //     sound: true,
-  //   );
-
-  //   print('User granted permission: ${settings.authorizationStatus}');
-  // }
-
-  // void getToken() async {
-  //   await FirebaseMessaging.instance.getToken().then((token) {
-  //     setState(() {
-  //       mtoken = token;
-  //       updateFcmToken();
-  //       // print("My token is $mtoken");
-  //     });
-  //   });
-  // }
-
-  // Future<void> updateFcmToken() async {
-  //   int userId = widget.account.id;
-  //   await ServicesApi.updateFcmToken(userId, mtoken!);
-  //   setState(() {});
-  // }
 
   @override
   Widget build(BuildContext context) {
