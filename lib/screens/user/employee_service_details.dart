@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/user/booking_details_screen.dart';
 import 'package:iclean_flutter/screens/user/components/employee_service_details/review_card.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/profile.dart';
 import '../../models/services.dart';
@@ -118,7 +119,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "${averageReview.toStringAsFixed(1)}",
+                                averageReview.toStringAsFixed(1),
                                 style: const TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Lato',
@@ -174,11 +175,11 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                               ),
                             ],
                           ),
-                          const SizedBox(height: 5),
+                          const SizedBox(height: 8),
                           Text(
-                            "\$${widget.profile.price}",
+                            "${NumberFormat('#,###').format(widget.profile.price)} VNĐ",
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 15,
                               fontWeight: FontWeight.bold,
                               fontFamily: 'Lato',
                               color: Colors.deepPurple.shade300,

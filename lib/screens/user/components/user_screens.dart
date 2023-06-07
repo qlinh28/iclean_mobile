@@ -7,8 +7,10 @@ import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
 import 'package:iclean_flutter/screens/user/notification_screen.dart';
 import 'package:iclean_flutter/screens/user/profile_screen.dart';
 
+import '../../../models/account.dart';
+
 class UserScreens extends StatefulWidget {
-  const UserScreens({Key? key}) : super(key: key);
+  const UserScreens({Key? key, Account? account}) : super(key: key);
 
   //final Account account;
 
@@ -25,7 +27,6 @@ class _UserScreensState extends State<UserScreens> {
   @override
   void initState() {
     super.initState();
-    //requestPermission();
     _screenOptions = <Widget>[
       const HomeScreen(),
       const MyBookingsScreen(),
@@ -34,44 +35,6 @@ class _UserScreensState extends State<UserScreens> {
       const ProfileScreen(),
     ];
   }
-
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   getToken();
-  // }
-
-  // void requestPermission() async {
-  //   FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-  //   NotificationSettings settings = await messaging.requestPermission(
-  //     alert: true,
-  //     announcement: false,
-  //     badge: true,
-  //     carPlay: false,
-  //     criticalAlert: false,
-  //     provisional: false,
-  //     sound: true,
-  //   );
-
-  //   print('User granted permission: ${settings.authorizationStatus}');
-  // }
-
-  // void getToken() async {
-  //   await FirebaseMessaging.instance.getToken().then((token) {
-  //     setState(() {
-  //       mtoken = token;
-  //       updateFcmToken();
-  //       // print("My token is $mtoken");
-  //     });
-  //   });
-  // }
-
-  // Future<void> updateFcmToken() async {
-  //   int userId = widget.account.id;
-  //   await ServicesApi.updateFcmToken(userId, mtoken!);
-  //   setState(() {});
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'package:iclean_flutter/models/account.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
 import 'package:iclean_flutter/screens/user/payment_screen.dart';
 import 'package:iclean_flutter/screens/user/update_profile_screen.dart';
-
+import '../common/user_preferences.dart';
 import '../common/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -27,14 +27,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       location: 'adasdasdsadasdsadsadsa');
 
   Future<void> _logout() async {
-    //final storage = FlutterSecureStorage();
-    //await storage.delete(key: 'accessToken');
-    //await storage.delete(key: 'account');
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(builder: (BuildContext context) => const LoginScreen()),
       (Route<dynamic> route) => false,
     );
+    await UserPreferences.logout();
   }
 
   @override
@@ -275,52 +273,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         mouseCursor: MaterialStateProperty.all<MouseCursor>(
                             SystemMouseCursors.click),
                       ),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text(
-                                "Confirm Log Out",
-                                style: TextStyle(
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                              content: const Text(
-                                "Are you sure you want to log out?",
-                                style: TextStyle(
-                                  fontFamily: 'Lato',
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text(
-                                    "Cancel",
-                                    style: TextStyle(
-                                        fontFamily: 'Lato',
-                                        color: Colors.deepPurple.shade300),
-                                  ),
-                                ),
-                                ElevatedButton(
-                                  style: ButtonStyle(
-                                    backgroundColor:
-                                        MaterialStateProperty.all<Color>(
-                                            Colors.deepPurple.shade300),
-                                  ),
-                                  onPressed: _logout,
-                                  child: const Text(
-                                    "Log Out",
-                                    style: TextStyle(
-                                      fontFamily: 'Lato',
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
+                      onPressed: () => showLogoutConfirmationDialog(context),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -351,6 +304,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         )),
       ),
+    );
+  }
+
+  void showLogoutConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("Confirm Log Out"),
+          content: const Text("Are you sure you want to log out?"),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                "Cancel",
+                style: TextStyle(color: Colors.deepPurple.shade300),
+              ),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.deepPurple.shade300,
+                ),
+              ),
+              onPressed: _logout,
+              child: const Text("Log Out"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
