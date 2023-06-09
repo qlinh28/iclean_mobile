@@ -48,9 +48,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 10),
               Column(
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     backgroundImage:
-                        AssetImage('assets/images/lisa_avatar.jpg'),
+                        NetworkImage(widget.account.profilePicture),
                     radius: 50,
                   ),
                   const SizedBox(height: 10),

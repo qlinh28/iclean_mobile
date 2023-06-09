@@ -115,7 +115,6 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                           context,
                           MaterialPageRoute(
                             builder: (context) => EmployeeDetailsScreen(
-                              service: widget.service,
                               profile: profile[i],
                             ),
                           ),

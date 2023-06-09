@@ -17,7 +17,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   late final dynamic fullnameController;
   late final dynamic emailController;
   late final dynamic phoneController;
-  late final dynamic addressController;
+
   DateTime? _selectedDate;
   bool initDateTime = false;
   String? _selectedGender;
@@ -28,8 +28,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     fullnameController = TextEditingController(text: widget.account.fullname);
     emailController = TextEditingController(text: widget.account.email);
     phoneController = TextEditingController(text: widget.account.phone);
-    addressController = TextEditingController(text: widget.account.location);
-    //fetchProvinces();
   }
 
   @override
@@ -37,7 +35,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     fullnameController.dispose();
     emailController.dispose();
     phoneController.dispose();
-    addressController.dispose();
     super.dispose();
   }
 
@@ -117,24 +114,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     return null;
   }
 
-  // Future<void> fetchProvinces() async {
-  //   final listProvinces = await AccountAPI.fetchProvinces();
-  //   setState(() {
-  //     if (listProvinces != null) {
-  //       provinces = listProvinces;
-  //     } else {}
-  //   });
-  // }
-
-  // Future<void> fetchDistricts(String provinceId) async {
-  //   final listDistricts = await AccountAPI.fetchDistricts(provinceId);
-  //   setState(() {
-  //     if (listDistricts != null) {
-  //       districts = listDistricts;
-  //     } else {}
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,7 +147,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               Column(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage(widget.account.profilePicture),
+                    backgroundImage:
+                        NetworkImage(widget.account.profilePicture),
                     radius: 50,
                   ),
                   const SizedBox(height: 10),
@@ -293,23 +273,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   onChanged: (String? value) {
                     _selectedGender = value;
                   },
-                  items: <String>['male', 'female'].map((String value) {
+                  items: <String>['Male', 'Female'].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
                     );
                   }).toList(),
                   validator: (value) => validateDropdown(value as String?),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: UpdateTextField(
-                  controller: addressController,
-                  labelText: 'Address',
-                  hintText: 'Enter your address',
-                  text: widget.account.location,
-                  obscureText: false,
                 ),
               ),
             ],

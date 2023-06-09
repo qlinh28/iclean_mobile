@@ -436,17 +436,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   const SizedBox(height: 10),
 
-                  //Address textfield
-                  MyTextField(
-                    controller: addressController,
-                    labelText: 'Address',
-                    hintText: 'Enter your address',
-                    text: 'address',
-                    obscureText: false,
-                  ),
-
-                  const SizedBox(height: 10),
-
                   MyButton(
                     text: "Sign up",
                     onTap: () {
@@ -473,9 +462,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const TextStyle(fontWeight: FontWeight.bold)),
                         onPressed: () {
                           Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginScreen()),
-    );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
+                          );
                         },
                         child: const Text(
                           'Login',

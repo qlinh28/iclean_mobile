@@ -4,18 +4,13 @@ import 'package:intl/intl.dart';
 
 import '../../../../models/profile.dart';
 import '../../../../models/feedback.dart';
-import '../../../../models/services.dart';
 
 class ReviewCard extends StatefulWidget {
   final Profile profile;
-  final Service service;
+
   final int rate;
 
-  const ReviewCard(
-      {Key? key,
-      required this.profile,
-      required this.service,
-      required this.rate})
+  const ReviewCard({Key? key, required this.profile, required this.rate})
       : super(key: key);
   @override
   _ReviewCardState createState() => _ReviewCardState();
@@ -49,14 +44,12 @@ class _ReviewCardState extends State<ReviewCard> {
         timestamp: DateTime.now()),
   ];
   late int workerId;
-  late int serviceId;
   late int rate;
 
   @override
   void initState() {
     super.initState;
     workerId = widget.profile.id;
-    serviceId = widget.service.id;
     rate = widget.rate;
     //fetchReview(workerId, serviceId, rate);
   }

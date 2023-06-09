@@ -471,30 +471,17 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                       child: Center(
                         child: [
+                          ReviewCard(profile: profile, rate: 10),
                           ReviewCard(
-                              profile: profile,
-                              service: widget.service,
-                              rate: 10),
+                              profile: profile, rate: _tabController.index),
                           ReviewCard(
-                              profile: profile,
-                              service: widget.service,
-                              rate: _tabController.index),
+                              profile: profile, rate: _tabController.index),
                           ReviewCard(
-                              profile: profile,
-                              service: widget.service,
-                              rate: _tabController.index),
+                              profile: profile, rate: _tabController.index),
                           ReviewCard(
-                              profile: profile,
-                              service: widget.service,
-                              rate: _tabController.index),
+                              profile: profile, rate: _tabController.index),
                           ReviewCard(
-                              profile: profile,
-                              service: widget.service,
-                              rate: _tabController.index),
-                          ReviewCard(
-                              profile: profile,
-                              service: widget.service,
-                              rate: _tabController.index),
+                              profile: profile, rate: _tabController.index),
                         ][_tabController.index],
                       ),
                     )

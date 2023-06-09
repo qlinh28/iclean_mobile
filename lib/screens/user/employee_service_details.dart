@@ -4,13 +4,11 @@ import 'package:iclean_flutter/screens/user/components/employee_service_details/
 import 'package:intl/intl.dart';
 
 import '../../models/profile.dart';
-import '../../models/services.dart';
 
 class EmployeeDetailsScreen extends StatefulWidget {
   final Profile profile;
-  final Service service;
-  const EmployeeDetailsScreen(
-      {Key? key, required this.profile, required this.service})
+  //final Service service;
+  const EmployeeDetailsScreen({Key? key, required this.profile})
       : super(key: key);
 
   @override
@@ -474,29 +472,21 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: Center(
                           child: [
+                            ReviewCard(profile: widget.profile, rate: 10),
                             ReviewCard(
                                 profile: widget.profile,
-                                service: widget.service,
-                                rate: 10),
-                            ReviewCard(
-                                profile: widget.profile,
-                                service: widget.service,
                                 rate: _tabController.index),
                             ReviewCard(
                                 profile: widget.profile,
-                                service: widget.service,
                                 rate: _tabController.index),
                             ReviewCard(
                                 profile: widget.profile,
-                                service: widget.service,
                                 rate: _tabController.index),
                             ReviewCard(
                                 profile: widget.profile,
-                                service: widget.service,
                                 rate: _tabController.index),
                             ReviewCard(
                                 profile: widget.profile,
-                                service: widget.service,
                                 rate: _tabController.index),
                           ][_tabController.index],
                         ),

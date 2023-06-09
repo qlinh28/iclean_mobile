@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
+import 'package:iclean_flutter/screens/user/my_bookmark_screen.dart';
 import '../../models/account.dart';
 import '../../models/services.dart';
 import 'employee_service_screen.dart';
@@ -41,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListView(
             children: [
               Container(
-                padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-                height: 200,
+                padding: const EdgeInsets.only(top: 30, left: 15, right: 15),
+                height: 180,
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
@@ -61,71 +62,84 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.only(top: 0),
-                          child: const CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/lisa_avatar.jpg'),
-                            radius: 25,
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children:  [
-                                  
-                                  Text(
-                                    widget.account.fullname,
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: 'Lato',
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 4),
-                              Row(
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(widget.account.profilePicture),
+                              radius: 25,
+                            ),
+                            Container(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Icon(
-                                    Icons.location_on,
-                                    size: 14,
-                                    color: Colors.white,
-                                  ),
-                                  const SizedBox(width: 4),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LocationScreen()));
-                                    },
-                                    child: Text(
-                                      widget.account.location,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: 'Lato',
-                                        color: Colors.grey.shade600,
+                                  Row(
+                                    children: [
+                                      Text(
+                                        widget.account.fullname,
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: 'Lato',
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                      maxLines:
-                                          2, // Allow the Text widget to wrap to as many lines as needed.
-                                      overflow: TextOverflow
-                                          .ellipsis, // Specify what to display if the Text widget overflows.
-                                      softWrap:
-                                          true, // Allow the text to wrap to new lines.
-                                    ),
-                                  )
+                                    ],
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    children: [
+                                      const Icon(
+                                        Icons.location_on,
+                                        size: 14,
+                                        color: Colors.white,
+                                      ),
+                                      const SizedBox(width: 4),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      LocationScreen()));
+                                        },
+                                        child: Text(
+                                          widget.account.location,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Lato',
+                                            color: Colors.grey.shade600,
+                                          ),
+                                          maxLines:
+                                              2, // Allow the Text widget to wrap to as many lines as needed.
+                                          overflow: TextOverflow
+                                              .ellipsis, // Specify what to display if the Text widget overflows.
+                                          softWrap:
+                                              true, // Allow the text to wrap to new lines.
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(width: 10),
                                 ],
                               ),
-                              const SizedBox(width: 10),
-                            ],
+                            ),
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MyBookmarkScreen()));
+                          },
+                          child: const Icon(
+                            Icons.turned_in_not_outlined,
+                            size: 25,
+                            color: Colors.white,
                           ),
                         ),
                       ],
@@ -136,12 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 50,
                       width: double.infinity,
                       decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                         gradient: LinearGradient(
                           colors: [
                             Colors.orange,
