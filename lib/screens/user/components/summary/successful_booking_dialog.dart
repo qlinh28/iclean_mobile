@@ -53,10 +53,10 @@ class BookingSuccessDialog extends StatelessWidget {
                             )));
               },
               child: Container(
-                width: MediaQuery.of(context).size.width / 1.2,
+                width: MediaQuery.of(context).size.width / 1.7,
                 height: MediaQuery.of(context).size.height / 14,
                 decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade300,
+                  color: Colors.deepPurple.shade400,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: const Center(
@@ -73,17 +73,25 @@ class BookingSuccessDialog extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8.0),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.deepPurple.shade300,
-              ),
-              child: const Text(
-                'Close',
-                style: TextStyle(
-                  color: Colors.white,
+            InkWell(
+              onTap: () {},
+              child: Container(
+                width: MediaQuery.of(context).size.width / 1.7,
+                height: MediaQuery.of(context).size.height / 14,
+                decoration: BoxDecoration(
+                  color: Colors.deepPurple.shade100,
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: Center(
+                  child: Text(
+                    "Message Worker",
+                    style: TextStyle(
+                        color: Colors.deepPurple.shade500,
+                        fontFamily: 'Lato',
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1),
+                  ),
                 ),
               ),
             ),

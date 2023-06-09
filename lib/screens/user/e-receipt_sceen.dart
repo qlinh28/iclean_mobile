@@ -1,5 +1,7 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/models/account.dart';
+import 'package:iclean_flutter/screens/user/components/user_screens.dart';
 
 class EReceiptScreen extends StatelessWidget {
   final String barcodeData;
@@ -21,7 +23,8 @@ class EReceiptScreen extends StatelessWidget {
                   child: Row(children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        int count = 6;
+                        Navigator.of(context).popUntil((_) => count-- <= 0);
                       },
                       child: const Icon(Icons.arrow_back),
                     ),
@@ -39,7 +42,7 @@ class EReceiptScreen extends StatelessWidget {
                 const SizedBox(height: 25),
                 Text(
                   'Booking Code: $barcodeData',
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Center(
                   child: BarcodeWidget(
