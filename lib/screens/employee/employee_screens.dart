@@ -7,10 +7,12 @@ import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
 import 'package:iclean_flutter/screens/user/notification_screen.dart';
 import 'package:iclean_flutter/screens/user/profile_screen.dart';
 
-class EmployeeScreens extends StatefulWidget {
-  const EmployeeScreens({Key? key}) : super(key: key);
+import '../../models/account.dart';
 
-  //final Account account;
+class EmployeeScreens extends StatefulWidget {
+  const EmployeeScreens({Key? key, required this.account}) : super(key: key);
+
+  final Account account;
 
   @override
   State<EmployeeScreens> createState() => _EmployeeScreensState();
@@ -31,7 +33,7 @@ class _EmployeeScreensState extends State<EmployeeScreens> {
       const MyBookingsScreen(),
       const InboxScreen(),
       const NotificationScreen(),
-      const ProfileScreen(),
+      ProfileScreen(account: widget.account),
     ];
   }
 

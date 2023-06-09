@@ -10,9 +10,8 @@ import 'package:iclean_flutter/screens/user/profile_screen.dart';
 import '../../../models/account.dart';
 
 class UserScreens extends StatefulWidget {
-  const UserScreens({Key? key, Account? account}) : super(key: key);
-
-  //final Account account;
+  final Account account;
+  const UserScreens({Key? key, required this.account}) : super(key: key);
 
   @override
   State<UserScreens> createState() => _UserScreensState();
@@ -28,11 +27,11 @@ class _UserScreensState extends State<UserScreens> {
   void initState() {
     super.initState();
     _screenOptions = <Widget>[
-      const HomeScreen(),
+      HomeScreen(account: widget.account),
       const MyBookingsScreen(),
       const InboxScreen(),
       const NotificationScreen(),
-      const ProfileScreen(),
+      ProfileScreen(account: widget.account),
     ];
   }
 

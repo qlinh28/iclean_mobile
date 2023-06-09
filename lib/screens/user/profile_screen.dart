@@ -7,25 +7,14 @@ import '../common/user_preferences.dart';
 import '../common/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  final Account account;
+  const ProfileScreen({Key? key, required this.account}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Account account = Account(
-      id: 1,
-      username: 'user1',
-      role: 'user',
-      fullname: 'lisa',
-      gender: 'female',
-      dateOfBirth: DateTime.now(),
-      phone: '019191919',
-      email: 'email@gmail.com',
-      profilePicture: 'assets/images/lisa_avatar.jpg',
-      location: 'adasdasdsadasdsadsadsa');
-
   Future<void> _logout() async {
     Navigator.pushAndRemoveUntil(
       context,
@@ -58,16 +47,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 10),
               Column(
-                children: const [
-                  CircleAvatar(
+                children: [
+                  const CircleAvatar(
                     backgroundImage:
                         AssetImage('assets/images/lisa_avatar.jpg'),
                     radius: 50,
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
-                    "Lisa",
-                    style: TextStyle(
+                    widget.account.fullname,
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       fontFamily: 'Lato',
@@ -83,8 +72,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  UpdateProfileScreen(account: account)));
+                              builder: (context) => UpdateProfileScreen(
+                                  account: widget.account)));
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 8),

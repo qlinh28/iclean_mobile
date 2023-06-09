@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
+import '../../models/account.dart';
 import '../../models/services.dart';
 import 'employee_service_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final Account account;
+  const HomeScreen({Key? key, required this.account}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -75,18 +77,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                children: const [
+                                children:  [
+                                  
                                   Text(
-                                    "Hello, ",
-                                    style: TextStyle(
-                                      fontFamily: 'Lato',
-                                      fontSize: 20,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  Text(
-                                    "Lisa",
-                                    style: TextStyle(
+                                    widget.account.fullname,
+                                    style: const TextStyle(
                                       fontSize: 20,
                                       fontFamily: 'Lato',
                                       fontWeight: FontWeight.bold,
@@ -113,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   LocationScreen()));
                                     },
                                     child: Text(
-                                      "S102 Vinhomes Grand Park",
+                                      widget.account.location,
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontFamily: 'Lato',

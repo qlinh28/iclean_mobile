@@ -1,5 +1,5 @@
 class Account {
-  int id;
+  int? id;
   String username,
       role,
       fullname,
@@ -24,19 +24,20 @@ class Account {
   });
 
   factory Account.fromJson(Map<String, dynamic> json) {
-    return Account(
-      id: json['userId'],
-      role: json['roleName'],
-      username: json['username'],
-      fullname: json['fullname'],
-      gender: json['gender'],
-      dateOfBirth: DateTime.parse(json['dateOfBirth']),
-      phone: json['phone'],
-      email: json['email'],
-      profilePicture: json['profilePicture'] ?? "",
-      location: json['location'] ?? "",
-    );
-  }
+  return Account(
+    id: json['userId'] as int?,
+    role: json['roleName'] as String? ?? "",
+    username: json['username'] as String,
+    fullname: json['fullname'] as String,
+    gender: json['gender'] as String,
+    dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
+    phone: json['phone'] as String,
+    email: json['email'] as String,
+    profilePicture: json['profilePicture'] as String? ?? "",
+    location: json['location'] as String? ?? "",
+  );
+}
+
 
   Map<String, dynamic> toJson() {
     return {
