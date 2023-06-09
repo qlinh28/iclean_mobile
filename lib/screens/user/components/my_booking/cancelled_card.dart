@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/services/booking_api.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../models/bookings.dart';
 
 class CancelledCard extends StatefulWidget {
-  //final String status;
+  final int status;
   //final int userId;
 
-  const CancelledCard({
-    Key? key,
-    /*required this.status, required this.userId*/
-  }) : super(key: key);
+  const CancelledCard({Key? key, required this.status}) : super(key: key);
 
   @override
   State<CancelledCard> createState() => _CancelledCardState();
@@ -22,57 +20,57 @@ class _CancelledCardState extends State<CancelledCard>
   late Animation<double> _animation;
   late List<bool> _isExpanded = List.filled(bookings.length, false);
   List<Booking> bookings = [
-    Booking(
-        id: 1,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Nguyễn Văn Đạt",
-        status: "cancel",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Giặt ủi",
-        description: "1233321123321",
-        jobImage: "assets/images/1.jpg"),
-    Booking(
-        id: 2,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Nguyễn Đăng Khoa",
-        status: "cancel",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Decor",
-        description: "1233321123321",
-        jobImage: "assets/images/2.png"),
-    Booking(
-        id: 3,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Lê Thúy Ngân",
-        status: "cancel",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Nấu ăn",
-        description: "1233321123321",
-        jobImage: "assets/images/3.png"),
+    // Booking(
+    //     id: 1,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Nguyễn Văn Đạt",
+    //     status: "cancel",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Giặt ủi",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/1.jpg"),
+    // Booking(
+    //     id: 2,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Nguyễn Đăng Khoa",
+    //     status: "cancel",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Decor",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/2.png"),
+    // Booking(
+    //     id: 3,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Lê Thúy Ngân",
+    //     status: "cancel",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Nấu ăn",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/3.png"),
   ];
 
   @override
   void initState() {
     super.initState;
-    //fetchBooking(widget.userId, widget.status);
+    fetchBooking(widget.status);
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -154,7 +152,7 @@ class _CancelledCardState extends State<CancelledCard>
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Text(
-                                  "Pending",
+                                  "Cancel",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
@@ -250,10 +248,10 @@ class _CancelledCardState extends State<CancelledCard>
     );
   }
 
-  // void fetchBooking(int userId, String status) async {
-  //   final listBookings = await BookingApi.fetchBooking(userId, status);
-  //   setState(() {
-  //     bookings = listBookings;
-  //   });
-  // }
+  void fetchBooking(int status) async {
+    final listBookings = await BookingApi.fetchBookingByStatus(status);
+    setState(() {
+      bookings = listBookings;
+    });
+  }
 }

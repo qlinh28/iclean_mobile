@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/services/booking_api.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../models/bookings.dart';
 
 class PendingCard extends StatefulWidget {
-  // final String status;
+  final int status;
   // final int userId;
 
-  const PendingCard({
-    Key? key,
-    /*required this.status, required this.userId*/
-  }) : super(key: key);
+  const PendingCard({Key? key, required this.status}) : super(key: key);
 
   @override
   State<PendingCard> createState() => _PendingCardState();
@@ -19,76 +17,76 @@ class PendingCard extends StatefulWidget {
 class _PendingCardState extends State<PendingCard>
     with TickerProviderStateMixin {
   List<Booking> bookings = [
-    Booking(
-        id: 1,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Nguyễn Văn Đạt",
-        status: "pending",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Giặt ủi",
-        description: "1233321123321",
-        jobImage: "assets/images/1.jpg"),
-    Booking(
-        id: 2,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Nguyễn Đăng Khoa",
-        status: "pending",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Decor",
-        description: "1233321123321",
-        jobImage: "assets/images/2.png"),
-    Booking(
-        id: 3,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Lê Thúy Ngân",
-        status: "pending",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Nấu ăn",
-        description: "1233321123321",
-        jobImage: "assets/images/3.png"),
+    // Booking(
+    //     id: 1,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Nguyễn Văn Đạt",
+    //     status: "pending",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Giặt ủi",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/1.jpg"),
+    // Booking(
+    //     id: 2,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Nguyễn Đăng Khoa",
+    //     status: "pending",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Decor",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/2.png"),
+    // Booking(
+    //     id: 3,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Lê Thúy Ngân",
+    //     status: "pending",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Nấu ăn",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/3.png"),
   ];
   late AnimationController _controller;
-  late Animation<double> _animation;
-  late List<bool> _isExpanded = List.filled(bookings.length, false);
+  late final List<bool> _isExpanded = List.filled(bookings.length, false);
 
   void _reloadPage() {
     setState(() {
       bookings = [];
     });
-    // fetchBooking(widget.userId, widget.status);
+    fetchBooking(widget.status);
   }
 
   @override
   void initState() {
     super.initState();
+    fetchBooking(widget.status);
 
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
   }
 
   @override
   void dispose() {
+    bookings.clear();
     _controller.dispose();
     super.dispose();
   }
@@ -364,10 +362,10 @@ class _PendingCardState extends State<PendingCard>
   //   _reloadPage;
   // }
 
-  // void fetchBooking(int userId, String status) async {
-  //   final listBookings = await BookingApi.fetchBooking(userId, status);
-  //   setState(() {
-  //     bookings = listBookings;
-  //   });
-  // }
+  void fetchBooking(int status) async {
+    final listBookings = await BookingApi.fetchBookingByStatus(status);
+    setState(() {
+      bookings = listBookings;
+    });
+  }
 }

@@ -41,9 +41,9 @@ class Account {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'userId': id,
       'username': username,
-      'role': role,
+      'roleName': role,
       'fullname': fullname,
       'gender': gender,
       'phone': phone,

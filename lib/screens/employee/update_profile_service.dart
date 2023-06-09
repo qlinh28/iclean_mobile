@@ -25,10 +25,11 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
   @override
   initState() {
     super.initState();
-    nameController = TextEditingController(text: widget.profile.name);
+    nameController = TextEditingController(text: widget.profile.employeeName);
     priceController =
         TextEditingController(text: widget.profile.price.toString());
-    introduceController = TextEditingController(text: widget.profile.introduce);
+    introduceController =
+        TextEditingController(text: widget.profile.description);
   }
 
   @override
@@ -50,7 +51,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                     ),
                     const SizedBox(width: 15),
                     Text(
-                      widget.profile.name,
+                      widget.profile.employeeName,
                       style: const TextStyle(
                         fontFamily: 'Lato',
                       ),
@@ -61,7 +62,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                 Row(
                   children: [
                     Image.asset(
-                      widget.profile.image,
+                      widget.profile.srcPicture,
                       width: 170,
                       height: 170,
                       fit: BoxFit.contain,
@@ -76,7 +77,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                               controller: nameController,
                               hintText: 'Your name',
                               obscureText: false,
-                              text: widget.profile.name),
+                              text: widget.profile.employeeName),
                           const SizedBox(height: 8),
                           Row(
                             children: [
@@ -86,7 +87,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "${averageReview.toStringAsFixed(1)}",
+                                averageReview.toStringAsFixed(1),
                                 style: const TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Lato',
@@ -94,7 +95,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "(${sumReview} reviews)",
+                                "($sumReview reviews)",
                                 style: const TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Lato',
@@ -132,7 +133,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 3,
                                 child: Text(
-                                  widget.profile.address,
+                                  widget.profile.location,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: 'Lato',
@@ -196,7 +197,7 @@ class _UpdateProfileServiceScreenState extends State<UpdateProfileServiceScreen>
                         controller: introduceController,
                         hintText: 'Introduce your self',
                         obscureText: false,
-                        text: widget.profile.introduce),
+                        text: widget.profile.description),
                   ],
                 ),
               ],

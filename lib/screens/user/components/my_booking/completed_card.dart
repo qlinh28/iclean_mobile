@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/services/booking_api.dart';
 
 import 'package:intl/intl.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -6,13 +7,12 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../../models/bookings.dart';
 
 class CompletedCard extends StatefulWidget {
+  final int status;
+
   // final String status;
   // final int userId;
 
-  const CompletedCard({
-    Key? key,
-    /*required this.status, required this.userId*/
-  }) : super(key: key);
+  const CompletedCard({Key? key, required this.status}) : super(key: key);
 
   @override
   State<CompletedCard> createState() => _CompletedCardState();
@@ -21,73 +21,66 @@ class CompletedCard extends StatefulWidget {
 class _CompletedCardState extends State<CompletedCard>
     with TickerProviderStateMixin {
   List<Booking> bookings = [
-    Booking(
-        id: 1,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Nguyễn Văn Đạt",
-        status: "completed",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Giặt ủi",
-        description: "1233321123321",
-        jobImage: "assets/images/1.jpg"),
-    Booking(
-        id: 2,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Nguyễn Đăng Khoa",
-        status: "completed",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Decor",
-        description: "1233321123321",
-        jobImage: "assets/images/2.png"),
-    Booking(
-        id: 3,
-        userId: 1,
-        usename: "Linh",
-        empId: 1,
-        empName: "Lê Thúy Ngân",
-        status: "completed",
-        workTime: DateTime.august,
-        timestamp: DateTime.now(),
-        price: 1000000000,
-        location: "Thủ Đức, Thành phố Hồ Chí Minh",
-        jobId: 1,
-        jobName: "Nấu ăn",
-        description: "1233321123321",
-        jobImage: "assets/images/3.png"),
+    // Booking(
+    //     id: 1,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Nguyễn Văn Đạt",
+    //     status: "completed",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Giặt ủi",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/1.jpg"),
+    // Booking(
+    //     id: 2,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Nguyễn Đăng Khoa",
+    //     status: "completed",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Decor",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/2.png"),
+    // Booking(
+    //     id: 3,
+    //     userId: 1,
+    //     usename: "Linh",
+    //     empId: 1,
+    //     empName: "Lê Thúy Ngân",
+    //     status: "completed",
+    //     workTime: DateTime.august,
+    //     timestamp: DateTime.now(),
+    //     price: 1000000000,
+    //     location: "Thủ Đức, Thành phố Hồ Chí Minh",
+    //     jobId: 1,
+    //     jobName: "Nấu ăn",
+    //     description: "1233321123321",
+    //     jobImage: "assets/images/3.png"),
   ];
-  late AnimationController _controller;
-  late Animation<double> _animation;
-  late List<bool> _isExpanded = List.filled(bookings.length, false);
+  late final List<bool> _isExpanded = List.filled(bookings.length, false);
 
   @override
   void initState() {
     super.initState;
-    //fetchBooking(widget.userId, widget.status);
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.easeInOut);
+    fetchBooking(widget.status);
   }
 
-  // void fetchBooking(int userId, String status) async {
-  //   final listBookings = await BookingApi.fetchBooking(userId, status);
-  //   setState(() {
-  //     bookings = listBookings;
-  //   });
-  // }
+  void fetchBooking(int status) async {
+    final listBookings = await BookingApi.fetchBookingByStatus(status);
+    setState(() {
+      bookings = listBookings;
+    });
+  }
 
   Widget _buildFeedbackDialog(BuildContext context, int orderId) {
     double _rating = 0;
@@ -225,7 +218,7 @@ class _CompletedCardState extends State<CompletedCard>
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Text(
-                                  "Pending",
+                                  "Completed",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,

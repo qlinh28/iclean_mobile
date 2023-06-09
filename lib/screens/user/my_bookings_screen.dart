@@ -125,6 +125,7 @@
 //   }
 // }
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/constant/order_status_constants.dart';
 import 'package:iclean_flutter/screens/user/components/my_booking/cancelled_card.dart';
 import 'package:iclean_flutter/screens/user/components/my_booking/completed_card.dart';
 import 'package:iclean_flutter/screens/user/components/my_booking/pending_card.dart';
@@ -201,15 +202,15 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       Tab(text: 'Cancelled'),
                     ],
                   ),
-                  SizedBox(height: 20),
-                  Container(
+                  const SizedBox(height: 20),
+                  SizedBox(
                     height: MediaQuery.of(context).size.height - 200,
-                    child: TabBarView(
+                    child: const TabBarView(
                       children: [
-                        PendingCard(),
-                        UpcomingCard(),
-                        CompletedCard(),
-                        CancelledCard(),
+                        PendingCard(status: OrderStatus.UNDONE),
+                        UpcomingCard(status: OrderStatus.UPCOMING),
+                        CompletedCard(status: OrderStatus.DONE),
+                        CancelledCard(status: OrderStatus.CANCEL),
                       ],
                     ),
                   ),

@@ -19,16 +19,15 @@ class ProfileServiceScreen extends StatefulWidget {
 class _ProfileServiceScreenState extends State<ProfileServiceScreen>
     with SingleTickerProviderStateMixin {
   Profile profile = Profile(
-      id: 1,
-      jobEmpId: 1,
+      employeeId: 1,
       jobId: 1,
-      name: "Lisa",
-      image: 'assets/images/lisa_worker.jpg',
-      introduce:
+      employeeName: "Lisa",
+      srcPicture: 'assets/images/lisa_worker.jpg',
+      description:
           "Lalisa Manobal, thường được biết đến với nghệ danh Lisa, là một nữ rapper, ca sĩ, nhạc sĩ và vũ công người Thái Lan. Cô là thành viên nhỏ tuổi nhất của nhóm nhạc nữ Hàn Quốc Blackpink trực thuộc YG Entertainment.",
       countRate: 10,
       averageRate: 5.0,
-      address: "Buriram, Thái Lan",
+      location: "Buriram, Thái Lan",
       jobName: "Singer",
       price: 10000000000);
 
@@ -103,7 +102,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                     ),
                     const SizedBox(width: 15),
                     Text(
-                      profile.name,
+                      profile.employeeName,
                       style: const TextStyle(
                         fontFamily: 'Lato',
                       ),
@@ -114,7 +113,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                 Row(
                   children: [
                     Image.asset(
-                      profile.image,
+                      profile.srcPicture,
                       width: 170,
                       height: 170,
                       fit: BoxFit.contain,
@@ -126,7 +125,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            profile.name,
+                            profile.employeeName,
                             style: TextStyle(
                               fontSize: 20,
                               fontFamily: 'Lato',
@@ -143,7 +142,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "${averageReview.toStringAsFixed(1)}",
+                                averageReview.toStringAsFixed(1),
                                 style: const TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Lato',
@@ -151,7 +150,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "(${sumReview} reviews)",
+                                "($sumReview reviews)",
                                 style: const TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Lato',
@@ -189,7 +188,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 3,
                                 child: Text(
-                                  profile.address,
+                                  profile.location,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: 'Lato',
@@ -240,7 +239,7 @@ class _ProfileServiceScreenState extends State<ProfileServiceScreen>
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      profile.introduce,
+                      profile.description,
                       style: const TextStyle(
                         fontSize: 13,
                         fontFamily: 'Lato',

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/services/notification_api.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/noti.dart';
@@ -12,53 +13,52 @@ class NotificationScreen extends StatefulWidget {
 
 class _NotificationScreenState extends State<NotificationScreen> {
   List<Noti> notis = [
-    Noti(
-        id: 1,
-        details: "Đơn #00834 của bạn đang được duyệt từ nhân viên",
-        status: 'unconfirm',
-        timestamp: DateTime.now(),
-        deleted: false,
-        read: false),
-    Noti(
-        id: 2,
-        details:
-            "Đơn #98956 của bạn đã được xác nhận, vui lòng chờ nhân viên của chúng tôi!",
-        status: 'undone',
-        timestamp: DateTime.now(),
-        deleted: false,
-        read: false),
-    Noti(
-        id: 3,
-        details:
-            "Công việc thuộc đơn #98442 đã được hoàn thành, bạn có thể đánh giá dịch vụ của chúng tôi!",
-        status: 'done',
-        timestamp: DateTime.now(),
-        deleted: false,
-        read: false),
-    Noti(
-        id: 4,
-        details: "Đơn #95242 đã bị hủy từ nhân viên",
-        status: 'cancel',
-        timestamp: DateTime.now(),
-        deleted: false,
-        read: false),
+    // Noti(
+    //     id: 1,
+    //     details: "Đơn #00834 của bạn đang được duyệt từ nhân viên",
+    //     status: 'unconfirm',
+    //     timestamp: DateTime.now(),
+    //     deleted: false,
+    //     read: false),
+    // Noti(
+    //     id: 2,
+    //     details:
+    //         "Đơn #98956 của bạn đã được xác nhận, vui lòng chờ nhân viên của chúng tôi!",
+    //     status: 'undone',
+    //     timestamp: DateTime.now(),
+    //     deleted: false,
+    //     read: false),
+    // Noti(
+    //     id: 3,
+    //     details:
+    //         "Công việc thuộc đơn #98442 đã được hoàn thành, bạn có thể đánh giá dịch vụ của chúng tôi!",
+    //     status: 'done',
+    //     timestamp: DateTime.now(),
+    //     deleted: false,
+    //     read: false),
+    // Noti(
+    //     id: 4,
+    //     details: "Đơn #95242 đã bị hủy từ nhân viên",
+    //     status: 'cancel',
+    //     timestamp: DateTime.now(),
+    //     deleted: false,
+    //     read: false),
   ];
 
   @override
   void initState() {
     super.initState();
-    //fetchNoti();
+    fetchNoti();
   }
 
-  // Future<void> fetchNoti() async {
-  //   final listNotis = await NotiAPI.fetchNotification(widget.account.id);
-  //   setState(() {
-  //     if (listNotis != null) {
-  //       notis = listNotis;
-  //       notis.sort((a, b) => b.timestamp.compareTo(a.timestamp));
-  //     } else {}
-  //   });
-  // }
+  Future<void> fetchNoti() async {
+    final listNotis = await NotificaitonAPI.fetchNotification();
+    setState(() {
+      if (listNotis != null) {
+        notis = listNotis;
+      } else {}
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

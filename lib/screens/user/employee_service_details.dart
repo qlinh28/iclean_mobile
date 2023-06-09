@@ -92,7 +92,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset(
-                        widget.profile.image,
+                        "assets/images/1.jpg",
                         width: 170,
                         height: 170,
                         fit: BoxFit.contain,
@@ -102,7 +102,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.profile.name,
+                            widget.profile.employeeName,
                             style: TextStyle(
                               fontSize: 20,
                               fontFamily: 'Lato',
@@ -127,7 +127,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                "(${sumReview} reviews)",
+                                "($sumReview reviews)",
                                 style: const TextStyle(
                                   fontSize: 13,
                                   fontFamily: 'Lato',
@@ -165,7 +165,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                               SizedBox(
                                 width: MediaQuery.of(context).size.width / 2.6,
                                 child: Text(
-                                  widget.profile.address,
+                                  widget.profile.location,
                                   style: const TextStyle(
                                     fontSize: 12,
                                     fontFamily: 'Lato',
@@ -236,7 +236,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                       ),
                       const SizedBox(height: 5),
                       Text(
-                        widget.profile.introduce,
+                        widget.profile.description,
                         style: const TextStyle(
                           fontSize: 13,
                           fontFamily: 'Lato',
@@ -259,7 +259,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            "${averageReview.toStringAsFixed(1)}",
+                            averageReview.toStringAsFixed(1),
                             style: const TextStyle(
                               fontSize: 18,
                               fontFamily: 'Lato',
@@ -268,7 +268,7 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                           ),
                           const SizedBox(width: 4),
                           Text(
-                            "(${sumReview} reviews)",
+                            "($sumReview reviews)",
                             style: const TextStyle(
                               fontSize: 18,
                               fontFamily: 'Lato',

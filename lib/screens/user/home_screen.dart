@@ -15,16 +15,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Service> services = [
-    Service(id: 1, name: "Giặt thảm", icon: "assets/images/clean-tham.jpg"),
+    Service(id: 4, name: "Giặt thảm", icon: "assets/images/clean-tham.jpg"),
     Service(
-        id: 2, name: "Vệ sinh kính", icon: "assets/images/cleaning-kinh.png"),
-    Service(id: 3, name: "Giặt ủi", icon: "assets/images/giat-ui.png"),
+        id: 14, name: "Vệ sinh kính", icon: "assets/images/cleaning-kinh.png"),
+    Service(id: 15, name: "Giặt ủi", icon: "assets/images/giat-ui.png"),
     Service(
-        id: 4,
+        id: 16,
         name: "Dọn nhà vệ sinh",
         icon: "assets/images/don-nha-ve-sinh.png"),
-    Service(id: 5, name: "Nấu ăn", icon: "assets/images/nau-an.png"),
-    Service(id: 6, name: "Decor", icon: "assets/images/decor.png"),
+    Service(id: 17, name: "Nấu ăn", icon: "assets/images/nau-an.png"),
+    Service(id: 18, name: "Decor", icon: "assets/images/decor.png"),
+    Service(id: 19, name: "Decor", icon: "assets/images/decor.png"),
+    Service(id: 20, name: "Decor", icon: "assets/images/decor.png"),
+    Service(id: 21, name: "Decor", icon: "assets/images/decor.png"),
   ];
 
   @override

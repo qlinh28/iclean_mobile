@@ -1,18 +1,18 @@
 class Profile {
-  String name, image, address, introduce, jobName;
-  int price, id, jobId, countRate, jobEmpId;
+  String employeeName, srcPicture, location, description, jobName;
+  int price, employeeId, jobId, countRate;
   double averageRate;
+  String? thumnailImg;
 
   Profile({
-    required this.id,
-    required this.jobEmpId,
+    required this.employeeId,
     required this.jobId,
-    required this.name,
-    required this.image,
-    required this.introduce,
+    required this.employeeName,
+    required this.srcPicture,
+    required this.description,
     required this.countRate,
     required this.averageRate,
-    required this.address,
+    required this.location,
     required this.jobName,
     required this.price,
   });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:iclean_flutter/services/feedback_api.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../models/profile.dart';
@@ -18,35 +19,35 @@ class ReviewCard extends StatefulWidget {
       required this.rate})
       : super(key: key);
   @override
-  _ReviewCardState createState() => _ReviewCardState();
+  State<ReviewCard> createState() => _ReviewCardState();
 }
 
 class _ReviewCardState extends State<ReviewCard> {
   List<FeedbackOrder> feedback = [
-    FeedbackOrder(
-        id: 1,
-        rate: 5,
-        employeeId: 1,
-        detail: "She's so beautiful",
-        profilePicture: "assets/images/1.jpg",
-        username: "Lê Trần Quang Linh",
-        timestamp: DateTime.now()),
-    FeedbackOrder(
-        id: 2,
-        rate: 4,
-        employeeId: 1,
-        detail: "She dances very well",
-        profilePicture: "assets/images/2.png",
-        username: "Mai Thanh Tỷ",
-        timestamp: DateTime.now()),
-    FeedbackOrder(
-        id: 3,
-        rate: 3,
-        employeeId: 1,
-        detail: "I love her performance",
-        profilePicture: "assets/images/3.png",
-        username: "Nguyễn Phương Nhật Linh",
-        timestamp: DateTime.now()),
+    // FeedbackOrder(
+    //     id: 1,
+    //     rate: 5,
+    //     employeeId: 1,
+    //     detail: "She's so beautiful",
+    //     profilePicture: "assets/images/1.jpg",
+    //     username: "Lê Trần Quang Linh",
+    //     timestamp: DateTime.now()),
+    // FeedbackOrder(
+    //     id: 2,
+    //     rate: 4,
+    //     employeeId: 1,
+    //     detail: "She dances very well",
+    //     profilePicture: "assets/images/2.png",
+    //     username: "Mai Thanh Tỷ",
+    //     timestamp: DateTime.now()),
+    // FeedbackOrder(
+    //     id: 3,
+    //     rate: 3,
+    //     employeeId: 1,
+    //     detail: "I love her performance",
+    //     profilePicture: "assets/images/3.png",
+    //     username: "Nguyễn Phương Nhật Linh",
+    //     timestamp: DateTime.now()),
   ];
   late int workerId;
   late int serviceId;
@@ -55,16 +56,16 @@ class _ReviewCardState extends State<ReviewCard> {
   @override
   void initState() {
     super.initState;
-    workerId = widget.profile.id;
+    workerId = widget.profile.employeeId;
     serviceId = widget.service.id;
     rate = widget.rate;
-    //fetchReview(workerId, serviceId, rate);
+    fetchReview(workerId, serviceId, rate);
   }
 
   @override
   void didUpdateWidget(covariant ReviewCard oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // fetchReview(workerId, serviceId, widget.rate);
+    fetchReview(workerId, serviceId, widget.rate);
   }
 
   @override
@@ -88,7 +89,7 @@ class _ReviewCardState extends State<ReviewCard> {
                           children: [
                             CircleAvatar(
                               backgroundImage:
-                                  AssetImage(feedback[i].profilePicture),
+                                  AssetImage("assets/images/1.jpg"),
                               radius: 20,
                             ),
                             const SizedBox(width: 15),
@@ -155,16 +156,16 @@ class _ReviewCardState extends State<ReviewCard> {
         ]);
   }
 
-  // void fetchReview(int workerId, int serviceId, int rate) async {
-  //   final listFeedback =
-  //       await FeedBackApi.fetchFeedback(workerId, serviceId, rate);
-  //   setState(() {
-  //     // ignore: unnecessary_null_comparison
-  //     if (listFeedback != null) {
-  //       feedback = listFeedback;
-  //     } else {
-  //       print("list feedback null");
-  //     }
-  //   });
-  // }
+  void fetchReview(int workerId, int serviceId, int rate) async {
+    final listFeedback =
+        await FeedbackAPI.fetchFeedback(serviceId, workerId, rate);
+    setState(() {
+      // ignore: unnecessary_null_comparison
+      if (listFeedback != null) {
+        feedback = listFeedback;
+      } else {
+        print("list feedback null");
+      }
+    });
+  }
 }
