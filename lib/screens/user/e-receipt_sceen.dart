@@ -31,7 +31,8 @@ class _EReceiptScreenState extends State<EReceiptScreen> {
                   child: Row(children: [
                     InkWell(
                       onTap: () {
-                        Navigator.pop(context);
+                        int count = 6;
+                        Navigator.of(context).popUntil((_) => count-- <= 0);
                       },
                       child: const Icon(Icons.arrow_back),
                     ),
