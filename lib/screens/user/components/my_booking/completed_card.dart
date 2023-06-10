@@ -190,7 +190,8 @@ class _CompletedCardState extends State<CompletedCard>
                           ),
                           child: Image.asset(
                             // bookings[i].jobImage,
-                            'assets/images/3.png',
+                            bookings[i].imgEmployee,
+                            // 'assets/images/3.png',
                             width: 70,
                             height: 70,
                             fit: BoxFit.contain,

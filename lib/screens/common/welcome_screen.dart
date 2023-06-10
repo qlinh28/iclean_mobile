@@ -38,43 +38,43 @@ class WelcomeScreen extends StatelessWidget {
               SizedBox(
                 height: ffem * 450,
               ),
-              Container(
-                margin: const EdgeInsets.fromLTRB(58, 0, 51, 19),
-                padding: const EdgeInsets.fromLTRB(64, 20, 80, 20),
-                width: double.infinity,
-                height: 64,
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                  borderRadius: BorderRadius.circular(38),
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      width: 24,
-                      height: 24,
-                      child: Image.asset(
-                        'assets/page-1/images/google.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Continue with Google',
-                        style: SafeGoogleFont(
-                          'Satoshi',
-                          fontSize: 13,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2575,
-                          color: BaseConfig.BASE_COLOR,
-                          decoration: TextDecoration.none,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.fromLTRB(58, 0, 51, 19),
+              //   padding: const EdgeInsets.fromLTRB(64, 20, 80, 20),
+              //   width: double.infinity,
+              //   height: 64,
+              //   decoration: BoxDecoration(
+              //     color: const Color(0xffffffff),
+              //     borderRadius: BorderRadius.circular(38),
+              //   ),
+              //   child: Row(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Container(
+              //         margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+              //         width: 24,
+              //         height: 24,
+              //         child: Image.asset(
+              //           'assets/page-1/images/google.png',
+              //           fit: BoxFit.cover,
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: Text(
+              //           'Continue with Google',
+              //           style: SafeGoogleFont(
+              //             'Satoshi',
+              //             fontSize: 13,
+              //             fontWeight: FontWeight.w700,
+              //             height: 1.2575,
+              //             color: BaseConfig.BASE_COLOR,
+              //             decoration: TextDecoration.none,
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               GestureDetector(
                 onTap: () {
                   Navigator.push(

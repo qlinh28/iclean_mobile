@@ -92,7 +92,8 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Image.asset(
-                        "assets/images/1.jpg",
+                        widget.profile.srcPicture,
+                        // "assets/images/1.jpg",
                         width: 170,
                         height: 170,
                         fit: BoxFit.contain,

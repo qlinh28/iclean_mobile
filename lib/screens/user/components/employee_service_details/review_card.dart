@@ -89,7 +89,8 @@ class _ReviewCardState extends State<ReviewCard> {
                           children: [
                             CircleAvatar(
                               backgroundImage:
-                                  AssetImage("assets/images/1.jpg"),
+                                  AssetImage(feedback[i].profilePicture),
+                              // AssetImage("assets/images/1.jpg"),
                               radius: 20,
                             ),
                             const SizedBox(width: 15),

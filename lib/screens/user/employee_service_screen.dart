@@ -149,7 +149,8 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.asset(
-                                  "assets/images/1.jpg",
+                                  profile[i].srcPicture,
+                                  // "assets/images/1.jpg",
                                   width: 120,
                                   height: 150,
                                   fit: BoxFit.cover,

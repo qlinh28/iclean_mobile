@@ -50,8 +50,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Column(
                 children: [
                   const CircleAvatar(
-                    backgroundImage:
-                        AssetImage('assets/images/lisa_avatar.jpg'),
+                    backgroundImage: AssetImage('assets/images/10.jpg'),
                     radius: 50,
                   ),
                   const SizedBox(height: 10),

@@ -71,8 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                           padding: const EdgeInsets.only(top: 0),
                           child: const CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/lisa_avatar.jpg'),
+                            backgroundImage: AssetImage('assets/images/10.jpg'),
                             radius: 25,
                           ),
                         ),

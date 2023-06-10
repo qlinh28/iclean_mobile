@@ -312,25 +312,25 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
               const SizedBox(height: 12),
-              Align(
-                alignment: Alignment.center,
-                child: TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => ForgotPassword()),
-                    // );
-                  },
-                  child: const Text(
-                    'Forgot Password',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: BaseConfig.BASE_COLOR,
-                    ),
-                  ),
-                ),
-              ),
+              // Align(
+              //   alignment: Alignment.center,
+              //   child: TextButton(
+              //     onPressed: () {
+              //       // Navigator.push(
+              //       //   context,
+              //       //   MaterialPageRoute(builder: (context) => ForgotPassword()),
+              //       // );
+              //     },
+              //     child: const Text(
+              //       'Forgot Password',
+              //       style: TextStyle(
+              //         fontSize: 20,
+              //         fontWeight: FontWeight.w700,
+              //         color: BaseConfig.BASE_COLOR,
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(height: 12),
               Align(
                 alignment: Alignment.center,

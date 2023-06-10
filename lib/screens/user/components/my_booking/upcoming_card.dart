@@ -111,8 +111,8 @@ class _UpcomingCardState extends State<UpcomingCard>
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Image.asset(
-                            // bookings[i].jobImage,
-                            'assets/images/3.png',
+                            bookings[i].imgEmployee,
+                            // 'assets/images/3.png',
                             width: 70,
                             height: 70,
                             fit: BoxFit.contain,
