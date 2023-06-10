@@ -31,7 +31,7 @@ class _EmployeeScreensState extends State<EmployeeScreens> {
     _screenOptions = <Widget>[
       const HomeScreen(),
       const MyBookingsScreen(),
-      const InboxScreen(),
+      // const InboxScreen(),
       const NotificationScreen(),
       ProfileScreen(account: widget.account),
     ];
@@ -113,15 +113,15 @@ class _EmployeeScreensState extends State<EmployeeScreens> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          GButton(
-            icon: Icons.chat,
-            text: 'Inbox',
-            textStyle: TextStyle(
-              fontFamily: 'Lato',
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          // GButton(
+          //   icon: Icons.chat,
+          //   text: 'Inbox',
+          //   textStyle: TextStyle(
+          //     fontFamily: 'Lato',
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           GButton(
             icon: Icons.notifications_none_outlined,
             text: 'Notification',

@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/dto/order_dto.dart';
 import 'package:iclean_flutter/screens/user/e-receipt_sceen.dart';
 
-class BookingSuccessDialog extends StatelessWidget {
+class BookingSuccessDialog extends StatefulWidget {
   final String bookingCode;
-  const BookingSuccessDialog({Key? key, required this.bookingCode})
+  final OrderDto orderDto;
+  const BookingSuccessDialog(
+      {Key? key, required this.bookingCode, required this.orderDto})
       : super(key: key);
+  @override
+  State<BookingSuccessDialog> createState() => _BookingSuccessDialogState();
+}
 
+class _BookingSuccessDialogState extends State<BookingSuccessDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -49,8 +56,8 @@ class BookingSuccessDialog extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => EReceiptScreen(
-                              barcodeData: bookingCode,
-                            )));
+                            barcodeData: widget.bookingCode,
+                            orderDto: widget.orderDto)));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,

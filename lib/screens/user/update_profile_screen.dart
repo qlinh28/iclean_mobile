@@ -28,7 +28,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     fullnameController = TextEditingController(text: widget.account.fullname);
     emailController = TextEditingController(text: widget.account.email);
     phoneController = TextEditingController(text: widget.account.phone);
-    addressController = TextEditingController(text: widget.account.location);
+    addressController =
+        TextEditingController(text: widget.account.locationName);
     //fetchProvinces();
   }
 
@@ -168,7 +169,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               Column(
                 children: [
                   CircleAvatar(
-                    backgroundImage: AssetImage(widget.account.profilePicture),
+                    // backgroundImage: AssetImage(widget.account.profilePicture),
+                    backgroundImage:
+                        AssetImage('assets/images/lisa_avatar.jpg'),
                     radius: 50,
                   ),
                   const SizedBox(height: 10),
@@ -293,7 +296,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   onChanged: (String? value) {
                     _selectedGender = value;
                   },
-                  items: <String>['male', 'female'].map((String value) {
+                  items: <String>['Male', 'Female'].map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -308,7 +311,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   controller: addressController,
                   labelText: 'Address',
                   hintText: 'Enter your address',
-                  text: widget.account.location,
+                  text: widget.account.gender,
                   obscureText: false,
                 ),
               ),

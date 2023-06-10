@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/screens/user/add_location_screen.dart';
 import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
+import 'package:iclean_flutter/screens/user/payment_screen.dart';
+import 'package:intl/intl.dart';
 import '../../models/account.dart';
 import '../../models/services.dart';
 import 'employee_service_screen.dart';
@@ -80,8 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                children:  [
-                                  
+                                children: [
                                   Text(
                                     widget.account.fullname,
                                     style: const TextStyle(
@@ -104,18 +106,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                   const SizedBox(width: 4),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  LocationScreen()));
+                                      if (widget.account.locationName.isEmpty) {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const AddLocationScreen(
+                                                      defaultOrNot: true,
+                                                    )));
+                                      } else {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LocationScreen()));
+                                      }
                                     },
                                     child: Text(
-                                      widget.account.location,
-                                      style: TextStyle(
+                                      widget.account.locationName,
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         fontFamily: 'Lato',
-                                        color: Colors.grey.shade600,
+                                        color: Colors.white,
                                       ),
                                       maxLines:
                                           2, // Allow the Text widget to wrap to as many lines as needed.
@@ -155,25 +167,34 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       child: Row(
-                        children: const [
-                          SizedBox(width: 30),
-                          Icon(
+                        children: [
+                          const SizedBox(width: 30),
+                          const Icon(
                             IconData(0xe0b2, fontFamily: 'MaterialIcons'),
                             size: 25,
                             color: Colors.white,
                           ),
-                          SizedBox(width: 4),
-                          Text(
-                            "Point: 120 000 VND",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: 'Lato',
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                          const SizedBox(width: 4),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PaymentScreen()));
+                            },
+                            child: Text(
+                              "Point: ${NumberFormat('# ###').format(widget.account.point)} VNĐ",
+                              style: const TextStyle(
+                                fontSize: 15,
+                                fontFamily: 'Lato',
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
                             ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                            softWrap: true,
                           ),
                         ],
                       ),

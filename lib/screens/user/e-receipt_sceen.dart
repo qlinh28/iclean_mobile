@@ -1,10 +1,20 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/dto/order_dto.dart';
+import 'package:intl/intl.dart';
 
-class EReceiptScreen extends StatelessWidget {
+class EReceiptScreen extends StatefulWidget {
   final String barcodeData;
-  const EReceiptScreen({Key? key, required this.barcodeData}) : super(key: key);
+  final OrderDto orderDto;
+  const EReceiptScreen(
+      {Key? key, required this.barcodeData, required this.orderDto})
+      : super(key: key);
 
+  @override
+  State<EReceiptScreen> createState() => _EReceiptScreenState();
+}
+
+class _EReceiptScreenState extends State<EReceiptScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +48,13 @@ class EReceiptScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 25),
                 Text(
-                  'Booking Code: $barcodeData',
-                  style: TextStyle(fontSize: 16),
+                  'Booking Code: ${widget.barcodeData}',
+                  style: const TextStyle(fontSize: 16),
                 ),
                 Center(
                   child: BarcodeWidget(
                     barcode: Barcode.code128(),
-                    data: barcodeData,
+                    data: widget.barcodeData,
                     width: 200,
                     height: 100,
                     drawText: false,
@@ -65,8 +75,8 @@ class EReceiptScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Service",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -74,8 +84,8 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "House Cleaning",
-                                style: TextStyle(
+                                widget.orderDto.serviceName,
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Lato',
                                   fontWeight: FontWeight.bold,
@@ -88,8 +98,8 @@ class EReceiptScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Worker",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -97,8 +107,8 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Lisa",
-                                style: TextStyle(
+                                widget.orderDto.workerName,
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Lato',
                                   fontWeight: FontWeight.bold,
@@ -111,8 +121,8 @@ class EReceiptScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Date & Time",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -120,8 +130,9 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Dec 23, 2024 | 10:00 AM",
-                                style: TextStyle(
+                                DateFormat('MMM d, yyyy | hh:mm aaa')
+                                    .format(DateTime.now()),
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Lato',
                                   fontWeight: FontWeight.bold,
@@ -132,8 +143,8 @@ class EReceiptScreen extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               "Working Hours",
                               style: TextStyle(
                                 fontSize: 15,
@@ -141,8 +152,8 @@ class EReceiptScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "2 Hours",
-                              style: TextStyle(
+                              widget.orderDto.workingHour.toString(),
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
@@ -169,8 +180,8 @@ class EReceiptScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "House Cleaning",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -178,8 +189,8 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "\$100",
-                                style: TextStyle(
+                                "${NumberFormat('#,###').format(widget.orderDto.totalNotDiscount)} VNĐ",
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Lato',
                                   fontWeight: FontWeight.bold,
@@ -202,7 +213,7 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "- \$20",
+                                "- ${NumberFormat('#,###').format(widget.orderDto.discount)} VNĐ",
                                 style: TextStyle(
                                   color: Colors.deepPurple.shade300,
                                   fontSize: 15,
@@ -224,8 +235,8 @@ class EReceiptScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Total",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -233,8 +244,8 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "\$80",
-                                style: TextStyle(
+                                "${NumberFormat('#,###').format(widget.orderDto.sum)} VNĐ",
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Lato',
                                   fontWeight: FontWeight.bold,
@@ -247,8 +258,8 @@ class EReceiptScreen extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 15),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text(
+                            children: [
+                              const Text(
                                 "Date",
                                 style: TextStyle(
                                   fontSize: 15,
@@ -256,8 +267,9 @@ class EReceiptScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "Dec 23, 2024 | 10:00 AM",
-                                style: TextStyle(
+                                DateFormat('MMM d, yyyy | hh:mm aaa')
+                                    .format(DateTime.now()),
+                                style: const TextStyle(
                                   fontSize: 15,
                                   fontFamily: 'Lato',
                                   fontWeight: FontWeight.bold,

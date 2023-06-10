@@ -1,5 +1,8 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/common/login_screen.dart';
+import 'package:iclean_flutter/services/account_api.dart';
 import 'component/my_button.dart';
 import 'component/my_textfield.dart';
 import 'package:intl/intl.dart';
@@ -12,81 +15,59 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // List<Province> provinces = [];
-  // List<District> districts = [];
   final _formKey = GlobalKey<FormState>();
   bool initDateTime = false;
 
   @override
   void initState() {
     super.initState;
-    //fetchProvinces();
   }
 
-  // Future<void> _signUpUser() async {
-  //   final response = await AccountAPI.createNewAccount(
-  //       usernameController.text,
-  //       passwordController.text,
-  //       _selectedRole!.toLowerCase(),
-  //       _selectedDate!.toIso8601String(),
-  //       emailController.text,
-  //       fullnameController.text,
-  //       _selectedGender!.toLowerCase(),
-  //       phoneController.text,
-  //       addressController.text,
-  //       int.parse(_selectedDistrict!));
+  Future<void> _signUpUser() async {
+    final response = await AccountApi.createAccount(
+        usernameController.text,
+        passwordController.text,
+        fullnameController.text,
+        DateFormat('yyyy-MM-dd').format(_selectedDate!),
+        _selectedGender!,
+        phoneController.text,
+        emailController.text);
 
-  //   if (response == 202) {
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) => AlertDialog(
-  //         title: Text('Success!'),
-  //         content: Text('Create new account successfully!!!.'),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () {
-  //               Navigator.of(context).pop();
-  //               Navigator.pop(context);
-  //             },
-  //             child: Text('OK'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   } else {
-  //     showDialog(
-  //       context: context,
-  //       builder: (BuildContext context) => AlertDialog(
-  //         title: Text('Failed'),
-  //         content: Text('Username is already existed!!'),
-  //         actions: [
-  //           TextButton(
-  //             onPressed: () => Navigator.of(context).pop(),
-  //             child: Text('OK'),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  // }
-
-  // Future<void> fetchProvinces() async {
-  //   final listProvinces = await AccountAPI.fetchProvinces();
-  //   setState(() {
-  //     if (listProvinces != null) {
-  //       provinces = listProvinces;
-  //     } else {}
-  //   });
-  // }
-
-  // Future<void> fetchDistricts(String provinceId) async {
-  //   final listDistricts = await AccountAPI.fetchDistricts(provinceId);
-  //   setState(() {
-  //     if (listDistricts != null) {
-  //       districts = listDistricts;
-  //     } else {}
-  //   });
-  // }
+    if (response == 200) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Success!'),
+          content: Text('Create new account successfully!!!.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                );
+              },
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+          title: Text('Failed'),
+          content: Text('Username is already existed!!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
 // Define validation function
   String? validatePassword(String? value, String? confirmPassword) {
@@ -270,43 +251,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   const SizedBox(height: 10),
 
-                  // role dropdown
-                  DropdownButtonFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Role',
-                      hintText: 'Select your role',
-                      enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey.shade400),
-                      ),
-                      filled: true,
-                      fillColor: Colors.grey.shade200,
-                      labelStyle: TextStyle(
-                        color: Colors.grey[500],
-                        fontFamily: 'Lato',
-                      ),
-                      hintStyle: TextStyle(
-                        color: Colors.grey[500],
-                        fontFamily: 'Lato',
-                      ),
-                    ),
-                    value: _selectedRole,
-                    onChanged: (String? value) {
-                      _selectedRole = value;
-                    },
-                    items: <String>['Employee', 'Renter'].map((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    //validator: (value) => validateDropdown(value),
-                  ),
-
-                  const SizedBox(height: 10),
-
                   //fullname textfield
                   MyTextField(
                     controller: fullnameController,
@@ -436,24 +380,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                   const SizedBox(height: 10),
 
-                  //Address textfield
-                  MyTextField(
-                    controller: addressController,
-                    labelText: 'Address',
-                    hintText: 'Enter your address',
-                    text: 'address',
-                    obscureText: false,
-                  ),
-
-                  const SizedBox(height: 10),
-
                   MyButton(
                     text: "Sign up",
                     onTap: () {
-                      // if (_formKey.currentState != null &&
-                      //     _formKey.currentState!.validate()) {
-                      //   _signUpUser();
-                      // } else {}
+                      if (_formKey.currentState != null &&
+                          _formKey.currentState!.validate()) {
+                        _signUpUser();
+                      } else {}
                     },
                   ),
 
@@ -473,9 +406,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 const TextStyle(fontWeight: FontWeight.bold)),
                         onPressed: () {
                           Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const LoginScreen()),
-    );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()),
+                          );
                         },
                         child: const Text(
                           'Login',

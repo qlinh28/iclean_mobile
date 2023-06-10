@@ -1,32 +1,24 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/models/account.dart';
-import 'package:iclean_flutter/models/feedback.dart';
+import 'package:iclean_flutter/constant/order_status_constants.dart';
 import 'package:iclean_flutter/services/booking_api.dart';
-import 'package:iclean_flutter/services/feedback_api.dart';
-
 import 'package:intl/intl.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../../models/bookings.dart';
-import '../../../common/user_preferences.dart';
 
-class CompletedCard extends StatefulWidget {
+class PendingCard extends StatefulWidget {
   final int status;
-
-  // final String status;
   // final int userId;
 
-  const CompletedCard({Key? key, required this.status}) : super(key: key);
+  const PendingCard({Key? key, required this.status}) : super(key: key);
 
   @override
-  State<CompletedCard> createState() => _CompletedCardState();
+  State<PendingCard> createState() => _PendingCardState();
 }
 
-class _CompletedCardState extends State<CompletedCard>
+class _PendingCardState extends State<PendingCard>
     with TickerProviderStateMixin {
-  Account? account;
   List<Booking> bookings = [
     // Booking(
     //     id: 1,
@@ -34,7 +26,7 @@ class _CompletedCardState extends State<CompletedCard>
     //     usename: "Linh",
     //     empId: 1,
     //     empName: "Nguyễn Văn Đạt",
-    //     status: "completed",
+    //     status: "pending",
     //     workTime: DateTime.august,
     //     timestamp: DateTime.now(),
     //     price: 1000000000,
@@ -49,7 +41,7 @@ class _CompletedCardState extends State<CompletedCard>
     //     usename: "Linh",
     //     empId: 1,
     //     empName: "Nguyễn Đăng Khoa",
-    //     status: "completed",
+    //     status: "pending",
     //     workTime: DateTime.august,
     //     timestamp: DateTime.now(),
     //     price: 1000000000,
@@ -64,7 +56,7 @@ class _CompletedCardState extends State<CompletedCard>
     //     usename: "Linh",
     //     empId: 1,
     //     empName: "Lê Thúy Ngân",
-    //     status: "completed",
+    //     status: "pending",
     //     workTime: DateTime.august,
     //     timestamp: DateTime.now(),
     //     price: 1000000000,
@@ -74,83 +66,32 @@ class _CompletedCardState extends State<CompletedCard>
     //     description: "1233321123321",
     //     jobImage: "assets/images/3.png"),
   ];
+  late AnimationController _controller;
   late final List<bool> _isExpanded = List.filled(bookings.length, false);
 
-  @override
-  void initState() {
-    super.initState;
+  void _reloadPage() {
+    setState(() {
+      bookings = [];
+    });
     fetchBooking(widget.status);
   }
 
-  void fetchBooking(int status) async {
-    final listBookings = await BookingApi.fetchBookingByStatus(status);
-    Account? accountEm = await UserPreferences.getUserInfomation();
-    setState(() {
-      bookings = listBookings;
-      account = accountEm;
-    });
+  @override
+  void initState() {
+    super.initState();
+    fetchBooking(widget.status);
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
   }
 
-  Widget _buildFeedbackDialog(BuildContext context, int orderId) {
-    double _rating = 0;
-    String _feedback = '';
-    return AlertDialog(
-      title: const Text('Feedback'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text('How would you rate your experience?'),
-          const SizedBox(height: 10.0),
-          RatingBar.builder(
-            initialRating: _rating,
-            minRating: 1,
-            maxRating: 5,
-            itemSize: 30.0,
-            direction: Axis.horizontal,
-            allowHalfRating: true,
-            itemCount: 5,
-            itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-            itemBuilder: (context, _) => const Icon(
-              Icons.star,
-              color: Colors.amber,
-            ),
-            onRatingUpdate: (rating) {
-              setState(() {
-                _rating = rating;
-              });
-            },
-          ),
-          const SizedBox(height: 20.0),
-          const Text('Please tell us what you think:'),
-          const SizedBox(height: 10.0),
-          TextFormField(
-            maxLines: null,
-            onChanged: (value) {
-              setState(() {
-                _feedback = value;
-              });
-            },
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          child: const Text('CANCEL'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: const Text('SUBMIT'),
-          onPressed: () {
-            _rating > 0 && _feedback.isNotEmpty
-                ? _submitFeedback(_rating, _feedback, orderId)
-                : null;
-          },
-        ),
-      ],
-    );
+  @override
+  void dispose() {
+    bookings.clear();
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -189,7 +130,7 @@ class _CompletedCardState extends State<CompletedCard>
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Image.asset(
-                            // bookings[i].jobImage,
+                            // bookings[i].imgEmployee,
                             'assets/images/3.png',
                             width: 70,
                             height: 70,
@@ -228,7 +169,7 @@ class _CompletedCardState extends State<CompletedCard>
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: const Text(
-                                  "Completed",
+                                  "Pending",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 13,
@@ -301,58 +242,83 @@ class _CompletedCardState extends State<CompletedCard>
                                 ),
                               ],
                             ),
-                            if (account?.role == 'user')
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  InkWell(
-                                    onTap: () async {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (context) =>
-                                            _buildFeedbackDialog(
-                                                context, bookings[i].id),
-                                      );
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          vertical: 8),
-                                      width: MediaQuery.of(context).size.width /
-                                          2.6,
-                                      height:
-                                          MediaQuery.of(context).size.height /
-                                              20,
-                                      decoration: BoxDecoration(
+                            const SizedBox(height: 8),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    await _updateBookingOrder(
+                                        bookings[i].id, OrderStatus.CANCEL);
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height:
+                                        MediaQuery.of(context).size.height / 18,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
                                         color: Colors.deepPurple.shade300,
-                                        borderRadius: BorderRadius.circular(50),
-                                        border: Border.all(
-                                            color: Colors.deepPurple.shade300,
-                                            width: 2),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.grey.withOpacity(0.4),
-                                            spreadRadius: 5,
-                                            blurRadius: 20,
-                                            offset: const Offset(0,
-                                                3), // changes position of shadow
-                                          ),
-                                        ],
+                                        width: 2,
                                       ),
-                                      child: const Center(
-                                        child: Text(
-                                          "Give Feedback",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 15,
-                                              fontFamily: 'Lato',
-                                              fontWeight: FontWeight.bold,
-                                              letterSpacing: 1),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Cancel Booking",
+                                        style: TextStyle(
+                                          color: Colors.deepPurple.shade300,
+                                          fontSize: 15,
+                                          fontFamily: 'Lato',
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
                                         ),
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                InkWell(
+                                  onTap: () async {
+                                    await _updateBookingOrder(
+                                        bookings[i].id, OrderStatus.UPCOMING);
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             OrderDetailsSreen(
+                                    //               order: orders[i],
+                                    //               orderDetails:
+                                    //                   orders[i].cartItems,
+                                    //             )));
+                                  },
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width / 3.5,
+                                    height:
+                                        MediaQuery.of(context).size.height / 18,
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepPurple.shade300,
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        color: Colors.deepPurple.shade300,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Accept Booking",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -376,29 +342,34 @@ class _CompletedCardState extends State<CompletedCard>
     );
   }
 
-  Future<void> _submitFeedback(
-      double rating, String feedback, int orderId) async {
-    FeedbackOrder feedbackOrder = FeedbackOrder(
-        id: orderId,
-        rate: rating.round(),
-        employeeId: 0,
-        detail: feedback,
-        profilePicture: "",
-        username: "",
-        timestamp: DateTime.now());
-    int responseStatus = await FeedbackAPI.createFeedback(feedbackOrder);
+  Future<void> _updateBookingOrder(int id, int status) async {
+    int responseStatus = await BookingApi.updateBookingByStatus(id, status);
+    String alert = "Cancel";
+    if (status != OrderStatus.CANCEL) {
+      alert = 'Accept';
+    }
     if (responseStatus == 200) {
       // Booking order was created successfully, show a success message to the user
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Thanks for give a Feedback!')),
+        SnackBar(content: Text('$alert Booking Successfully!')),
       );
-    } else {
+    } else if (responseStatus == 409) {
       // Booking order creation failed, show an error message to the user
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('You have already given feedback on this order!')),
+        const SnackBar(content: Text('The booking is conflict with another')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to cancel booking')),
       );
     }
-    Navigator.of(context).pop();
+    _reloadPage;
+  }
+
+  void fetchBooking(int status) async {
+    final listBookings = await BookingApi.fetchBookingByStatus(status);
+    setState(() {
+      bookings = listBookings;
+    });
   }
 }

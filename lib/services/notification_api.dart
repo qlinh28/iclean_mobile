@@ -8,26 +8,30 @@ import '../constant/url_constants.dart';
 
 class NotificaitonAPI {
   static Future<List<Noti>> fetchNotification() async {
-    Account? account = await UserPreferences.getUserInfomation();
-    final userId = account?.id;
-    final url = '${UrlConstant.NOTIFICATION}?userId=$userId';
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final body = response.body;
-    final json = jsonDecode(body);
-    final users = json['data'] as List<dynamic>;
-    final notifications = users.map((e) {
-      int deleted = e['isDelete'];
-      int read = e['isRead'];
-      return Noti(
-        id: e['notificationId'],
-        details: e['detail'],
-        status: e['status'] ?? "done",
-        timestamp: DateTime.parse(e['timestamp']),
-        deleted: deleted == 1 ? true : false,
-        read: read == 1 ? true : false,
-      );
-    }).toList();
-    return notifications;
+    try {
+      Account? account = await UserPreferences.getUserInfomation();
+      final userId = account?.id;
+      final url = '${UrlConstant.NOTIFICATION}?userId=$userId';
+      final uri = Uri.parse(url);
+      final response = await http.get(uri);
+      final body = utf8.decode(response.bodyBytes);
+      final json = jsonDecode(body);
+      final users = json['data'] as List<dynamic>;
+      final notifications = users.map((e) {
+        int deleted = e['isDelete'];
+        int read = e['isRead'];
+        return Noti(
+          id: e['notificationId'],
+          details: e['detail'],
+          status: e['status'] ?? "done",
+          timestamp: DateTime.parse(e['timestamp']),
+          deleted: deleted == 1 ? true : false,
+          read: read == 1 ? true : false,
+        );
+      }).toList();
+      return notifications;
+    } catch (e) {
+      return List<Noti>.empty();
+    }
   }
 }

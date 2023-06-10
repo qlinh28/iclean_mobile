@@ -29,7 +29,7 @@ class _UserScreensState extends State<UserScreens> {
     _screenOptions = <Widget>[
       HomeScreen(account: widget.account),
       const MyBookingsScreen(),
-      const InboxScreen(),
+      // const InboxScreen(),
       const NotificationScreen(),
       ProfileScreen(account: widget.account),
     ];
@@ -73,15 +73,15 @@ class _UserScreensState extends State<UserScreens> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          GButton(
-            icon: Icons.chat,
-            text: 'Inbox',
-            textStyle: TextStyle(
-              fontFamily: 'Lato',
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+          // GButton(
+          //   icon: Icons.chat,
+          //   text: 'Inbox',
+          //   textStyle: TextStyle(
+          //     fontFamily: 'Lato',
+          //     color: Colors.white,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
           GButton(
             icon: Icons.notifications_none_outlined,
             text: 'Notification',

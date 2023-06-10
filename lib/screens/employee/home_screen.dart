@@ -12,17 +12,29 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<Service> services = [
-    Service(id: 1, name: "quet nha", icon: "assets/images/lisa_avatar.jpg"),
-    Service(id: 2, name: "lau nha", icon: "assets/images/lisa_avatar.jpg"),
-    Service(id: 3, name: "rua chen", icon: "assets/images/lisa_avatar.jpg"),
-    Service(id: 4, name: "nau com", icon: "assets/images/lisa_avatar.jpg"),
+    Service(id: 4, name: "Giặt thảm", icon: "assets/images/clean-tham.jpg"),
+    Service(
+        id: 14, name: "Vệ sinh kính", icon: "assets/images/cleaning-kinh.png"),
+    Service(id: 15, name: "Giặt ủi", icon: "assets/images/giat-ui.png"),
+    Service(
+        id: 16,
+        name: "Dọn nhà vệ sinh",
+        icon: "assets/images/don-nha-ve-sinh.png"),
+    Service(id: 17, name: "Nấu ăn", icon: "assets/images/nau-an.png"),
+    Service(id: 18, name: "Decor", icon: "assets/images/decor.png"),
   ];
 
   List<Service> allServices = [
-    Service(id: 1, name: "quet nha2", icon: "assets/images/lisa_avatar.jpg"),
-    Service(id: 2, name: "lau nha2", icon: "assets/images/lisa_avatar.jpg"),
-    Service(id: 3, name: "rua chen2", icon: "assets/images/lisa_avatar.jpg"),
-    Service(id: 4, name: "nau com2", icon: "assets/images/lisa_avatar.jpg"),
+    Service(id: 4, name: "Giặt thảm", icon: "assets/images/clean-tham.jpg"),
+    Service(
+        id: 14, name: "Vệ sinh kính", icon: "assets/images/cleaning-kinh.png"),
+    Service(id: 15, name: "Giặt ủi", icon: "assets/images/giat-ui.png"),
+    Service(
+        id: 16,
+        name: "Dọn nhà vệ sinh",
+        icon: "assets/images/don-nha-ve-sinh.png"),
+    Service(id: 17, name: "Nấu ăn", icon: "assets/images/nau-an.png"),
+    Service(id: 18, name: "Decor", icon: "assets/images/decor.png"),
   ];
 
   @override

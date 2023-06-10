@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:iclean_flutter/models/address.dart';
+import 'package:iclean_flutter/services/address_api.dart';
 
 class UpdateLocationScreen extends StatefulWidget {
   final Address address;
@@ -17,22 +20,23 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
   late final dynamic nameController;
   late final dynamic buildingController;
   late final dynamic descriptionController;
-  late final double latitude;
-  late final double longitude;
+  late final double? latitude;
+  late final double? longitude;
+  LatLng? _selectedLocation;
 
   @override
   void initState() {
     super.initState();
-    latitude = 37.7749;
-    longitude = -122.4194;
+    latitude = widget.address.latitude;
+    longitude = widget.address.longitude;
     nameController = TextEditingController(text: widget.address.addressName);
-    buildingController = TextEditingController();
+    buildingController = TextEditingController(text: widget.address.street);
     descriptionController =
         TextEditingController(text: widget.address.description);
     _markers.add(
       Marker(
         markerId: const MarkerId('selected_location'),
-        position: LatLng(latitude, longitude),
+        position: LatLng(latitude!, longitude!),
         infoWindow: const InfoWindow(
           title: 'Your Location',
           snippet: 'This is the initial location',
@@ -59,6 +63,7 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
           position: latLng,
         ),
       );
+      _selectedLocation = latLng;
     });
   }
 
@@ -198,8 +203,10 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
                 child: GoogleMap(
                   onMapCreated: (value) => {_mapController = value},
                   initialCameraPosition: CameraPosition(
-                    target: LatLng(latitude,
-                        longitude), //Default Location: Tan Son Nhat AirPort
+                    target: LatLng(
+                        latitude ?? 14,
+                        longitude ??
+                            -106), //Default Location: Tan Son Nhat AirPort
                     zoom: 14,
                   ),
                   markers: _markers,
@@ -221,11 +228,7 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
                 alignment: Alignment.centerRight,
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    // context,
-                    // MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         UpdateProfileServiceScreen(profile: profile)));
+                    _handleDeleteLocation(widget.address.id);
                   },
                   child: Container(
                     margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
@@ -259,11 +262,16 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
                 alignment: Alignment.centerLeft,
                 child: InkWell(
                   onTap: () {
-                    // Navigator.push(
-                    // context,
-                    // MaterialPageRoute(
-                    //     builder: (context) =>
-                    //         UpdateProfileServiceScreen(profile: profile)));
+                    Address address = Address(
+                        id: widget.address.id,
+                        userId: 0,
+                        addressName: nameController.text,
+                        description: descriptionController.text,
+                        isDefault: widget.address.isDefault,
+                        street: buildingController.text,
+                        longitude: _selectedLocation!.longitude,
+                        latitude: _selectedLocation!.latitude);
+                    _handleUpdateLocation(address);
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height / 14,
@@ -291,5 +299,71 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleDeleteLocation(int addressId) async {
+    int statusCode = await AddressApi.deleteAddress(addressId);
+    if (statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Delete location success!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Some error occur!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
+
+  Future<void> _handleUpdateLocation(Address address) async {
+    int statusCode = await AddressApi.updateAddress(address);
+    if (statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Update location success!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Some error occur!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

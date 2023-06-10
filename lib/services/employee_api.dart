@@ -9,7 +9,7 @@ class WorkerAPI {
     final url = '${UrlConstant.JOB_EMPLOYEE}?jobId=$serviceId';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
-    final body = response.body;
+    final body = utf8.decode(response.bodyBytes);
     final json = jsonDecode(body);
     final users = json['data'] as List<dynamic>;
     final profiles = users.map((e) {
@@ -23,7 +23,7 @@ class WorkerAPI {
         countRate: e['countRate'] ?? 0,
         averageRate: e['averageRate'],
         jobName: e['jobName'],
-        location: e['location'],
+        location: e['location'] ?? "",
         price: priceInt.toInt(),
       );
     }).toList();

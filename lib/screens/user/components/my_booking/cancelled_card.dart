@@ -18,7 +18,7 @@ class _CancelledCardState extends State<CancelledCard>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  late List<bool> _isExpanded = List.filled(bookings.length, false);
+  late final List<bool> _isExpanded = List.filled(bookings.length, false);
   List<Booking> bookings = [
     // Booking(
     //     id: 1,
@@ -114,7 +114,8 @@ class _CancelledCardState extends State<CancelledCard>
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Image.asset(
-                            bookings[i].jobImage,
+                            // bookings[i].jobImage,
+                            'assets/images/3.png',
                             width: 70,
                             height: 70,
                             fit: BoxFit.contain,

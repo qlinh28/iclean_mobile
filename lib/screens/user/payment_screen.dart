@@ -200,7 +200,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               onTap: () {},
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
-                height: MediaQuery.of(context).size.height / 14,
+                height: MediaQuery.of(context).size.height / 16,
                 decoration: BoxDecoration(
                   color: Colors.deepPurple.shade300,
                   borderRadius: BorderRadius.circular(50),

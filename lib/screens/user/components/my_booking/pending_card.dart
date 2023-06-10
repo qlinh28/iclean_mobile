@@ -1,7 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/constant/order_status_constants.dart';
+import 'package:iclean_flutter/screens/common/user_preferences.dart';
 import 'package:iclean_flutter/services/booking_api.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../models/account.dart';
 import '../../../../models/bookings.dart';
 
 class PendingCard extends StatefulWidget {
@@ -64,6 +69,7 @@ class _PendingCardState extends State<PendingCard>
     //     jobImage: "assets/images/3.png"),
   ];
   late AnimationController _controller;
+  Account? account;
   late final List<bool> _isExpanded = List.filled(bookings.length, false);
 
   void _reloadPage() {
@@ -127,7 +133,8 @@ class _PendingCardState extends State<PendingCard>
                             borderRadius: BorderRadius.circular(15),
                           ),
                           child: Image.asset(
-                            bookings[i].jobImage,
+                            // bookings[i].imgEmployee,
+                            'assets/images/3.png',
                             width: 70,
                             height: 70,
                             fit: BoxFit.contain,
@@ -244,8 +251,8 @@ class _PendingCardState extends State<PendingCard>
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    // await _updateBookingOrder(
-                                    //   bookings[i].id, 'cancel');
+                                    await _updateBookingOrder(
+                                        bookings[i].id, OrderStatus.CANCEL);
                                   },
                                   child: Container(
                                     width:
@@ -273,48 +280,58 @@ class _PendingCardState extends State<PendingCard>
                                     ),
                                   ),
                                 ),
-                                // InkWell(
-                                //   onTap: () async {
-                                //     await _updateBookingOrder(
-                                //         bookings[i].id, 'undone');
-                                //     // Navigator.push(
-                                //     //     context,
-                                //     //     MaterialPageRoute(
-                                //     //         builder: (context) =>
-                                //     //             OrderDetailsSreen(
-                                //     //               order: orders[i],
-                                //     //               orderDetails:
-                                //     //                   orders[i].cartItems,
-                                //     //             )));
-                                //   },
-                                //   child: Container(
-                                //     width:
-                                //         MediaQuery.of(context).size.width / 3.5,
-                                //     height:
-                                //         MediaQuery.of(context).size.height / 18,
-                                //     decoration: BoxDecoration(
-                                //       color: Colors.deepPurple.shade300,
-                                //       borderRadius: BorderRadius.circular(50),
-                                //       border: Border.all(
-                                //         color: Colors.deepPurple.shade300,
-                                //         width: 2,
-                                //       ),
-                                //     ),
-                                //     child: const Center(
-                                //       child: Text(
-                                //         "Accept Booking",
-                                //         style: TextStyle(
-                                //           color: Colors.white,
-                                //           fontSize: 15,
-                                //           fontWeight: FontWeight.bold,
-                                //           letterSpacing: 1,
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
-                                // ),
                               ],
                             ),
+                            if (account?.role == 'employee')
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  InkWell(
+                                    onTap: () async {
+                                      await _updateBookingOrder(
+                                          bookings[i].id, OrderStatus.UPCOMING);
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             OrderDetailsSreen(
+                                      //               order: orders[i],
+                                      //               orderDetails:
+                                      //                   orders[i].cartItems,
+                                      //             )));
+                                    },
+                                    child: Container(
+                                      margin: const EdgeInsets.fromLTRB(
+                                          0, 20, 0, 0),
+                                      width:
+                                          MediaQuery.of(context).size.width / 2,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              18,
+                                      decoration: BoxDecoration(
+                                        color: Colors.deepPurple.shade300,
+                                        borderRadius: BorderRadius.circular(50),
+                                        border: Border.all(
+                                          color: Colors.deepPurple.shade300,
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          "Accept Booking",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                            letterSpacing: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                           ],
                         ),
                       ),
@@ -338,34 +355,36 @@ class _PendingCardState extends State<PendingCard>
     );
   }
 
-  // Future<void> _updateBookingOrder(int id, String status) async {
-  //   int responseStatus = await BookingApi.changeStatusBooking(id, status);
-  //   String alert = "Cancel";
-  //   if (status != 'cancel') {
-  //     alert = 'Accept';
-  //   }
-  //   if (responseStatus == 202) {
-  //     // Booking order was created successfully, show a success message to the user
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('${alert} Booking Successfully!')),
-  //     );
-  //   } else if (responseStatus == 409) {
-  //     // Booking order creation failed, show an error message to the user
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('The booking is conflict with another')),
-  //     );
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text('Failed to cancel booking')),
-  //     );
-  //   }
-  //   _reloadPage;
-  // }
+  Future<void> _updateBookingOrder(int id, int status) async {
+    int responseStatus = await BookingApi.updateBookingByStatus(id, status);
+    String alert = "Cancel";
+    if (status != OrderStatus.CANCEL) {
+      alert = 'Accept';
+    }
+    if (responseStatus == 200) {
+      // Booking order was created successfully, show a success message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('$alert Booking Successfully!')),
+      );
+    } else if (responseStatus == 409) {
+      // Booking order creation failed, show an error message to the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('The booking is conflict with another')),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Failed to cancel booking')),
+      );
+    }
+    _reloadPage;
+  }
 
   void fetchBooking(int status) async {
     final listBookings = await BookingApi.fetchBookingByStatus(status);
+    Account? accountEm = await UserPreferences.getUserInfomation();
     setState(() {
       bookings = listBookings;
+      account = accountEm!;
     });
   }
 }

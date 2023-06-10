@@ -7,7 +7,12 @@ class Account {
       phone,
       email,
       profilePicture,
-      location;
+      locationName,
+      description,
+      street;
+  double longitude, latitude;
+  int point;
+
   DateTime dateOfBirth;
 
   Account({
@@ -20,24 +25,33 @@ class Account {
     required this.phone,
     required this.email,
     required this.profilePicture,
-    required this.location,
+    required this.locationName,
+    required this.description,
+    required this.street,
+    required this.longitude,
+    required this.latitude,
+    required this.point,
   });
 
   factory Account.fromJson(Map<String, dynamic> json) {
-  return Account(
-    id: json['userId'] as int?,
-    role: json['roleName'] as String? ?? "",
-    username: json['username'] as String,
-    fullname: json['fullname'] as String,
-    gender: json['gender'] as String,
-    dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
-    phone: json['phone'] as String,
-    email: json['email'] as String,
-    profilePicture: json['profilePicture'] as String? ?? "",
-    location: json['location'] as String? ?? "",
-  );
-}
-
+    return Account(
+      id: json['userId'] as int?,
+      role: json['roleName'] as String? ?? "",
+      username: json['username'] as String,
+      fullname: json['fullname'] as String,
+      gender: json['gender'] as String,
+      dateOfBirth: DateTime.parse(json['dateOfBirth'] as String),
+      phone: json['phone'] as String,
+      email: json['email'] as String,
+      profilePicture: json['profilePicture'] as String? ?? "",
+      locationName: json['locationName'] as String? ?? "",
+      description: json['description'] as String? ?? "",
+      street: json['street'] as String? ?? "",
+      longitude: json['longitude'] as double? ?? 0,
+      latitude: json['latitude'] as double? ?? 0,
+      point: json['point'] as int? ?? 0,
+    );
+  }
 
   Map<String, dynamic> toJson() {
     return {
@@ -49,8 +63,13 @@ class Account {
       'phone': phone,
       'email': email,
       'profilePicture': profilePicture,
-      'location': location,
+      'locationName': locationName,
       'dateOfBirth': dateOfBirth.toIso8601String(),
+      'description': description,
+      'street': street,
+      'longitude': longitude,
+      'latitude': latitude,
+      'point': point,
     };
   }
 }

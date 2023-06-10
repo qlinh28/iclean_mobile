@@ -1,13 +1,22 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/models/account.dart';
+import 'package:iclean_flutter/screens/common/user_preferences.dart';
+import 'package:iclean_flutter/screens/user/payment_screen.dart';
 import 'package:iclean_flutter/screens/user/summary_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../../models/profile.dart';
+import '../../models/services.dart';
 
 class BookingDetailsScreen extends StatefulWidget {
   final Profile profile;
 
-  const BookingDetailsScreen({Key? key, required this.profile})
+  final Service service;
+
+  const BookingDetailsScreen(
+      {Key? key, required this.profile, required this.service})
       : super(key: key);
 
   @override
@@ -357,15 +366,51 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             ),
             const SizedBox(height: 5),
             InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SummaryScreen()));
+              onTap: () async {
+                Account? account = await UserPreferences.getUserInfomation();
+                if (account!.point < (widget.profile.price * _counter)) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SummaryScreen(
+                                account: account,
+                                discount: 0,
+                                workDateTime: DateTime(
+                                    today.year,
+                                    today.month,
+                                    today.day,
+                                    _selectedTime.hour,
+                                    _selectedTime.minute),
+                                hour: _counter,
+                                profile: widget.profile,
+                                service: widget.service,
+                              )));
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Out of money!'),
+                      content: const Text(
+                          'You don\'t have enough money in your account, please top up!'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PaymentScreen()))
+                          },
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
-                height: MediaQuery.of(context).size.height / 14,
+                height: MediaQuery.of(context).size.height / 16,
                 decoration: BoxDecoration(
                   color: Colors.deepPurple.shade300,
                   borderRadius: BorderRadius.circular(50),

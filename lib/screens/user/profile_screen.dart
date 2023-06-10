@@ -5,6 +5,7 @@ import 'package:iclean_flutter/screens/user/payment_screen.dart';
 import 'package:iclean_flutter/screens/user/update_profile_screen.dart';
 import '../common/user_preferences.dart';
 import '../common/login_screen.dart';
+import 'add_location_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final Account account;
@@ -100,10 +101,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LocationScreen()));
+                      if (widget.account.locationName.isEmpty) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddLocationScreen(
+                                      defaultOrNot: true,
+                                    )));
+                      } else {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LocationScreen()));
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(top: 8, bottom: 8),

@@ -193,7 +193,8 @@ class _EmployeeDetailsScreenState extends State<EmployeeDetailsScreen>
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           BookingDetailsScreen(
-                                              profile: widget.profile)));
+                                              profile: widget.profile,
+                                              service: widget.service)));
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width / 3.5,

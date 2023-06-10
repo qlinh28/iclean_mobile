@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/constant/gobal_variable.dart';
 import 'package:iclean_flutter/screens/common/user_preferences.dart';
+import 'package:iclean_flutter/screens/employee/employee_screens.dart';
 
 import '../../constant/url_constants.dart';
 import '../../models/account.dart';
@@ -38,7 +39,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _handleLogin(String username, String password) async {
     final response = await http.post(
-      Uri.parse("${UrlConstant.LOGIN}/sign-in"),
+      Uri.parse("${UrlConstant.AUTH}/sign-in"),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({'username': username, 'password': password}),
     );
@@ -56,11 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
               builder: (context) => UserScreens(account: account)),
         );
       } else if (account.role == 'employee') {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => WorkerScreens(account: account)),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EmployeeScreens(account: account)),
+        );
       } else if (account.role == 'admin') {
         showDialog(
           context: context,

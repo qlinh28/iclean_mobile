@@ -186,7 +186,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                       color: Colors.deepPurple.shade300,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TabBar(
                     isScrollable: true,
                     unselectedLabelColor: Colors.grey,

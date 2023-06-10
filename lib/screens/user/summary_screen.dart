@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/dto/order_dto.dart';
+import 'package:iclean_flutter/models/profile.dart';
+import 'package:intl/intl.dart';
 
+import '../../models/account.dart';
+import '../../models/services.dart';
 import 'components/summary/successful_booking_dialog.dart';
 
 class SummaryScreen extends StatefulWidget {
-  const SummaryScreen({Key? key}) : super(key: key);
+  final Service service;
+  final Profile profile;
+  final Account account;
+  final int hour;
+  final int discount;
+  final DateTime workDateTime;
+  const SummaryScreen(
+      {Key? key,
+      required this.service,
+      required this.profile,
+      required this.hour,
+      required this.account,
+      required this.discount,
+      required this.workDateTime})
+      : super(key: key);
 
   @override
   State<SummaryScreen> createState() => _SummaryScreenState();
@@ -11,14 +30,26 @@ class SummaryScreen extends StatefulWidget {
 
 class _SummaryScreenState extends State<SummaryScreen> {
   void _makeBooking() {
-    // Perform booking logic here
-    // ...
-    String bookingCode = '123456789';
-    // Show success dialog after successful booking
+    OrderDto orderDto = OrderDto(
+        jobId: widget.service.id,
+        employeeId: widget.profile.employeeId,
+        renterId: 0,
+        workDateTime: widget.workDateTime,
+        serviceName: widget.service.name,
+        workerName: widget.profile.employeeName,
+        orderDate: DateTime.now(),
+        workingHour: widget.hour,
+        sum: widget.profile.price * widget.hour - widget.discount,
+        totalNotDiscount: widget.profile.price * widget.hour,
+        discount: widget.discount);
+    String bookingCode =
+        '${widget.profile.employeeId}${widget.profile.jobId}${widget.profile.employeeId}${widget.account.id}${widget.hour}';
     showDialog(
       context: context,
-      builder: (BuildContext context) =>
-          BookingSuccessDialog(bookingCode: bookingCode),
+      builder: (BuildContext context) => BookingSuccessDialog(
+        bookingCode: bookingCode,
+        orderDto: orderDto,
+      ),
     );
   }
 
@@ -67,8 +98,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               "Service",
                               style: TextStyle(
                                 fontSize: 15,
@@ -76,8 +107,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               ),
                             ),
                             Text(
-                              "House Cleaning",
-                              style: TextStyle(
+                              widget.profile.jobName,
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
@@ -90,8 +121,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               "Worker",
                               style: TextStyle(
                                 fontSize: 15,
@@ -99,8 +130,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               ),
                             ),
                             Text(
-                              "Lisa",
-                              style: TextStyle(
+                              widget.profile.employeeName,
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
@@ -113,8 +144,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               "Date & Time",
                               style: TextStyle(
                                 fontSize: 15,
@@ -122,8 +153,9 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               ),
                             ),
                             Text(
-                              "Dec 23, 2024 | 10:00 AM",
-                              style: TextStyle(
+                              DateFormat('MMM d, yyyy | hh:mm aaa')
+                                  .format(DateTime.now()),
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
@@ -134,8 +166,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Working Hours",
                             style: TextStyle(
                               fontSize: 15,
@@ -143,8 +175,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                             ),
                           ),
                           Text(
-                            "2 Hours",
-                            style: TextStyle(
+                            widget.hour.toString(),
+                            style: const TextStyle(
                               fontSize: 15,
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
@@ -171,8 +203,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
-                            Text(
+                          children: [
+                            const Text(
                               "House Cleaning",
                               style: TextStyle(
                                 fontSize: 15,
@@ -180,8 +212,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               ),
                             ),
                             Text(
-                              "\$100",
-                              style: TextStyle(
+                              "${NumberFormat('#,###').format(widget.profile.price * widget.hour)} VNĐ",
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Lato',
                                 fontWeight: FontWeight.bold,
@@ -204,7 +236,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
                               ),
                             ),
                             Text(
-                              "- \$20",
+                              widget.discount.toString(),
                               style: TextStyle(
                                 color: Colors.deepPurple.shade300,
                                 fontSize: 15,
@@ -224,8 +256,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Total",
                             style: TextStyle(
                               fontSize: 15,
@@ -233,8 +265,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
                             ),
                           ),
                           Text(
-                            "\$80",
-                            style: TextStyle(
+                            "${NumberFormat('#,###').format(widget.profile.price * widget.hour - widget.discount)} VNĐ",
+                            style: const TextStyle(
                               fontSize: 15,
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
@@ -266,7 +298,7 @@ class _SummaryScreenState extends State<SummaryScreen> {
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
-                height: MediaQuery.of(context).size.height / 14,
+                height: MediaQuery.of(context).size.height / 16,
                 decoration: BoxDecoration(
                   color: Colors.deepPurple.shade300,
                   borderRadius: BorderRadius.circular(50),

@@ -1,8 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:iclean_flutter/models/address.dart';
+import 'package:iclean_flutter/services/address_api.dart';
 
 class AddLocationScreen extends StatefulWidget {
-  const AddLocationScreen({Key? key}) : super(key: key);
+  final bool defaultOrNot;
+  const AddLocationScreen({Key? key, required this.defaultOrNot})
+      : super(key: key);
 
   @override
   State<AddLocationScreen> createState() => _AddLocationScreenState();
@@ -13,28 +19,16 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
   late final dynamic nameController;
   late final dynamic buildingController;
   late final dynamic descriptionController;
-  late final double latitude;
-  late final double longitude;
+  late double latitude = 37.7749;
+  late double longitude = -122.4194;
+  LatLng? _selectedLocation;
 
   @override
   void initState() {
     super.initState();
-    latitude = 37.7749;
-    longitude = -122.4194;
     nameController = TextEditingController();
     buildingController = TextEditingController();
     descriptionController = TextEditingController();
-    _markers.add(
-      Marker(
-        markerId: const MarkerId('selected_location'),
-        position: LatLng(latitude,
-            longitude), // Replace with desired initial latitude and longitude
-        infoWindow: const InfoWindow(
-          title: 'Your Location',
-          snippet: 'This is the initial location',
-        ),
-      ),
-    );
   }
 
   @override
@@ -55,6 +49,7 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
           position: latLng,
         ),
       );
+      _selectedLocation = latLng;
     });
   }
 
@@ -217,11 +212,16 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
             const SizedBox(height: 5),
             InkWell(
               onTap: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //         builder: (context) =>
-                //             UpdateProfileServiceScreen(profile: profile)));
+                Address address = Address(
+                    id: 0,
+                    userId: 0,
+                    addressName: nameController.text,
+                    description: descriptionController.text,
+                    isDefault: widget.defaultOrNot,
+                    street: buildingController.text,
+                    longitude: _selectedLocation!.longitude,
+                    latitude: _selectedLocation!.latitude);
+                _handleAddNewLocation(address);
               },
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.2,
@@ -248,5 +248,38 @@ class _AddLocationScreenState extends State<AddLocationScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _handleAddNewLocation(Address address) async {
+    int statusCode = await AddressApi.createAddress(address);
+    if (statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Add new location success!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Some error occur!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
   }
 }
