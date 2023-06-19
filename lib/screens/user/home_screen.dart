@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/screens/common/user_preferences.dart';
 import 'package:iclean_flutter/screens/user/add_location_screen.dart';
 import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
@@ -17,6 +18,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Account? current;
   List<Service> services = [
     Service(id: 4, name: "Giặt thảm", icon: "assets/images/clean-tham.jpg"),
     Service(
@@ -36,6 +38,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    setAccount();
+  }
+
+  Future<void> setAccount() async {
+    Account? currentAcc = await UserPreferences.getUserInfomation();
+    setState(() {
+      current = currentAcc;
+    });
   }
 
   @override
@@ -183,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           const PaymentScreen()));
                             },
                             child: Text(
-                              "Point: ${NumberFormat('# ###').format(widget.account.point)} VNĐ",
+                              "Point: ${NumberFormat('# ###').format(current?.point ?? 0)} VNĐ",
                               style: const TextStyle(
                                 fontSize: 15,
                                 fontFamily: 'Lato',

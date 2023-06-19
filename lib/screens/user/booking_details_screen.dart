@@ -368,7 +368,7 @@ class _BookingDetailsScreenState extends State<BookingDetailsScreen> {
             InkWell(
               onTap: () async {
                 Account? account = await UserPreferences.getUserInfomation();
-                if (account!.point < (widget.profile.price * _counter)) {
+                if (account!.point > (widget.profile.price * _counter)) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(

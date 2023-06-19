@@ -59,8 +59,7 @@ class BookingApi {
           "workTime": order.workingHour,
           "renterId": order.renterId,
           "employeeId": order.employeeId,
-          "jobId": order.jobId,
-          "voucherCode": ""
+          "jobId": order.jobId
         }));
     return response.statusCode;
   }

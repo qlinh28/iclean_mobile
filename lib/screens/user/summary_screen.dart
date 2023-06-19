@@ -1,6 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/dto/order_dto.dart';
 import 'package:iclean_flutter/models/profile.dart';
+import 'package:iclean_flutter/screens/common/user_preferences.dart';
+import 'package:iclean_flutter/services/booking_api.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/account.dart';
@@ -29,7 +33,7 @@ class SummaryScreen extends StatefulWidget {
 }
 
 class _SummaryScreenState extends State<SummaryScreen> {
-  void _makeBooking() {
+  Future<void> _makeBooking() async {
     OrderDto orderDto = OrderDto(
         jobId: widget.service.id,
         employeeId: widget.profile.employeeId,
@@ -44,13 +48,16 @@ class _SummaryScreenState extends State<SummaryScreen> {
         discount: widget.discount);
     String bookingCode =
         '${widget.profile.employeeId}${widget.profile.jobId}${widget.profile.employeeId}${widget.account.id}${widget.hour}';
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => BookingSuccessDialog(
-        bookingCode: bookingCode,
-        orderDto: orderDto,
-      ),
-    );
+    bool? check = await _handleAddNewOrder(orderDto);
+    if (check!) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) => BookingSuccessDialog(
+          bookingCode: bookingCode,
+          orderDto: orderDto,
+        ),
+      );
+    }
   }
 
   @override
@@ -320,5 +327,43 @@ class _SummaryScreenState extends State<SummaryScreen> {
         ),
       ),
     );
+  }
+
+  Future<bool?> _handleAddNewOrder(OrderDto orderDto) async {
+    int statusCode = await BookingApi.createBooking(orderDto);
+    if (statusCode == 200) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Success'),
+          content: const Text('Add booking success!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      Account? account = await UserPreferences.getUserInfomation();
+      account!.point = account.point - orderDto.sum;
+      UserPreferences.setUserInfomation(account);
+      return true;
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: const Text('Error'),
+          content: const Text('Some error occur!'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('OK'),
+            ),
+          ],
+        ),
+      );
+      return false;
+    }
   }
 }
