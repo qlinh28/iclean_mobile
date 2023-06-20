@@ -144,24 +144,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 ),
               ),
               const SizedBox(height: 15),
-              Column(
-                children: [
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(widget.account.profilePicture),
-                    radius: 50,
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    widget.account.fullname,
-                    style: const TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Lato',
-                    ),
-                  ),
-                ],
+              CircleAvatar(
+                backgroundImage:
+                    NetworkImage(widget.account.profilePicture),
+                radius: 50,
               ),
+              const SizedBox(height: 15),
               Container(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                 child: UpdateTextField(
