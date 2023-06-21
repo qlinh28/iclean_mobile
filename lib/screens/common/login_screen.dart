@@ -10,6 +10,7 @@ import '../../constant/url_constants.dart';
 import '../../models/account.dart';
 import 'package:http/http.dart' as http;
 
+import '../employee/employee_screens.dart';
 import '../user/components/user_screens.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -56,11 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
               builder: (context) => UserScreens(account: account)),
         );
       } else if (account.role == 'employee') {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //       builder: (context) => WorkerScreens(account: account)),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EmployeeScreens(account: account)),
+        );
       } else if (account.role == 'admin') {
         showDialog(
           context: context,
@@ -209,6 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 35,
                   fontWeight: FontWeight.w700,
                   color: Color(0xff000000),
+                  fontFamily: 'Lato',
                 ),
               ),
               const SizedBox(height: 12),
@@ -218,6 +220,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
                   color: Color(0xff000000),
+                  fontFamily: 'Lato',
                 ),
               ),
               const SizedBox(height: 48),
@@ -233,6 +236,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                           color: Color(0xff000000),
+                          fontFamily: 'Lato',
+                        ),
+                        hintStyle: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff000000),
+                          fontFamily: 'Lato',
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -260,6 +270,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 15,
                           fontWeight: FontWeight.w700,
                           color: Color(0xff000000),
+                        ),
+                        hintStyle: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff000000),
+                          fontFamily: 'Lato',
                         ),
                         suffixIcon: IconButton(
                           icon: _isPassword
@@ -306,6 +322,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 15,
                       fontWeight: FontWeight.w700,
                       color: Color(0xff000000),
+                      fontFamily: 'Lato',
                     ),
                   ),
                 ],
@@ -326,31 +343,25 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 20,
                       fontWeight: FontWeight.w700,
                       color: BaseConfig.BASE_COLOR,
+                      fontFamily: 'Lato',
                     ),
                   ),
                 ),
               ),
               const SizedBox(height: 12),
-              Align(
+              const Align(
                 alignment: Alignment.center,
-                child: TextButton(
-                  onPressed: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => ForgotPassword()),
-                    // );
-                  },
-                  child: const Text(
-                    'or continue with',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff000000),
-                    ),
+                child: Text(
+                  'or continue with',
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xff000000),
+                    fontFamily: 'Lato',
                   ),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 25),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -396,6 +407,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
                         color: Color(0xffffffff),
+                        fontFamily: 'Lato',
                       ),
                     ),
                   ),

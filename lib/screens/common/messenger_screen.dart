@@ -3,7 +3,7 @@ import 'package:iclean_flutter/constant/gobal_variable.dart';
 import 'package:iclean_flutter/models/inbox.dart';
 import 'package:iclean_flutter/models/message.dart';
 
-import 'components/message/mess_card.dart';
+import 'component/message/mess_card.dart';
 
 class MessengerScreen extends StatefulWidget {
   final Inbox inbox;
@@ -55,7 +55,7 @@ class _MessengerScreenState extends State<MessengerScreen> {
       _textEditingController.clear();
 
       // Scroll to the position of the newly sent message
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent + 100,
           duration: const Duration(milliseconds: 300),
@@ -85,7 +85,7 @@ class _MessengerScreenState extends State<MessengerScreen> {
       }
     });
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _scrollToLatestMessage();
     });
   }

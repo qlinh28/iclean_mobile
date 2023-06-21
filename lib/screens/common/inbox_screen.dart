@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/models/inbox.dart';
-import 'package:iclean_flutter/screens/user/messenger_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
+import 'messenger_screen.dart';
 
 class InboxScreen extends StatefulWidget {
   const InboxScreen({Key? key}) : super(key: key);

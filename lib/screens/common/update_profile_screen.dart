@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iclean_flutter/models/account.dart';
 import 'package:intl/intl.dart';
 
-import 'components/update_profile/update_textfield.dart';
+import '../user/components/update_profile/update_textfield.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   final Account account;
@@ -145,8 +145,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               ),
               const SizedBox(height: 15),
               CircleAvatar(
-                backgroundImage:
-                    NetworkImage(widget.account.profilePicture),
+                backgroundImage: NetworkImage(widget.account.profilePicture),
                 radius: 50,
               ),
               const SizedBox(height: 15),

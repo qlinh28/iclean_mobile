@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iclean_flutter/models/account.dart';
 import 'package:iclean_flutter/screens/user/location_screen.dart';
 import 'package:iclean_flutter/screens/user/payment_screen.dart';
-import 'package:iclean_flutter/screens/user/update_profile_screen.dart';
+
 import '../common/user_preferences.dart';
 import '../common/login_screen.dart';
+import 'update_profile_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   final Account account;

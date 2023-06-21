@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/employee/profile_service_screen.dart';
+import 'package:iclean_flutter/screens/employee/register_service_screen.dart';
 import 'package:iclean_flutter/screens/user/components/home/banner_slider.dart';
+import '../../models/account.dart';
 import '../../models/services.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final Account account;
+  const HomeScreen({Key? key, required this.account}) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -30,6 +33,55 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
   }
 
+  void createNewService(BuildContext context, Service service) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            "You haven't subscribed to this service yet",
+            style: TextStyle(
+              fontFamily: 'Lato',
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
+          content: const Text(
+            "Would you like to sign up?",
+            style: TextStyle(
+              fontFamily: 'Lato',
+              fontSize: 15,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text(
+                "Cancel",
+                style: TextStyle(color: Colors.deepPurple.shade300),
+              ),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.deepPurple.shade300,
+                ),
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegisterServiceScreen(
+                            account: widget.account, service: service)));
+              },
+              child: const Text("Yes"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,9 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Container(
                   padding: const EdgeInsets.only(top: 20),
-                  child: const CircleAvatar(
+                  child: CircleAvatar(
                     backgroundImage:
-                        AssetImage('assets/images/lisa_avatar.jpg'),
+                        NetworkImage(widget.account.profilePicture),
                     radius: 25,
                   ),
                 ),
@@ -55,8 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        children: const [
-                          Text(
+                        children: [
+                          const Text(
                             "Hello, ",
                             style: TextStyle(
                               fontFamily: 'Lato',
@@ -64,8 +116,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Text(
-                            "Lisa",
-                            style: TextStyle(
+                            widget.account.fullname,
+                            style: const TextStyle(
                               fontSize: 15,
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.bold,
@@ -212,11 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Column(children: [
                     InkWell(
                       onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => EmployeeServiceScreen(
-                        //             service: services[i])));
+                        createNewService(context, allServices[i]);
                       },
                       child: Container(
                         margin: const EdgeInsets.all(10),

@@ -2,12 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iclean_flutter/screens/user/home_screen.dart';
-import 'package:iclean_flutter/screens/user/inbox_screen.dart';
 import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
-import 'package:iclean_flutter/screens/user/notification_screen.dart';
-import 'package:iclean_flutter/screens/user/profile_screen.dart';
+import 'package:iclean_flutter/screens/common/notification_screen.dart';
 
 import '../../../models/account.dart';
+import '../../common/inbox_screen.dart';
+import '../../common/profile_screen.dart';
 
 class UserScreens extends StatefulWidget {
   final Account account;

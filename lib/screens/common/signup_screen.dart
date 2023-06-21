@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/screens/common/login_screen.dart';
-import 'component/my_button.dart';
-import 'component/my_textfield.dart';
+import 'component/login_signup/my_button.dart';
+import 'component/login_signup/my_textfield.dart';
 import 'package:intl/intl.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -12,15 +12,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // List<Province> provinces = [];
-  // List<District> districts = [];
   final _formKey = GlobalKey<FormState>();
   bool initDateTime = false;
 
   @override
   void initState() {
     super.initState;
-    //fetchProvinces();
   }
 
   // Future<void> _signUpUser() async {
@@ -68,24 +65,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   //       ),
   //     );
   //   }
-  // }
-
-  // Future<void> fetchProvinces() async {
-  //   final listProvinces = await AccountAPI.fetchProvinces();
-  //   setState(() {
-  //     if (listProvinces != null) {
-  //       provinces = listProvinces;
-  //     } else {}
-  //   });
-  // }
-
-  // Future<void> fetchDistricts(String provinceId) async {
-  //   final listDistricts = await AccountAPI.fetchDistricts(provinceId);
-  //   setState(() {
-  //     if (listDistricts != null) {
-  //       districts = listDistricts;
-  //     } else {}
-  //   });
   // }
 
 // Define validation function
@@ -147,8 +126,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final addressController = TextEditingController();
   String? _selectedGender;
   String? _selectedRole;
-  String? _selectedProvince;
-  String? _selectedDistrict;
   DateTime? _selectedDate;
 
   Future<void> _selectDate(BuildContext context) async {

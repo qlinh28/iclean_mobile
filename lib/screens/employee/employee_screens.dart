@@ -2,12 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iclean_flutter/screens/employee/home_screen.dart';
-import 'package:iclean_flutter/screens/user/inbox_screen.dart';
-import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
-import 'package:iclean_flutter/screens/user/notification_screen.dart';
-import 'package:iclean_flutter/screens/user/profile_screen.dart';
-
+import 'package:iclean_flutter/screens/employee/my_bookings_screen.dart';
+import 'package:iclean_flutter/screens/common/notification_screen.dart';
 import '../../models/account.dart';
+import '../common/inbox_screen.dart';
+import '../common/profile_screen.dart';
 
 class EmployeeScreens extends StatefulWidget {
   const EmployeeScreens({Key? key, required this.account}) : super(key: key);
@@ -29,7 +28,7 @@ class _EmployeeScreensState extends State<EmployeeScreens> {
     super.initState();
     //requestPermission();
     _screenOptions = <Widget>[
-      const HomeScreen(),
+      HomeScreen(account: widget.account),
       const MyBookingsScreen(),
       const InboxScreen(),
       const NotificationScreen(),
