@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:iclean_flutter/constant/gobal_variable.dart';
 import 'package:iclean_flutter/models/inbox.dart';
+import 'package:iclean_flutter/models/message.dart';
+
+import 'components/message/mess_card.dart';
 
 class MessengerScreen extends StatefulWidget {
   final Inbox inbox;
@@ -10,38 +14,86 @@ class MessengerScreen extends StatefulWidget {
 }
 
 class _MessengerScreenState extends State<MessengerScreen> {
-  List<Map<String, dynamic>> messages = [
-    {"message": "Hello", "isMe": true},
-    {"message": "Hi, how are you?", "isMe": false},
-    {"message": "I'm good, thanks!", "isMe": true},
-    {"message": "Great!", "isMe": false},
-    {"message": "Bye!", "isMe": true},
-    {"message": "Hello", "isMe": true},
-    {"message": "Hi, how are you?", "isMe": false},
-    {"message": "I'm good, thanks!", "isMe": true},
-    {"message": "Great!", "isMe": false},
-    {"message": "Bye!", "isMe": true},
-    {"message": "Hello", "isMe": true},
-    {"message": "Hi, how are you?", "isMe": false},
-    {"message": "I'm good, thanks!", "isMe": true},
-    {"message": "Great!", "isMe": false},
-    {"message": "Bye!", "isMe": true},
-    {"message": "Hello", "isMe": true},
-    {"message": "Hi, how are you?", "isMe": false},
-    {"message": "I'm good, thanks!", "isMe": true},
-    {"message": "Great!", "isMe": false},
-    {"message": "Bye!", "isMe": true},
+  List<Message> messages = [
+    Message(message: "Hello", isMe: true, timestamp: DateTime.now()),
+    Message(
+        message: "Hi, how are you?", isMe: false, timestamp: DateTime.now()),
+    Message(
+        message: "I'm good, thanks!", isMe: true, timestamp: DateTime.now()),
+    Message(message: "Great!", isMe: false, timestamp: DateTime.now()),
+    Message(message: "Bye!", isMe: true, timestamp: DateTime.now()),
+    Message(message: "Hello", isMe: true, timestamp: DateTime.now()),
+    Message(
+        message: "Hi, how are you?", isMe: false, timestamp: DateTime.now()),
+    Message(
+        message: "I'm good, thanks!", isMe: true, timestamp: DateTime.now()),
+    Message(message: "Great!", isMe: false, timestamp: DateTime.now()),
+    Message(message: "Bye!", isMe: true, timestamp: DateTime.now()),
+    Message(message: "Hello", isMe: true, timestamp: DateTime.now()),
+    Message(
+        message: "Hi, how are you?", isMe: false, timestamp: DateTime.now()),
+    Message(
+        message: "I'm good, thanks!", isMe: true, timestamp: DateTime.now()),
+    Message(message: "Great!", isMe: false, timestamp: DateTime.now()),
+    Message(message: "Bye!", isMe: true, timestamp: DateTime.now()),
   ];
 
   TextEditingController _textEditingController = TextEditingController();
+  ScrollController _scrollController = ScrollController();
+  bool _shouldScrollToBottom = true;
 
   void _sendMessage(String message) {
     if (message.isNotEmpty) {
+      final newMessage = Message(
+        message: message,
+        isMe: true,
+        timestamp: DateTime.now(),
+      );
       setState(() {
-        messages.add({"message": message, "isMe": true});
+        messages.add(newMessage);
       });
       _textEditingController.clear();
+
+      // Scroll to the position of the newly sent message
+      WidgetsBinding.instance!.addPostFrameCallback((_) {
+        _scrollController.animateTo(
+          _scrollController.position.maxScrollExtent + 100,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
     }
+  }
+
+  void _scrollToLatestMessage() {
+    _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels ==
+          _scrollController.position.maxScrollExtent) {
+        _shouldScrollToBottom = true;
+      } else {
+        _shouldScrollToBottom = false;
+      }
+    });
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _scrollToLatestMessage();
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -77,39 +129,7 @@ class _MessengerScreenState extends State<MessengerScreen> {
                 ],
               ),
             ),
-            Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: ListView.builder(
-                  itemCount: messages.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final message = messages[index];
-                    return Align(
-                      alignment: message["isMe"]
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        margin: const EdgeInsets.symmetric(vertical: 4.0),
-                        decoration: BoxDecoration(
-                          color:
-                              message["isMe"] ? Colors.blue : Colors.grey[300],
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Text(
-                          message["message"],
-                          style: TextStyle(
-                            color:
-                                message["isMe"] ? Colors.white : Colors.black,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
+            mess_card(scrollController: _scrollController, messages: messages),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Row(
@@ -117,14 +137,34 @@ class _MessengerScreenState extends State<MessengerScreen> {
                   Expanded(
                     child: TextField(
                       controller: _textEditingController,
-                      decoration: const InputDecoration(
-                        hintText: "Type a message",
-                        border: OutlineInputBorder(),
+                      decoration: InputDecoration(
+                        hintText: "Type a message...",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(color: BaseConfig.BASE_COLOR),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        filled: true,
+                        contentPadding: const EdgeInsets.only(left: 20),
+                        hintStyle: TextStyle(
+                          color: Colors.grey[500],
+                          fontFamily: 'Lato',
+                        ),
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(Icons.send),
+                    icon: const Icon(
+                      Icons.send,
+                      color: BaseConfig.BASE_COLOR,
+                    ),
                     onPressed: () {
                       _sendMessage(_textEditingController.text);
                     },
