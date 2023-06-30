@@ -10,6 +10,7 @@ class Booking {
       imgRenter,
       imgEmployee;
   DateTime timestamp;
+  double longitude, latitude;
   Booking(
       {required this.id,
       required this.userId,
@@ -26,5 +27,7 @@ class Booking {
       required this.jobImage,
       required this.timestamp,
       required this.imgEmployee,
+      required this.longitude,
+      required this.latitude,
       required this.imgRenter});
 }

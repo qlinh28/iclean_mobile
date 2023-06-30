@@ -46,6 +46,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   shared_preferences: ^2.0.10
   http: ^0.13.5
+  url_launcher: ^6.0.10
   barcode_widget: ^2.0.1
   flutter_svg: ^0.22.0
 

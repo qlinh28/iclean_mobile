@@ -9,4 +9,5 @@ class UrlConstant {
   static const NOTIFICATION = "${BaseConstants.BASE_URL}/api/v1/notification";
   static const ADDRESS = "${BaseConstants.BASE_URL}/api/v1/address";
   static const ORDER = "${BaseConstants.BASE_URL}/api/v1/order";
+  static const USER = "${BaseConstants.BASE_URL}/api/v1/user";
 }

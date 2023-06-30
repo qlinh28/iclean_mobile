@@ -207,7 +207,7 @@ class _UpdateLocationScreenState extends State<UpdateLocationScreen> {
                         latitude ?? 14,
                         longitude ??
                             -106), //Default Location: Tan Son Nhat AirPort
-                    zoom: 14,
+                    zoom: 18,
                   ),
                   markers: _markers,
                   onTap: _onMapTapped,

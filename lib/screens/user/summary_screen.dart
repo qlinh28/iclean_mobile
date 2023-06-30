@@ -5,6 +5,7 @@ import 'package:iclean_flutter/dto/order_dto.dart';
 import 'package:iclean_flutter/models/profile.dart';
 import 'package:iclean_flutter/screens/common/user_preferences.dart';
 import 'package:iclean_flutter/services/booking_api.dart';
+import 'package:iclean_flutter/services/user_api.dart';
 import 'package:intl/intl.dart';
 
 import '../../models/account.dart';
@@ -329,6 +330,10 @@ class _SummaryScreenState extends State<SummaryScreen> {
     );
   }
 
+  Future<void> _updateMoney(int newMoney) async {
+    await UserApi.updateMoneyByUserId(newMoney);
+  }
+
   Future<bool?> _handleAddNewOrder(OrderDto orderDto) async {
     int statusCode = await BookingApi.createBooking(orderDto);
     if (statusCode == 200) {
@@ -346,8 +351,8 @@ class _SummaryScreenState extends State<SummaryScreen> {
         ),
       );
       Account? account = await UserPreferences.getUserInfomation();
-      account!.point = account.point - orderDto.sum;
-      UserPreferences.setUserInfomation(account);
+      int updateMoney = account!.point - orderDto.sum;
+      await _updateMoney(updateMoney);
       return true;
     } else {
       showDialog(

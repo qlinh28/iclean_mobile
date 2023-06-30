@@ -38,6 +38,8 @@ class BookingApi {
           imgRenter: e['imgRenter'] ?? '',
           imgEmployee: e['imgEmployee'] ?? '',
           timestamp: DateTime.parse(e['timestamp']),
+          longitude: e['longitude'] ?? 0,
+          latitude: e['latitude'] ?? 0,
           description: e['description'] ?? '',
           jobName: e['jobName'] ?? '',
           jobImage: '');

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/services/booking_api.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../constant/order_status_constants.dart';
 import '../../../../models/account.dart';
@@ -273,6 +274,44 @@ class _UpcomingCardState extends State<UpcomingCard>
                                   ),
                                 ],
                               ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    launchMap(bookings[i].latitude,
+                                        bookings[i].longitude);
+                                  },
+                                  child: Container(
+                                    margin:
+                                        const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                                    width:
+                                        MediaQuery.of(context).size.width / 2,
+                                    height:
+                                        MediaQuery.of(context).size.height / 18,
+                                    decoration: BoxDecoration(
+                                      color: Colors.deepPurple.shade300,
+                                      borderRadius: BorderRadius.circular(50),
+                                      border: Border.all(
+                                        color: Colors.deepPurple.shade300,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Location",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          letterSpacing: 1,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
@@ -325,6 +364,17 @@ class _UpcomingCardState extends State<UpcomingCard>
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to cancel booking')),
       );
+    }
+  }
+
+  void launchMap(double latitude, double longitude) async {
+    final url =
+        // 'https://www.google.com/maps/search/?api=1&query=10.8875919,106.7839217';
+        'https://www.google.com/maps/search/?api=1&query=$latitude, $longitude';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      print('Could not launch map');
     }
   }
 }
