@@ -11,4 +11,5 @@ class UrlConstant {
   static const ORDER = "${BaseConstants.BASE_URL}/api/v1/order";
   static const USER = "${BaseConstants.BASE_URL}/api/v1/user";
   static const PRODUCT = "${BaseConstants.BASE_URL}/api/v1/product";
+  static const ORDER_PRODUCT = "${BaseConstants.BASE_URL}/api/v1/order-product";
 }

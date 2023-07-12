@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iclean_flutter/models/product.dart';
+import 'package:intl/intl.dart';
 
 typedef ProductCardOnTaped = void Function(Product data);
 
@@ -27,13 +28,7 @@ class ProductCard extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                Image.network(data.imgLink, width: 182, height: 182),
-                Positioned(
-                  top: 16,
-                  right: 16,
-                  child: Image.asset('assets/icons/not_collected@2x.png',
-                      width: 28, height: 28),
-                )
+                Image.network(data.imgLink, width: 182, height: 100),
               ],
             ),
           ),
@@ -52,7 +47,7 @@ class ProductCard extends StatelessWidget {
           _buildSoldPoint(4.5, 6937),
           const SizedBox(height: 10),
           Text(
-            '${data.price.toStringAsFixed(0)} VNĐ',
+            "${NumberFormat('#,###').format(data.price)} VNĐ",
             style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,

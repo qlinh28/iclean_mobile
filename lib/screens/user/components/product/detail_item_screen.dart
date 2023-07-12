@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:iclean_flutter/models/product.dart';
 import '../../../../constant/size_config.dart';
-import 'yt_player.dart';
+import '../../shopping/cart/review_cart.dart';
 
 class ShopDetailItemScreen extends StatefulWidget {
   final Product product;
@@ -19,7 +19,6 @@ class ShopDetailItemScreen extends StatefulWidget {
 
 class _ShopDetailItemScreenState extends State<ShopDetailItemScreen> {
   int _quantity = 0;
-  bool _iscollected = false;
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +193,13 @@ class _ShopDetailItemScreenState extends State<ShopDetailItemScreen> {
             color: Colors.transparent,
             child: InkWell(
               borderRadius: const BorderRadius.all(Radius.circular(29)),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ReviewCart(
+                            product: widget.product, quantity: _quantity)));
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

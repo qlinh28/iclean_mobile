@@ -1,27 +1,29 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/screens/user/employee_service_details.dart';
-import 'package:iclean_flutter/services/employee_api.dart';
-import '../../models/profile.dart';
+import 'package:iclean_flutter/models/order_product.dart';
+import 'package:iclean_flutter/services/order_product_api.dart';
 import 'package:intl/intl.dart';
-import '../../models/services.dart';
 
-class EmployeeServiceScreen extends StatefulWidget {
-  final Service service;
+import '../../../models/account.dart';
+import '../../common/user_preferences.dart';
+import '../components/product/detail_order_screen.dart';
 
-  const EmployeeServiceScreen({Key? key, required this.service})
-      : super(key: key);
+class OrderProductHistoryScreen extends StatefulWidget {
+  const OrderProductHistoryScreen({Key? key}) : super(key: key);
 
   @override
-  State<EmployeeServiceScreen> createState() => _EmployeeServiceScreenState();
+  State<OrderProductHistoryScreen> createState() =>
+      _OrderProductHistoryScreenState();
 }
 
-class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
-  List<Profile> profile = [];
+class _OrderProductHistoryScreenState extends State<OrderProductHistoryScreen> {
+  List<OrderProduct> products = [];
 
   @override
   void initState() {
     super.initState;
-    fetchWorker(widget.service.id);
+    fetchOrderProduct();
   }
 
   @override
@@ -34,43 +36,19 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(Icons.arrow_back),
-                    ),
-                    const SizedBox(width: 15),
-                    Text(
-                      widget.service.name,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Lato',
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                for (int i = 0; i < profile.length; i++)
+                for (int i = 0; i < products.length; i++)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: InkWell(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EmployeeDetailsScreen(
-                              service: widget.service,
-                              profile: profile[i],
-                            ),
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailOrderScreen(
+                                    orderProduct: products[i])));
                       },
                       child: Container(
-                        height: 150,
+                        height: 120,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
@@ -99,12 +77,15 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
-                                child: Image.asset(
-                                  profile[i].srcPicture,
-                                  // "assets/images/1.jpg",
+                                child: Image.network(
+                                  products[i].products.isNotEmpty
+                                      ? products[i].products[0].imgLink
+                                      : 'https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-1932.jpg?w=2000',
                                   width: 120,
                                   height: 150,
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Text('Error'),
                                 ),
                               ),
                             ),
@@ -115,7 +96,9 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    profile[i].employeeName,
+                                    products[i].products.isNotEmpty
+                                        ? products[i].products[0].title
+                                        : 'Your History Order',
                                     style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -124,7 +107,7 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    "${NumberFormat('#,###').format(profile[i].price)} VNĐ",
+                                    "${NumberFormat('#,###').format(products[i].totalAmount)} VNĐ",
                                     style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -135,15 +118,11 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                                   const SizedBox(height: 8),
                                   Row(
                                     children: [
-                                      Icon(
-                                        Icons.location_on,
-                                        size: 16,
-                                        color: Colors.grey.shade600,
-                                      ),
                                       const SizedBox(width: 4),
                                       Expanded(
                                         child: Text(
-                                          profile[i].location,
+                                          DateFormat('MMM d, yyyy | hh:mm aaa')
+                                              .format(products[i].orderDate),
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontFamily: 'Lato',
@@ -154,36 +133,6 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
                                         ),
                                       ),
                                     ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Container(
-                              width: 50,
-                              height: 150,
-                              decoration: BoxDecoration(
-                                color: Colors.deepPurple.shade50,
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(8),
-                                  bottomRight: Radius.circular(8),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.favorite_border,
-                                    color: Colors.deepPurple,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    "Save",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Lato',
-                                      color: Colors.deepPurple,
-                                    ),
                                   ),
                                 ],
                               ),
@@ -201,10 +150,14 @@ class _EmployeeServiceScreenState extends State<EmployeeServiceScreen> {
     );
   }
 
-  Future<void> fetchWorker(int id) async {
-    final listWorkers = await WorkerAPI.fetchProfileByService(id);
+  Future<void> fetchOrderProduct() async {
+    Account? account = await UserPreferences.getUserInfomation();
+    final userId = account?.id;
+    final listOrders = await OrderProductApi.fetchOrderProduct(userId!, '', -1);
     setState(() {
-      profile = listWorkers;
+      if (listOrders != null) {
+        products = listOrders;
+      } else {}
     });
   }
 }

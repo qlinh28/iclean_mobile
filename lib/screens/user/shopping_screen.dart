@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'shopping/items.shopping.dart';
+import 'shopping/items_shopping.dart';
+import 'shopping/order_product_history.dart';
+import 'shopping/video_history.dart';
 import 'shopping/video_shopping.dart';
 
 class ShoppingScreen extends StatefulWidget {
@@ -15,7 +17,7 @@ class _ShoppingScreenState extends State<ShoppingScreen>
 
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 4, vsync: this, initialIndex: 0);
     _tabController.addListener((_handleTabSelection));
     super.initState();
   }
@@ -30,7 +32,7 @@ class _ShoppingScreenState extends State<ShoppingScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 2,
+        length: 4,
         child: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
@@ -57,8 +59,10 @@ class _ShoppingScreenState extends State<ShoppingScreen>
                           width: 2, color: Colors.deepPurple.shade300),
                     ),
                     tabs: const [
-                      Tab(text: 'Video'),
-                      Tab(text: 'Item'),
+                      Tab(text: 'Tip Cleanings'),
+                      Tab(text: 'Our Products'),
+                      Tab(text: 'Your Tips'),
+                      Tab(text: 'Order History'),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -68,6 +72,8 @@ class _ShoppingScreenState extends State<ShoppingScreen>
                       children: [
                         VideoCart(),
                         ItemCart(),
+                        VideoHistoryScreen(),
+                        OrderProductHistoryScreen(),
                       ],
                     ),
                   ),

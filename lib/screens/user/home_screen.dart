@@ -31,9 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: "assets/images/don-nha-ve-sinh.png"),
     Service(id: 17, name: "Nấu ăn", icon: "assets/images/nau-an.png"),
     Service(id: 18, name: "Decor", icon: "assets/images/decor.png"),
-    Service(id: 19, name: "Decor", icon: "assets/images/decor.png"),
-    Service(id: 20, name: "Decor", icon: "assets/images/decor.png"),
-    Service(id: 21, name: "Decor", icon: "assets/images/decor.png"),
   ];
   late int money = 0;
 

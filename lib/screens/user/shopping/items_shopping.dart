@@ -16,17 +16,60 @@ class ItemCart extends StatefulWidget {
 
 class _ItemCartState extends State<ItemCart> with TickerProviderStateMixin {
   List<Product> datas = [];
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    fetchProduct();
+    fetchProduct('');
   }
 
   @override
   Widget build(BuildContext context) {
     const padding = EdgeInsets.fromLTRB(24, 24, 24, 24);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFf3f3f3),
+        title: Container(
+          height: 56,
+          decoration: const BoxDecoration(
+            color: Color(0xFFf3f3f3),
+            borderRadius: BorderRadius.all(
+              Radius.circular(16),
+            ),
+          ),
+          child: Center(
+            child: TextField(
+              controller: searchController,
+              decoration: const InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+                border: InputBorder.none,
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+                hintText: "Search",
+                hintStyle: TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFFBDBDBD),
+                ),
+                labelStyle: TextStyle(
+                  fontSize: 14,
+                  color: Color(0xFF212121),
+                ),
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              final searchTerm = searchController.text;
+              fetchProduct(searchTerm);
+            },
+          ),
+        ],
+      ),
       body: CustomScrollView(slivers: [
         SliverPadding(
           padding: padding,
@@ -36,8 +79,8 @@ class _ItemCartState extends State<ItemCart> with TickerProviderStateMixin {
     );
   }
 
-  Future<void> fetchProduct() async {
-    final listProducts = await ProductApi.fetchProductNotBuy(0, '', 'item');
+  Future<void> fetchProduct(String search) async {
+    final listProducts = await ProductApi.fetchProductNotBuy(0, search, 'item');
     setState(() {
       if (listProducts != null) {
         datas = listProducts;
@@ -51,7 +94,7 @@ class _ItemCartState extends State<ItemCart> with TickerProviderStateMixin {
         maxCrossAxisExtent: 185,
         mainAxisSpacing: 24,
         crossAxisSpacing: 16,
-        mainAxisExtent: 285,
+        mainAxisExtent: 230,
       ),
       delegate: SliverChildBuilderDelegate(_buildPopularItem,
           childCount: datas.length),
