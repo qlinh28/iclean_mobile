@@ -7,7 +7,9 @@ import 'package:iclean_flutter/screens/user/my_bookings_screen.dart';
 import 'package:iclean_flutter/screens/user/notification_screen.dart';
 import 'package:iclean_flutter/screens/user/profile_screen.dart';
 
+import '../../../constant/size_config.dart';
 import '../../../models/account.dart';
+import '../shopping_screen.dart';
 
 class UserScreens extends StatefulWidget {
   final Account account;
@@ -29,6 +31,7 @@ class _UserScreensState extends State<UserScreens> {
     _screenOptions = <Widget>[
       HomeScreen(account: widget.account),
       const MyBookingsScreen(),
+      const ShoppingScreen(),
       // const InboxScreen(),
       const NotificationScreen(),
       ProfileScreen(account: widget.account),
@@ -37,6 +40,7 @@ class _UserScreensState extends State<UserScreens> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: _screenOptions.elementAt(_selectedIndex),
@@ -67,6 +71,15 @@ class _UserScreensState extends State<UserScreens> {
           GButton(
             icon: Icons.calendar_today_outlined,
             text: 'Booking',
+            textStyle: TextStyle(
+              fontFamily: 'Lato',
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          GButton(
+            icon: Icons.shop_2_outlined,
+            text: 'Store',
             textStyle: TextStyle(
               fontFamily: 'Lato',
               color: Colors.white,

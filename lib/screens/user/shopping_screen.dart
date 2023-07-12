@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:iclean_flutter/constant/order_status_constants.dart';
-import 'package:iclean_flutter/screens/user/components/my_booking/cancelled_card.dart';
-import 'package:iclean_flutter/screens/user/components/my_booking/completed_card.dart';
-import 'package:iclean_flutter/screens/user/components/my_booking/pending_card.dart';
-import 'package:iclean_flutter/screens/user/components/my_booking/upcoming_card.dart';
+import 'shopping/items.shopping.dart';
+import 'shopping/video_shopping.dart';
 
-class MyBookingsScreen extends StatefulWidget {
-  const MyBookingsScreen({Key? key}) : super(key: key);
+class ShoppingScreen extends StatefulWidget {
+  const ShoppingScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyBookingsScreen> createState() => _MyBookingsScreenState();
+  State<ShoppingScreen> createState() => _ShoppingScreenState();
 }
 
-class _MyBookingsScreenState extends State<MyBookingsScreen>
+class _ShoppingScreenState extends State<ShoppingScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
   void initState() {
-    _tabController = TabController(length: 4, vsync: this, initialIndex: 0);
+    _tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     _tabController.addListener((_handleTabSelection));
     super.initState();
   }
@@ -33,7 +30,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTabController(
-        length: 4,
+        length: 2,
         child: SingleChildScrollView(
           child: SafeArea(
             child: Padding(
@@ -42,7 +39,7 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "My Booking",
+                    "Shopping",
                     style: TextStyle(
                       fontSize: 24,
                       fontFamily: 'Lato',
@@ -60,10 +57,8 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                           width: 2, color: Colors.deepPurple.shade300),
                     ),
                     tabs: const [
-                      Tab(text: 'Pending'),
-                      Tab(text: 'Upcoming'),
-                      Tab(text: 'Completed'),
-                      Tab(text: 'Cancelled'),
+                      Tab(text: 'Video'),
+                      Tab(text: 'Item'),
                     ],
                   ),
                   const SizedBox(height: 20),
@@ -71,10 +66,8 @@ class _MyBookingsScreenState extends State<MyBookingsScreen>
                     height: MediaQuery.of(context).size.height - 200,
                     child: const TabBarView(
                       children: [
-                        PendingCard(status: OrderStatus.UNDONE),
-                        UpcomingCard(status: OrderStatus.UPCOMING),
-                        CompletedCard(status: OrderStatus.DONE),
-                        CancelledCard(status: OrderStatus.CANCEL),
+                        VideoCart(),
+                        ItemCart(),
                       ],
                     ),
                   ),

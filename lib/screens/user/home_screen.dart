@@ -65,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double fem = MediaQuery.of(context).size.width / 300;
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: _refreshData,
@@ -97,9 +98,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Container(
                             padding: const EdgeInsets.only(top: 0),
-                            child: const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('assets/images/10.jpg'),
+                            child: CircleAvatar(
+                              backgroundImage: Image.network(
+                                'https://scontent.fsgn5-2.fna.fbcdn.net/v/t39.30808-1/276130762_3054315431447051_7801602352302132365_n.jpg?stp=dst-jpg_p320x320&_nc_cat=105&cb=99be929b-3346023f&ccb=1-7&_nc_sid=7206a8&_nc_ohc=lSxgK6lu8WwAX8_dJei&_nc_ht=scontent.fsgn5-2.fna&oh=00_AfASvoBZsMXiULDPNGSO18cGXztTkK2rvGeV_WU-_5naZA&oe=64B03BAD',
+                                errorBuilder: (BuildContext context,
+                                    Object exception, StackTrace? stackTrace) {
+                                  return const CircleAvatar(
+                                    backgroundColor: Colors.white,
+                                    backgroundImage:
+                                        AssetImage('assets/images/10.jpg'),
+                                    radius: 25,
+                                  );
+                                },
+                              ).image,
                               radius: 25,
                             ),
                           ),
@@ -169,6 +180,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 const SizedBox(width: 10),
                               ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: fem * 68),
+                            child: const CircleAvatar(
+                              backgroundColor: Colors.white,
+                              backgroundImage:
+                                  AssetImage('assets/images/iClean-bg.png'),
+                              radius: 25,
                             ),
                           ),
                         ],

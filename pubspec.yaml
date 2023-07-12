@@ -49,6 +49,8 @@ dependencies:
   url_launcher: ^6.0.10
   barcode_widget: ^2.0.1
   flutter_svg: ^0.22.0
+  expandable_text: ^2.3.0
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +75,14 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/icons/
+    - assets/icons/bold/
+    - assets/icons/detail/
+    - assets/icons/light/
+    - assets/icons/products/
+    - assets/icons/profile/
+    - assets/icons/tabbar/bold/
+    - assets/icons/tabbar/light/
     - assets/images/
     - assets/page-1/images/welcome-to.png
     - assets/page-1/images/google.png
